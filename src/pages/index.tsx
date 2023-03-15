@@ -1,7 +1,11 @@
+import AppScheme from "layouts/AppScheme";
+
 export default function IndexPage() {
   return (
     <div>
-      <h1>Hello World!</h1>
+      <AppScheme>
+        <h1>Francisco Fetapi</h1>
+      </AppScheme>
     </div>
   );
 }
