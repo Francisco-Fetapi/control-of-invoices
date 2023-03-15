@@ -9,12 +9,8 @@ import {
   ActionIcon,
   createStyles,
 } from "@mantine/core";
-import { openConfirmModal } from "@mantine/modals";
 import { IconSun, IconMoonStars, IconLogout } from "@tabler/icons";
-import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
-import { useDispatch } from "react-redux";
-import { destroyCookie } from "nookies";
 
 interface HeaderProps {
   opened: boolean;
@@ -64,13 +60,6 @@ export default function Header({ opened, setOpened }: HeaderProps) {
           />
         </MediaQuery>
 
-        {/* <img
-          // src={`/logo-light.png`}
-          src={`/logo-${theme.colorScheme}.png`}
-          width={50}
-          height={40}
-          alt="Logo do sistema"
-        /> */}
         <h4>SISTEMA DE EMISSÃO DE NOTAS FISCAIS</h4>
 
         <Group>
