@@ -1,7 +1,7 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import AppStore from "../core/AppStore";
-import AppProvider from "../core/AppProvider";
+import AppStore from "core/AppStore";
+import AppProvider from "core/AppProvider";
 import { ColorSchemeProvider } from "@mantine/core";
 import { useState } from "react";
 import nookies, { setCookie } from "nookies";
