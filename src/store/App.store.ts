@@ -1,28 +1,16 @@
-import { configureStore, PayloadAction } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-export const THEME_KEY_IN_LOCALSTORAGE = "darkMode";
-export const SIGNUP_KEY_IN_LOCALSTORAGE = "signup-data";
-export interface IDarkMode {
-  darkMode: boolean;
-}
+export interface App {}
 
-export interface App extends IDarkMode {}
-
-export const initialState: App = {
-  darkMode: false,
-};
+export const initialState: App = {};
 
 export function sliceCreator(initialState: App) {
   return createSlice({
     name: "app",
     initialState,
     reducers: {
-      resetAllState(state, action: PayloadAction<boolean>) {
-        if (action.payload) {
-          Object.assign(state, initialState);
-          return;
-        }
+      resetAllState(state) {
         Object.assign(state, initialState);
       },
     },
