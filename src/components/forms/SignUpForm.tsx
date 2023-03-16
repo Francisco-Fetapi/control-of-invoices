@@ -105,9 +105,11 @@ export function SignUpForm() {
           />
 
           <Center>
-            <Button loading={loading} type="submit">
-              Criar conta
-            </Button>
+            <Link href="/confirmar-email">
+              <Button loading={loading} component="a">
+                Criar conta
+              </Button>
+            </Link>
           </Center>
         </Stack>
       </Paper>
