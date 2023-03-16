@@ -12,6 +12,7 @@ import {
 import { IconSun, IconMoonStars, IconLogout } from "@tabler/icons";
 import { Dispatch, SetStateAction } from "react";
 
+
 interface HeaderProps {
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
