@@ -59,10 +59,37 @@ export function SignUpForm() {
             // width="100%"
           />
           <TextInput
+            label="Nome da Empresa"
+            required
+            // {...form.getInputProps("username")}
+            // width="100%"
+          />
+          <TextInput
             label="Email"
             placeholder="seu@email.com"
             required
             // {...form.getInputProps("email")}
+          />
+          <TextInput
+            label="Número de Telefone"
+            type="number"
+            required
+            // {...form.getInputProps("email")}
+          />
+          <Select
+            style={{ zIndex: 2 }}
+            data={[
+              "MEI",
+              "EI",
+              "LTDA",
+              "SLU",
+              "Sociedade Simples",
+              "Sociedade Anônima",
+            ]}
+            // {...form.getInputProps("genre")}
+            // placeholder=""
+            label="Selecione seu CNPJ"
+            required
           />
           <PasswordInput
             label="Senha"
@@ -75,21 +102,6 @@ export function SignUpForm() {
             placeholder="Confirme sua senha"
             required
             // {...form.getInputProps("password2")}
-          />
-          <TextInput
-            type="date"
-            label="Data de nascimento"
-            placeholder="DD/MM/AAAA"
-            required
-            // {...form.getInputProps("birthday")}
-          />
-          <Select
-            style={{ zIndex: 2 }}
-            data={[]}
-            // {...form.getInputProps("genre")}
-            // placeholder=""
-            label="Selecione seu genero"
-            required
           />
 
           <Center>
