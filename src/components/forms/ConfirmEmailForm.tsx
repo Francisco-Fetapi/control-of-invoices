@@ -83,14 +83,16 @@ export function ConfirmEmailForm() {
               </Center>
             </Anchor>
           </Link>
-          <Button
-            disabled={noEmail}
-            loading={loading}
-            type="submit"
-            className={classes.control}
-          >
-            Confirmar email
-          </Button>
+          <Link href="/" passHref>
+            <Button
+              disabled={noEmail}
+              loading={loading}
+              component="a"
+              className={classes.control}
+            >
+              Confirmar email
+            </Button>
+          </Link>
         </Group>
       </Paper>
 

@@ -1,7 +1,15 @@
 import React from "react";
-import { Navbar, Divider, ScrollArea, Stack, MediaQuery } from "@mantine/core";
-import { IconHome, IconNotes, IconUser } from "@tabler/icons";
+import {
+  Group,
+  Navbar,
+  Divider,
+  ScrollArea,
+  Stack,
+  MediaQuery,
+} from "@mantine/core";
+import { IconHistory, IconHome, IconSettings, IconUser } from "@tabler/icons";
 import NavBarLink from "./NavBarLink";
+import LaunchInvoice from "./LaunchInvoice";
 
 interface NavBarProps {
   opened: boolean;
@@ -10,14 +18,16 @@ interface NavBarProps {
 export default function NavBar({ opened }: NavBarProps) {
   return (
     <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ lg: 300, sm: 320 }}>
+      <Navbar.Section p="sm">
+        <Group sx={{ justifyContent: "flex-end" }}>
+          <LaunchInvoice />
+        </Group>
+      </Navbar.Section>
       <Navbar.Section grow component={ScrollArea} p="md">
         {/* Os itens do menu */}
-        <Stack>
-          <p>NavBar</p>
-        </Stack>
         <NavBarLink Icon={IconHome} label="Página Inicial" link="/" />
-        <NavBarLink Icon={IconUser} label="Link 2" link="/link2" />
-        <NavBarLink Icon={IconNotes} label="Link 3" link="/link3" />
+        <NavBarLink Icon={IconHistory} label="Histórico" link="/link2" />
+        <NavBarLink Icon={IconSettings} label="Preferências" link="/link2" />
       </Navbar.Section>
       <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
         <Navbar.Section>
