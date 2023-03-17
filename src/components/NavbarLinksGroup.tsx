@@ -94,12 +94,12 @@ export function LinksGroup({
   ));
 
   const Label = (
-    <UnstyledButton
+    <Box
       sx={{
         pointerEvents: isActive ? "none" : "initial",
         opacity: isActive ? 0.5 : 1,
       }}
-      component={link ? "a" : "button"}
+      // component={link ? "a" : "button"}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <ThemeIcon variant="light" size={30}>
@@ -109,7 +109,7 @@ export function LinksGroup({
           <Text size="md">{label}</Text>
         </Box>
       </Box>
-    </UnstyledButton>
+    </Box>
   );
 
   const LabelWithLink = link && (
