@@ -24,6 +24,12 @@ export interface LinkMenu extends Link {
 export default function AppScheme({ children }: AppSchemeProps) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const router = useRouter();
+  const initiallyOpened = [
+    "/empresas-parceiras",
+    "/configuracoes",
+    "/categoria-despesas",
+  ].includes(router.pathname);
 
   const linksMenu: LinkMenu[] = [
     { label: "Página Inicial", icon: IconHome, link: "/" },
@@ -31,6 +37,7 @@ export default function AppScheme({ children }: AppSchemeProps) {
     {
       label: "Preferências",
       icon: IconSettings,
+      initiallyOpened,
       links: [
         { label: "Empresas Parceiras", link: "/empresas-parceiras" },
         { label: "Categoria de Despesas", link: "/categoria-despesas" },

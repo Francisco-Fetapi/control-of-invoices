@@ -80,18 +80,23 @@ export function LinksGroup({
   const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
   const router = useRouter();
   const isActive = router.pathname === link;
-  const items = (hasLinks ? links : []).map((link) => (
-    <Link href={link.link!} passHref key={link.label}>
-      <Text<"a">
-        component="a"
-        className={classes.link}
-        href={link.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </Text>
-    </Link>
-  ));
+  const items = (hasLinks ? links : []).map((link) => {
+    const isActive = router.pathname === link.link;
+    return (
+      <Link href={link.link!} passHref key={link.label}>
+        <Text<"a">
+          component="a"
+          className={classes.link}
+          href={link.link}
+          sx={{
+            color: isActive ? "white" : undefined,
+          }}
+        >
+          {link.label}
+        </Text>
+      </Link>
+    );
+  });
 
   const Label = (
     <Box
