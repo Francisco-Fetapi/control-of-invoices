@@ -1,3 +1,4 @@
+import FormSettings from "components/forms/FormSettings";
 import AppScheme from "layouts/AppScheme";
 
 export default function IndexPage() {
@@ -5,6 +6,8 @@ export default function IndexPage() {
     <div>
       <AppScheme>
         <h2>Configurações</h2>
+
+        <FormSettings />
       </AppScheme>
     </div>
   );
