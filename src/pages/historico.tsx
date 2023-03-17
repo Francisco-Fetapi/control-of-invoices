@@ -40,6 +40,7 @@ const mockInvoices: Invoice[] = [
   },
 ];
 
+// TODO: implementar um TAB para alternar entre as 2 tabelas.
 export default function IndexPage() {
   return (
     <div>

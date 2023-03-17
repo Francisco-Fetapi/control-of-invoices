@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   createStyles,
-  Switch,
   Table,
   Checkbox,
   Group,
@@ -9,9 +8,7 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import { TableMenuRow } from "./TableMenuRow";
-import { ExpenseCategory } from "pages/categoria-despesas";
 import getShortText from "helpers/getShortText";
-import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -86,6 +83,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
           <th></th>
         </tr>
       </thead>
+
       <tbody>{rows}</tbody>
     </Table>
   );
