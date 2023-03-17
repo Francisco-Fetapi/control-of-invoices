@@ -4,7 +4,7 @@ import { TextInput, Checkbox, Space, Stack } from "@mantine/core";
 
 export default function FormSettings() {
   return (
-    <Stack spacing={1} style={{ flexDirection: "column" }}>
+    <Stack spacing={15} style={{ flexDirection: "column" }}>
       <TextInput
         label="Limite máximo de faturamento de MEI"
         type="number"
