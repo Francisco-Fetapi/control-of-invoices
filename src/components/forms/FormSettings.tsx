@@ -1,5 +1,7 @@
 import { TextInput, Checkbox, Space, Stack } from "@mantine/core";
 
+// TODO: formatar input numeros.
+
 export default function FormSettings() {
   return (
     <Stack spacing={1} style={{ flexDirection: "column" }}>
@@ -7,6 +9,8 @@ export default function FormSettings() {
         label="Limite máximo de faturamento de MEI"
         type="number"
         required
+        value={81000}
+
         // {...form.getInputProps("email")}
       />
       <br />

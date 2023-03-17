@@ -9,6 +9,8 @@ export interface Costumer {
   cnpj: string;
 }
 
+// TODO: no menu DETALHES exibir as operacoes realizadas vinculadas a essa empresa.
+
 const mockConstumers: Costumer[] = [
   {
     cnpj: "12-12",
