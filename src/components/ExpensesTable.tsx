@@ -19,21 +19,21 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface Invoice {
+export interface Expense {
   id: string;
-  value: string;
-  number: number;
-  description: string;
-  accrualMonth: Date;
-  receiptDate: Date;
+  name: string;
   corporationName: string;
+  category: string;
+  value: string;
+  payday: Date;
+  accrualMonth: Date;
 }
 
-export interface InvoicesTableProps {
-  data: Invoice[];
+export interface ExpensesTableProps {
+  data: Expense[];
 }
 
-export function InvoicesTable({ data }: InvoicesTableProps) {
+export function ExpensesTable({ data }: ExpensesTableProps) {
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState(["1"]);
   const toggleRow = (id: string) =>
@@ -72,14 +72,12 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
               transitionDuration={0}
             />
           </th>
+          <th>Nome</th>
           <th>Empresa</th>
+          <th>Categoria</th>
           <th>Valor</th>
-          <th>Número</th>
-          <th>Descrição</th>
-          {/* Mês de  */}
-          <th>Competencia</th>
-          {/* Data de  */}
-          <th>Recebimento</th>
+          <th>Data do Pagamento</th>
+          <th>Data de Competência</th>
           <th></th>
         </tr>
       </thead>
@@ -90,7 +88,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
 }
 
 interface TableRowProps {
-  item: Invoice;
+  item: Expense;
   selection: string[];
   toggleRow: (id: string) => void;
 }
@@ -111,12 +109,12 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
           transitionDuration={2}
         />
       </td>
+      <td>{item.name}</td>
       <td>{item.corporationName}</td>
+      <td>{item.category}</td>
       <td>{item.value}</td>
-      <td>{item.number}</td>
-      <td>{getShortText(item.description, 3)}</td>
+      <td>{item.payday.toLocaleDateString()}</td>
       <td>{item.accrualMonth.toLocaleDateString()}</td>
-      <td>{item.receiptDate.toLocaleDateString()}</td>
       <td>
         <TableMenuRow
           handleDelete={openModalDelete}

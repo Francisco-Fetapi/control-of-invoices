@@ -1,3 +1,4 @@
+import { Expense, ExpensesTable } from "components/ExpensesTable";
 import { Invoice, InvoicesTable } from "components/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
 
@@ -40,6 +41,45 @@ const mockInvoices: Invoice[] = [
   },
 ];
 
+const mockExpenses: Expense[] = [
+  {
+    id: "awd1",
+    accrualMonth: new Date(),
+    category: "Categoria",
+    corporationName: "Empresa 1",
+    name: "Despesa 1",
+    payday: new Date(),
+    value: "1200",
+  },
+  {
+    id: "awd2",
+    accrualMonth: new Date(),
+    category: "Categoria 2",
+    corporationName: "Empresa 2",
+    name: "Despesa 2",
+    payday: new Date(),
+    value: "1750",
+  },
+  {
+    id: "awd3",
+    accrualMonth: new Date(),
+    category: "Categoria 3",
+    corporationName: "Empresa 3",
+    name: "Despesa 3",
+    payday: new Date(),
+    value: "2300",
+  },
+  {
+    id: "awd4",
+    accrualMonth: new Date(),
+    category: "Categoria 4",
+    corporationName: "Empresa 6",
+    name: "Despesa 4",
+    payday: new Date(),
+    value: "3100",
+  },
+];
+
 // TODO: implementar um TAB para alternar entre as 2 tabelas.
 export default function IndexPage() {
   return (
@@ -52,6 +92,8 @@ export default function IndexPage() {
         <InvoicesTable data={mockInvoices} />
 
         <h4>Tabela de Despesas Lancadas</h4>
+
+        <ExpensesTable data={mockExpenses} />
       </AppScheme>
     </div>
   );
