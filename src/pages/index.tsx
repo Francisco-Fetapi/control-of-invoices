@@ -18,6 +18,13 @@ export default function IndexPage() {
           </li>
           <li>gráficos com as despesas por categorias</li>
         </ul>
+
+        <br />
+
+        <p>
+          Deve ser possível escolher o ano, para possibilitar visualização de
+          dados históricos
+        </p>
       </AppScheme>
     </div>
   );

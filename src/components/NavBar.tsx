@@ -7,7 +7,13 @@ import {
   Stack,
   MediaQuery,
 } from "@mantine/core";
-import { IconHistory, IconHome, IconSettings, IconUser } from "@tabler/icons";
+import {
+  IconHistory,
+  IconHome,
+  IconSettings,
+  IconUser,
+  TablerIcon,
+} from "@tabler/icons";
 import NavBarLink from "./NavBarLink";
 import LaunchInvoice from "./LaunchInvoice";
 import LaunchCost from "./LaunchCost";
