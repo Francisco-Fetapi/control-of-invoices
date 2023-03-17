@@ -5,6 +5,7 @@ export interface ExpenseCategory {
   id: string;
   name: string;
   description: string;
+  archived:boolean;
 }
 
 const mockCategories: ExpenseCategory[] = [
@@ -12,26 +13,31 @@ const mockCategories: ExpenseCategory[] = [
     id: "1",
     name: "Categoria 1",
     description: "ola mundo, esta eh uma nova descricao",
+    archived:false
   },
   {
     id: "2",
     name: "Categoria 2",
     description: "ola mundo, esta eh uma nova descricao",
+    archived:false
   },
   {
     id: "3",
     name: "Categoria 3",
     description: "ola mundo, esta eh uma nova descricao",
+    archived:true
   },
   {
     id: "4",
     name: "Categoria 4",
     description: "ola mundo, esta eh uma nova descricao",
+    archived:false
   },
   {
     id: "5",
     name: "Categoria 5",
     description: "ola mundo, esta eh uma nova descricao",
+    archived:true
   },
 ];
 

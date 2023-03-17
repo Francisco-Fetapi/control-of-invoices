@@ -1,16 +1,17 @@
 import { useState } from "react";
 import {
   createStyles,
+  Switch,
   Table,
   Checkbox,
   Group,
   Text,
   ActionIcon,
 } from "@mantine/core";
-import { Costumer } from "../pages/empresas-parceiras";
 import { TableMenuRow } from "./TableMenuRow";
 import { ExpenseCategory } from "pages/categoria-despesas";
 import getShortText from "helpers/getShortText";
+import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -39,41 +40,14 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
       current.length === data.length ? [] : data.map((item) => item.id)
     );
 
-  function openModalDelete() {}
-  function openModalMoreDetails() {}
-  function openEditForm() {}
-
   const rows = data.map((item, key) => {
-    const selected = selection.includes(item.id);
     return (
-      <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
-        <td>
-          <Checkbox
-            checked={selection.includes(item.id)}
-            onChange={() => toggleRow(item.id)}
-            transitionDuration={2}
-          />
-        </td>
-        <td>
-          <Group spacing="sm">
-            <Text size="sm" weight={500}>
-              {item.name}
-            </Text>
-          </Group>
-        </td>
-        <td>{getShortText(item.description, 5)}</td>
-        <td>
-          <TableMenuRow
-            handleDelete={openModalDelete}
-            handleDetails={openModalMoreDetails}
-            handleEdit={openEditForm}
-          >
-            <ActionIcon>
-              <h4>. . .</h4>
-            </ActionIcon>
-          </TableMenuRow>
-        </td>
-      </tr>
+      <TableRow
+        selection={selection}
+        item={item}
+        key={item.id}
+        toggleRow={toggleRow}
+      />
     );
   });
 
@@ -93,10 +67,63 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
           </th>
           <th>Nome</th>
           <th>Descrição</th>
+          <th>Arquivada</th>
           <th></th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
     </Table>
+  );
+}
+
+interface TableRowProps {
+  item: ExpenseCategory;
+  selection: string[];
+  toggleRow: (id: string) => void;
+}
+
+function TableRow({ item, selection, toggleRow }: TableRowProps) {
+  const { classes, cx } = useStyles();
+  const selected = selection.includes(item.id);
+  const [archived, setArchived] = useState(item.archived);
+
+  function openModalDelete() {}
+  function openModalMoreDetails() {}
+  function openEditForm() {}
+  return (
+    <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
+      <td>
+        <Checkbox
+          checked={selection.includes(item.id)}
+          onChange={() => toggleRow(item.id)}
+          transitionDuration={2}
+        />
+      </td>
+      <td>
+        <Group spacing="sm">
+          <Text size="sm" weight={500}>
+            {item.name}
+          </Text>
+        </Group>
+      </td>
+      <td>{getShortText(item.description, 5)}</td>
+      <td style={{ textAlign: "center" }}>
+        <Switch
+          checked={archived}
+          onChange={(event) => setArchived(event.currentTarget.checked)}
+        />
+      </td>
+      <td>
+        <TableMenuRow
+          handleDelete={openModalDelete}
+          handleDetails={openModalMoreDetails}
+          handleEdit={openEditForm}
+        >
+          <ActionIcon>
+            <h4>. . .</h4>
+          </ActionIcon>
+        </TableMenuRow>
+      </td>
+    </tr>
   );
 }
