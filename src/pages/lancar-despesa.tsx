@@ -1,5 +1,4 @@
-import { Box, Button, Center } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
+import FormLaunchExpense from "components/forms/FormLaunchExpense";
 import AppScheme from "layouts/AppScheme";
 
 export default function IndexPage() {
@@ -8,10 +7,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Lançar Despesa</h2>
 
-        {/* <FormLaunchInvoice /> */}
-        <Center mt={30}>
-          <Button leftIcon={<IconPlus size="1rem" />}>Lançar Despesa</Button>
-        </Center>
+        <FormLaunchExpense />
       </AppScheme>
     </div>
   );

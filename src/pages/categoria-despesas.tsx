@@ -10,7 +10,7 @@ export interface ExpenseCategory {
   archived: boolean;
 }
 
-const mockCategories: ExpenseCategory[] = [
+export const mockCategories: ExpenseCategory[] = [
   {
     id: "1",
     name: "Categoria 1",

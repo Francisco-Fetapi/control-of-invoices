@@ -16,7 +16,6 @@ type SelectMode = "cnpj" | "name";
 export default function FormLaunchInvoice() {
   const [selectMode, setSelectMode] = useState<string | null>(null);
   const [costumer, setCostumer] = useState<string | null>(null);
-  const [value, setValue] = useState<Date | null>(null);
 
   return (
     <Stack spacing={10} style={{ flexDirection: "column" }}>
