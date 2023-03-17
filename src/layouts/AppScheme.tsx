@@ -21,23 +21,23 @@ export interface LinkMenu extends Link {
   initiallyOpened?: boolean;
 }
 
-const linksMenu: LinkMenu[] = [
-  { label: "Página Inicial", icon: IconHome, link: "/" },
-  { label: "Histórico", icon: IconHistory, link: "/historico" },
-  {
-    label: "Preferências",
-    icon: IconSettings,
-    links: [
-      { label: "Empresas Parceiras", link: "/empresas-parceiras" },
-      { label: "Categoria de Despesas", link: "/categoria-despesas" },
-      { label: "Configurações", link: "/configuracoes" },
-    ],
-  },
-];
-
 export default function AppScheme({ children }: AppSchemeProps) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+  const linksMenu: LinkMenu[] = [
+    { label: "Página Inicial", icon: IconHome, link: "/" },
+    { label: "Histórico", icon: IconHistory, link: "/historico" },
+    {
+      label: "Preferências",
+      icon: IconSettings,
+      links: [
+        { label: "Empresas Parceiras", link: "/empresas-parceiras" },
+        { label: "Categoria de Despesas", link: "/categoria-despesas" },
+        { label: "Configurações", link: "/configuracoes" },
+      ],
+    },
+  ];
 
   return (
     <AppShell

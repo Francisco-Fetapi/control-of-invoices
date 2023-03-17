@@ -16,22 +16,22 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 import { LinkMenu } from "layouts/AppScheme";
+import { useRouter } from "next/router";
 
 const useStyles = createStyles((theme) => ({
   control: {
     fontWeight: 500,
     display: "block",
     width: "100%",
-    padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
+    padding: `${theme.spacing.md}px 9px`,
     color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
     fontSize: theme.fontSizes.sm,
 
     "&:hover": {
       backgroundColor:
         theme.colorScheme === "dark"
-          ? theme.colors.dark[7]
-          : theme.colors.gray[0],
-      color: theme.colorScheme === "dark" ? theme.white : theme.black,
+          ? theme.colors.dark[6]
+          : theme.colors.gray[3],
     },
   },
 
@@ -65,13 +65,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface LinksGroupProps extends LinkMenu {
-  // icon: TablerIcon;
-  // label: string;
-  // initiallyOpened?: boolean;
-  // links?: { label: string; link: string }[];
-  // link?:string;
-}
+interface LinksGroupProps extends LinkMenu {}
 
 export function LinksGroup({
   icon: Icon,
@@ -84,28 +78,53 @@ export function LinksGroup({
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
+  const router = useRouter();
+  const isActive = router.pathname === link;
   const items = (hasLinks ? links : []).map((link) => (
-    <Text<"a">
-      component="a"
-      className={classes.link}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </Text>
+    <Link href={link.link!} passHref key={link.label}>
+      <Text<"a">
+        component="a"
+        className={classes.link}
+        href={link.link}
+        onClick={(event) => event.preventDefault()}
+      >
+        {link.label}
+      </Text>
+    </Link>
   ));
 
   const Label = (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <ThemeIcon variant="light" size={30}>
-        <Icon size={18} />
-      </ThemeIcon>
-      <Box ml="md">{label}</Box>
-    </Box>
+    <UnstyledButton
+      sx={{
+        pointerEvents: isActive ? "none" : "initial",
+        opacity: isActive ? 0.5 : 1,
+      }}
+      component={link ? "a" : "button"}
+    >
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <ThemeIcon variant="light" size={30}>
+          <Icon size={18} />
+        </ThemeIcon>
+        <Box ml="md">
+          <Text size="md">{label}</Text>
+        </Box>
+      </Box>
+    </UnstyledButton>
   );
 
-  const LabelWithLink = link && <Link href={link}>{Label}</Link>;
+  const LabelWithLink = link && (
+    <Link href={link} passHref>
+      {Label}
+    </Link>
+  );
+
+  function navigate() {
+    if (link) {
+      router.push(link);
+    }
+  }
+
+  console.log(hasLinks);
 
   return (
     <>
@@ -113,7 +132,7 @@ export function LinksGroup({
         onClick={() => setOpened((o) => !o)}
         className={classes.control}
       >
-        <Group position="apart" spacing={0}>
+        <Group position="apart" spacing={0} onClick={navigate}>
           {hasLinks ? Label : LabelWithLink}
           {hasLinks && (
             <ChevronIcon
