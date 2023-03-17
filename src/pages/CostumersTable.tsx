@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import { Costumer } from "./empresas-parceiras";
 import { IconTrash, IconPencil, IconInfoCircle } from "@tabler/icons";
+import { TableMenuRow } from "./TableMenuRow";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -65,7 +66,7 @@ export function CostumersTable({ data }: CostumersTableProps) {
         <td>{item.companyname}</td>
         <td>{item.cnpj}</td>
         <td>
-          <MenuRow
+          <TableMenuRow
             handleDelete={openModalDelete}
             handleDetails={openModalMoreDetails}
             handleEdit={openEditForm}
@@ -73,7 +74,7 @@ export function CostumersTable({ data }: CostumersTableProps) {
             <ActionIcon>
               <h4>. . .</h4>
             </ActionIcon>
-          </MenuRow>
+          </TableMenuRow>
         </td>
       </tr>
     );
@@ -101,45 +102,5 @@ export function CostumersTable({ data }: CostumersTableProps) {
       </thead>
       <tbody>{rows}</tbody>
     </Table>
-  );
-}
-
-interface MenuRowProps {
-  children: React.ReactNode;
-  handleDelete: () => void;
-  handleDetails: () => void;
-  handleEdit: () => void;
-}
-
-function MenuRow({
-  children,
-  handleDelete,
-  handleDetails,
-  handleEdit,
-}: MenuRowProps) {
-  return (
-    <Menu shadow="md" width={200}>
-      <Menu.Target>{children}</Menu.Target>
-
-      <Menu.Dropdown>
-        <Menu.Label>Gerais</Menu.Label>
-        <Menu.Item onClick={handleDetails} icon={<IconInfoCircle size={14} />}>
-          Detalhes
-        </Menu.Item>
-        <Menu.Item onClick={handleEdit} icon={<IconPencil size={14} />}>
-          Editar
-        </Menu.Item>
-
-        <Menu.Divider />
-
-        <Menu.Item
-          onClick={handleDelete}
-          color="red"
-          icon={<IconTrash size={14} />}
-        >
-          Apagar
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
   );
 }
