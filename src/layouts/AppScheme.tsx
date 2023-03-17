@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
 import Footer from "components/Footer";
-import NavBar from "components/NavBar";
 import Aside from "components/Aside";
 import Header from "components/Header";
 import { useRouter } from "next/router";
@@ -59,7 +58,6 @@ export default function AppScheme({ children }: AppSchemeProps) {
       navbarOffsetBreakpoint="md"
       asideOffsetBreakpoint="md"
       navbar={<NavbarNested opened={opened} links={linksMenu} />}
-      // navbar={<NavBar opened={opened} />}
       aside={<Aside />}
       footer={<Footer />}
       header={<Header opened={opened} setOpened={setOpened} />}
