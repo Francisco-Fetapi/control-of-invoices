@@ -1,6 +1,6 @@
 import { Stack } from "@mantine/core";
 import AppScheme from "layouts/AppScheme";
-import { CostumersTable } from "./CostumersTable";
+import { CostumersTable } from "../components/CostumersTable";
 
 export interface Costumer {
   id: string;

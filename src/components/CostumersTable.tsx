@@ -3,15 +3,11 @@ import {
   createStyles,
   Table,
   Checkbox,
-  ScrollArea,
   Group,
-  Avatar,
   Text,
-  Menu,
   ActionIcon,
 } from "@mantine/core";
-import { Costumer } from "./empresas-parceiras";
-import { IconTrash, IconPencil, IconInfoCircle } from "@tabler/icons";
+import { Costumer } from "../pages/empresas-parceiras";
 import { TableMenuRow } from "./TableMenuRow";
 
 const useStyles = createStyles((theme) => ({
