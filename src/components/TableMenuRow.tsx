@@ -2,6 +2,14 @@ import { Menu } from "@mantine/core";
 
 import { IconTrash, IconPencil, IconInfoCircle } from "@tabler/icons";
 
+// TODO: implementar os formularios para edicao de todos os componentes que usam esse componenent.
+
+// TODO: implementar o modalConfirm internamente nesse componente. Ele apenas deve receber a funcao que sera executda no 'yes'.
+
+// TODO: nas tabelas implementar o botao Elimar (selecionados). Aparece quando tiver pelo menos 1 items selecionado. Deve ser um Hook que todas as tabelas irao implementar.
+
+// TODO: a logica de selecionar os itens da tabela deve estar num hook.
+
 interface MenuRowProps {
   children: React.ReactNode;
   handleDelete: () => void;
