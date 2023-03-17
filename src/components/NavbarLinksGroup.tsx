@@ -129,8 +129,6 @@ export function LinksGroup({
     }
   }
 
-  console.log(hasLinks);
-
   return (
     <>
       <UnstyledButton
