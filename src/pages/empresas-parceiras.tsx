@@ -36,9 +36,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Empresas Parceiras</h2>
 
-        <Stack>
-          <CostumersTable data={mockConstumers} />
-        </Stack>
+        <CostumersTable data={mockConstumers} />
       </AppScheme>
     </div>
   );
