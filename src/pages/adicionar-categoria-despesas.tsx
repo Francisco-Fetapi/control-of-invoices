@@ -5,7 +5,7 @@ export default function IndexPage() {
   return (
     <div>
       <AppScheme>
-        <h2>Adicionar Categoria das Despesas</h2>
+        <h2>Categoria das Despesas</h2>
 
         <FormCategory />
       </AppScheme>

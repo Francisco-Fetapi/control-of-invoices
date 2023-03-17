@@ -1,7 +1,6 @@
 import { ExpenseCategoryTable } from "components/ExpenseCategoryTable";
 import AppScheme from "layouts/AppScheme";
 import { Button, Center } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
 import Link from "next/link";
 
 export interface ExpenseCategory {
@@ -54,9 +53,7 @@ export default function IndexPage() {
 
         <Center mt={30}>
           <Link href="adicionar-categoria-despesas" passHref>
-            <Button component="a" leftIcon={<IconPlus size="1rem" />}>
-              Adicionar
-            </Button>
+            <Button component="a">Adicionar</Button>
           </Link>
         </Center>
       </AppScheme>

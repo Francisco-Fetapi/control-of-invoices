@@ -1,7 +1,6 @@
 import AppScheme from "layouts/AppScheme";
 import { CostumersTable } from "../components/CostumersTable";
 import { Button, Center } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
 import Link from "next/link";
 
 export interface Costumer {
@@ -46,9 +45,7 @@ export default function IndexPage() {
 
         <Center mt={30}>
           <Link href="adicionar-empresas-parceiras" passHref>
-            <Button component="a" leftIcon={<IconPlus size="1rem" />}>
-              Adicionar
-            </Button>
+            <Button component="a">Adicionar</Button>
           </Link>
         </Center>
       </AppScheme>
