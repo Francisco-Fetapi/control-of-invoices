@@ -80,6 +80,8 @@ export function LinksGroup({
   const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
   const router = useRouter();
   const isActive = router.pathname === link;
+  const highlightColor =
+    theme.colorScheme === "dark" ? theme.white : theme.black;
   const items = (hasLinks ? links : []).map((link) => {
     const isActive = router.pathname === link.link;
     return (
@@ -89,7 +91,7 @@ export function LinksGroup({
           className={classes.link}
           href={link.link}
           sx={{
-            color: isActive ? "white" : undefined,
+            color: isActive ? highlightColor : undefined,
           }}
         >
           {link.label}
