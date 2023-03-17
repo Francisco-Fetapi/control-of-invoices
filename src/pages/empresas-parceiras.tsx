@@ -11,7 +11,7 @@ export interface Costumer {
 
 // TODO: no menu DETALHES exibir as operacoes realizadas vinculadas a essa empresa.
 
-const mockConstumers: Costumer[] = [
+export const mockConstumers: Costumer[] = [
   {
     cnpj: "12-12",
     id: "iddofirebase1",

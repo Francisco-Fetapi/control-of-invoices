@@ -7,7 +7,8 @@ import {
 import { UserButton } from "./UserButton";
 import { LinksGroup } from "./NavbarLinksGroup";
 import { LinkMenu } from "layouts/AppScheme";
-import { IconSwitchHorizontal, IconLogout,IconDoorExit,IconDoorEnter } from "@tabler/icons";
+import { IconDoorExit,IconDoorEnter } from "@tabler/icons";
+import Link from 'next/link'
 
 
 const useStyles = createStyles((theme) => ({
@@ -128,15 +129,19 @@ export function NavbarNested({ opened, links }: NavBarProps) {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer2}>
-        <UnstyledButton className={classes.control}>
+      <Link href="/lancar-despesa" passHref>
+        <UnstyledButton component="a" className={classes.control}>
           <IconDoorExit className={classes.linkIcon} stroke={1.5} />
-          <span>Nova Despesa</span>
+          <span>Lançar Despesa</span>
         </UnstyledButton>
-
-        <UnstyledButton className={classes.control}>
+        </Link>
+        
+        <Link href="/lancar-nota-fiscal" passHref>
+        <UnstyledButton component="a" className={classes.control}>
           <IconDoorEnter className={classes.linkIcon} stroke={1.5} />
-          <span>Nova nota fiscal</span>
+          <span>Lançar Nota Fiscal</span>
         </UnstyledButton>
+        </Link>
       </Navbar.Section>
     </Navbar>
   );
