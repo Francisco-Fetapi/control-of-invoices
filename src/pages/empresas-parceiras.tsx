@@ -1,6 +1,7 @@
-import { Stack } from "@mantine/core";
 import AppScheme from "layouts/AppScheme";
 import { CostumersTable } from "../components/CostumersTable";
+import { Button, Center } from "@mantine/core";
+import { IconPlus } from "@tabler/icons";
 
 export interface Costumer {
   id: string;
@@ -39,6 +40,10 @@ export default function IndexPage() {
         <h2>Empresas Parceiras</h2>
 
         <CostumersTable data={mockConstumers} />
+
+        <Center mt={30}>
+          <Button leftIcon={<IconPlus size="1rem" />}>Adicionar Empresa</Button>
+        </Center>
       </AppScheme>
     </div>
   );
