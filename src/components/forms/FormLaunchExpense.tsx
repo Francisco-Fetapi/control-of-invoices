@@ -18,7 +18,7 @@ export default function FormLaunchExpense() {
   const [costumer, setCostumer] = useState<string | null>(null);
 
   return (
-    <Stack spacing={10} style={{ flexDirection: "column" }}>
+    <Stack spacing={15} style={{ flexDirection: "column" }}>
       <Select
         label="Selecionar categoria"
         data={mockCategories.map((category) => {

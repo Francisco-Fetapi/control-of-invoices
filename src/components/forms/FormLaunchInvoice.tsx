@@ -18,7 +18,7 @@ export default function FormLaunchInvoice() {
   const [costumer, setCostumer] = useState<string | null>(null);
 
   return (
-    <Stack spacing={10} style={{ flexDirection: "column" }}>
+    <Stack spacing={15} style={{ flexDirection: "column" }}>
       <Select
         label="Selecionar empresa pelo"
         placeholder="Escolha o criterio de busca"
