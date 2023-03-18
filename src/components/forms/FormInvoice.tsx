@@ -2,7 +2,6 @@ import { Textarea, Select, Center, TextInput, Box, Stack } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { Invoice } from "components/InvoicesTable";
 import { mockConstumers } from "pages/empresas-parceiras";
-import { useState } from "react";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 type SelectMode = "cnpj" | "name";

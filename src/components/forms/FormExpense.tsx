@@ -3,7 +3,6 @@ import { Expense } from "components/ExpensesTable";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { mockCategories } from "pages/categoria-despesas";
 import { mockConstumers } from "pages/empresas-parceiras";
-import { useState } from "react";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 export interface FormExpenseFields extends Omit<Expense, "id"> {}

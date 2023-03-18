@@ -1,5 +1,4 @@
 import { useForm } from "@mantine/form";
-import FormExpense, { FormExpenseFields } from "components/forms/FormExpense";
 import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit";
 import FormInvoice, { FormInvoiceFields } from "./FormInvoice";
 
