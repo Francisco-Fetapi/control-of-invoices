@@ -1,4 +1,4 @@
-import FormCategory from "components/forms/FormCategory";
+import FormAddCategory from "components/forms/FormAddCategory";
 import AppScheme from "layouts/AppScheme";
 
 export default function IndexPage() {
@@ -7,7 +7,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Categoria das Despesas</h2>
 
-        <FormCategory />
+        <FormAddCategory />
       </AppScheme>
     </div>
   );

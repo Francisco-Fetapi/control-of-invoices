@@ -2,6 +2,6 @@ import { UseFormReturnType } from "@mantine/form";
 
 export interface FormForAddAndEdit<T = any> {
   editMode?: boolean;
-  handleSubmit: () => void;
+  handleSubmit: (values: T, event: React.FormEvent<HTMLFormElement>) => void;
   form: UseFormReturnType<T>;
 }
