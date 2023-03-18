@@ -1,7 +1,10 @@
 import AppScheme from "layouts/AppScheme";
 
 // TODO: middlware to redirect user to login if isn't logged
-// put all pages that need authentication in the same folder.
+
+// way1:  put all pages that need(or not) authentication in the same folder.
+
+// way2:  create a middlare for all pages and use if statement to determine what page need authenticaton. use an array to list all pages that need authentication. the middleware only can go to next handler if satisfy the conditions.
 
 export default function IndexPage() {
   return (
