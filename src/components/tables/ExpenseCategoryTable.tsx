@@ -13,6 +13,7 @@ import { ExpenseCategory } from "pages/categoria-despesas";
 import getShortText from "helpers/getShortText";
 import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
 import useTableActions from "hooks/useTableActions";
+import FormEditCategory from "components/forms/FormEditCategory";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -92,7 +93,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <div>Form de Edicao</div>,
+      EditForm: <FormEditCategory />,
       ViewDetails: <div>Component com mais informacoes</div>,
     });
 
