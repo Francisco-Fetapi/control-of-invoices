@@ -1,7 +1,6 @@
 import { Text } from "@mantine/core";
 import { openModal, openConfirmModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import React from "react";
 
 interface Notification {
   title: React.ReactNode;
@@ -51,7 +50,6 @@ export default function useTableActions({
       onCancel: () => console.log("Cancel"),
       onConfirm: async () => {
         try {
-          // Execute an action onDelete
           await handleDelete();
           showNotification({
             title: deletedNotification.title,

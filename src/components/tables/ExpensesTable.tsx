@@ -8,7 +8,7 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import { TableMenuRow } from "../TableMenuRow";
-import getShortText from "helpers/getShortText";
+import useTableActions from "hooks/useTableActions";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -96,10 +96,15 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  const { openEditForm, openModalDelete, openModalMoreDetails } =
+    useTableActions({
+      async handleDelete() {
+        console.log("Deletado");
+      },
+      EditForm: <div>Form de Edicao</div>,
+      ViewDetails: <div>Component com mais informacoes</div>,
+    });
 
-  function openModalDelete() {}
-  function openModalMoreDetails() {}
-  function openEditForm() {}
   return (
     <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
       <td>

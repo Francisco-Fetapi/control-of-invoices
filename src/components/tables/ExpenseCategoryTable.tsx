@@ -12,6 +12,7 @@ import { TableMenuRow } from "../TableMenuRow";
 import { ExpenseCategory } from "pages/categoria-despesas";
 import getShortText from "helpers/getShortText";
 import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
+import useTableActions from "hooks/useTableActions";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -86,10 +87,15 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
   const [archived, setArchived] = useState(item.archived);
+  const { openEditForm, openModalDelete, openModalMoreDetails } =
+    useTableActions({
+      async handleDelete() {
+        console.log("Deletado");
+      },
+      EditForm: <div>Form de Edicao</div>,
+      ViewDetails: <div>Component com mais informacoes</div>,
+    });
 
-  function openModalDelete() {}
-  function openModalMoreDetails() {}
-  function openEditForm() {}
   return (
     <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
       <td>

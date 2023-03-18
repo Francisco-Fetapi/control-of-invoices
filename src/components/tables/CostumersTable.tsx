@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { Costumer } from "../../pages/empresas-parceiras";
 import { TableMenuRow } from "../TableMenuRow";
+import useTableActions from "hooks/useTableActions";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -37,9 +38,14 @@ export function CostumersTable({ data }: CostumersTableProps) {
       current.length === data.length ? [] : data.map((item) => item.id)
     );
 
-  function openModalDelete() {}
-  function openModalMoreDetails() {}
-  function openEditForm() {}
+  const { openEditForm, openModalDelete, openModalMoreDetails } =
+    useTableActions({
+      async handleDelete() {
+        console.log("Deletado");
+      },
+      EditForm: <div>Form de Edicao</div>,
+      ViewDetails: <div>Component com mais informacoes</div>,
+    });
 
   const rows = data.map((item, key) => {
     const selected = selection.includes(item.id);
