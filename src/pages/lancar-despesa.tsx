@@ -1,5 +1,5 @@
 import AppScheme from "layouts/AppScheme";
-import FormAddExpense from "./FormAddExpense";
+import FormAddExpense from "../components/forms/FormAddExpense";
 
 export default function IndexPage() {
   return (
