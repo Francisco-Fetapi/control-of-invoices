@@ -1,5 +1,5 @@
-import FormLaunchExpense from "components/forms/FormLaunchExpense";
 import AppScheme from "layouts/AppScheme";
+import FormAddExpense from "./FormAddExpense";
 
 export default function IndexPage() {
   return (
@@ -7,7 +7,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Lançar Despesa</h2>
 
-        <FormLaunchExpense />
+        <FormAddExpense />
       </AppScheme>
     </div>
   );
