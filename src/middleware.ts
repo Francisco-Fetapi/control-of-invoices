@@ -15,18 +15,19 @@ const protectdRoutesForAuth = [
 ];
 
 function isProtected(str: string) {
-  return protectdRoutesForAuth.some((routeProtected) =>
-    str.startsWith(routeProtected)
+  return (
+    str === "/" ||
+    protectdRoutesForAuth.some((routeProtected) =>
+      str.startsWith(routeProtected)
+    )
   );
 }
 
 export function middleware(request: NextRequest): MiddlewareReturn {
   const nextPathname = request.nextUrl.pathname;
-  if (nextPathname === "/" || isProtected(nextPathname)) {
-    console.log("Rota protegida");
+  if (isProtected(nextPathname)) {
     return NextResponse.redirect(new URL("/iniciar-sessao", request.url));
   }
 
-  console.log("Passou!");
   return NextResponse.next();
 }
