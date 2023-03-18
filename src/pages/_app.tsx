@@ -40,7 +40,7 @@ export default function App(props: AppProps & WithColorScheme) {
           content="Uma aplicação simples para gerenciar notas fiscais."
         />
       </Head>
-
+      {/* TODO: add router transition */}
       <AppStore>
         <ColorSchemeProvider
           colorScheme={colorScheme}
