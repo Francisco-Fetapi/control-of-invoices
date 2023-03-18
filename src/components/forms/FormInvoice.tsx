@@ -1,6 +1,6 @@
 import { Textarea, Select, Center, TextInput, Box, Stack } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
-import { Invoice } from "components/InvoicesTable";
+import { Invoice } from "components/tables/InvoicesTable";
 import { mockConstumers } from "pages/empresas-parceiras";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 

@@ -1,5 +1,5 @@
 import { Expense, ExpensesTable } from "components/tables/ExpensesTable";
-import { Invoice, InvoicesTable } from "components/InvoicesTable";
+import { Invoice, InvoicesTable } from "components/tables/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
 
 const mockInvoices: Invoice[] = [
