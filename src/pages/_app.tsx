@@ -5,6 +5,7 @@ import AppProvider from "core/AppProvider";
 import { ColorSchemeProvider } from "@mantine/core";
 import { useState } from "react";
 import nookies, { setCookie } from "nookies";
+import RouterTransition from "components/RouterTransition";
 
 interface WithColorScheme {
   preferredColorScheme: "light" | "dark";
@@ -40,13 +41,14 @@ export default function App(props: AppProps & WithColorScheme) {
           content="Uma aplicação simples para gerenciar notas fiscais."
         />
       </Head>
-      {/* TODO: add router transition */}
+
       <AppStore>
         <ColorSchemeProvider
           colorScheme={colorScheme}
           toggleColorScheme={toggleColorScheme}
         >
           <AppProvider Page={<Component {...pageProps} />} />
+          <RouterTransition />
         </ColorSchemeProvider>
       </AppStore>
     </>
