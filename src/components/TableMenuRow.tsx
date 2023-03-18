@@ -23,6 +23,8 @@ export function TableMenuRow({
   handleDetails,
   handleEdit,
 }: MenuRowProps) {
+
+
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>{children}</Menu.Target>
