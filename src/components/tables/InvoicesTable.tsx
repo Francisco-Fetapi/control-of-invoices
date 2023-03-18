@@ -11,6 +11,7 @@ import { TableMenuRow } from "../TableMenuRow";
 import getShortText from "helpers/getShortText";
 import useTableActions from "hooks/useTableActions";
 import FormEditInvoices from "components/forms/FormEditInvoices";
+import getWordsLength from "helpers/getWordsLength";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -100,13 +101,15 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  const wordsLength = getWordsLength(item.description);
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       async handleDelete() {
         console.log("Deletado");
       },
       EditForm: <FormEditInvoices />,
-      ViewDetails: <div>Component com mais informacoes</div>,
+      ViewDetails:
+        wordsLength > 3 ? <div>Component com mais informacoes</div> : undefined,
     });
 
   return (
@@ -129,6 +132,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
           handleDelete={openModalDelete}
           handleDetails={openModalMoreDetails}
           handleEdit={openEditForm}
+          detailsLabel="Ver Descrição"
         >
           <ActionIcon>
             <h4>. . .</h4>

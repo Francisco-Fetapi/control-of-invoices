@@ -9,7 +9,7 @@ export const mockInvoices: Invoice[] = [
     id: "o1",
     accrualMonth: new Date(),
     corporationName: "Empresa 1",
-    description: "Foi um gasto bastante necessario",
+    description: "Foi um gasto",
     number: 12321,
     receiptDate: new Date(),
     value: "20",
