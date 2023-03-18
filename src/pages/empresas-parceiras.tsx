@@ -2,6 +2,7 @@ import AppScheme from "layouts/AppScheme";
 import { CostumersTable } from "../components/tables/CostumersTable";
 import { Button, Center } from "@mantine/core";
 import Link from "next/link";
+import TitleAndButtonAction from "components/TitleAndButtonAction";
 
 export interface Costumer {
   id: string;
@@ -10,9 +11,9 @@ export interface Costumer {
   cnpj: string;
 }
 
-// TODO: no menu DETALHES exibir as operacoes realizadas vinculadas a essa empresa.
+// TODO: On details show more information related to this costumer such as expense and invoices.
 
-// TODO: colocar o botao adicionar no HEADER. a direita do titulo. A tabela pode ficar muito grande e a posicao atual nao facilita.
+// TODO: put the add button near the title on header.
 
 export const mockConstumers: Costumer[] = [
   {
@@ -39,15 +40,12 @@ export default function IndexPage() {
   return (
     <div>
       <AppScheme>
-        <h2>Empresas Parceiras</h2>
+        <TitleAndButtonAction
+          title="Empresas Parceiras"
+          href="/adicionar-empresas-parceiras"
+        />
 
         <CostumersTable data={mockConstumers} />
-
-        <Center mt={30}>
-          <Link href="adicionar-empresas-parceiras" passHref>
-            <Button component="a">Adicionar</Button>
-          </Link>
-        </Center>
       </AppScheme>
     </div>
   );
