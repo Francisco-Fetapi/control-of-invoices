@@ -10,6 +10,7 @@ import {
 import { Costumer } from "../../pages/empresas-parceiras";
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
+import FormEditCostumer from "components/forms/FormEditCostumer";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -43,7 +44,7 @@ export function CostumersTable({ data }: CostumersTableProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <div>Form de Edicao</div>,
+      EditForm: <FormEditCostumer />,
       ViewDetails: <div>Component com mais informacoes</div>,
     });
 
