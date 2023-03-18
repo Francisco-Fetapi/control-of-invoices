@@ -11,8 +11,6 @@ export interface Costumer {
   cnpj: string;
 }
 
-// TODO: On details show more information related to this costumer such as expense and invoices.
-
 export const mockConstumers: Costumer[] = [
   {
     cnpj: "12-12",

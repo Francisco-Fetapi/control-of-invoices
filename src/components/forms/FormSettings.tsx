@@ -1,8 +1,6 @@
 import { TextInput, Box, Checkbox, Space, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-// TODO format input number.
-
 interface FormSettingFields {
   limit: number;
   sendEmail: boolean;

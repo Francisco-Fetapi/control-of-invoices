@@ -27,7 +27,7 @@ export default function FormCostumer({
           required
           {...form.getInputProps("corporationName")}
         />
-        {/* TODO: validate CNPJ */}
+
         <TextInput label="CNPJ" required {...form.getInputProps("cnpj")} />
 
         <Center mt={30}>
