@@ -1,4 +1,4 @@
-import FormLaunchInvoice from "components/forms/FormLaunchInvoice";
+import FormAddInvoices from "components/forms/FormAddInvoices";
 import AppScheme from "layouts/AppScheme";
 
 export default function IndexPage() {
@@ -7,7 +7,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Lançar Nota Fiscal</h2>
 
-        <FormLaunchInvoice />
+        <FormAddInvoices />
       </AppScheme>
     </div>
   );
