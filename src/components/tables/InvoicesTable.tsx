@@ -101,6 +101,7 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  const detailsLabel = "Descrição";
   const wordsLength = getWordsLength(item.description);
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
@@ -108,8 +109,8 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
         console.log("Deletado");
       },
       EditForm: <FormEditInvoices />,
-      ViewDetails:
-        wordsLength > 3 ? <div>Component com mais informacoes</div> : undefined,
+      ViewDetails: wordsLength > 3 ? <div>{item.description}</div> : undefined,
+      detailsLabel,
     });
 
   return (
@@ -132,7 +133,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
           handleDelete={openModalDelete}
           handleDetails={openModalMoreDetails}
           handleEdit={openEditForm}
-          detailsLabel="Ver Descrição"
+          detailsLabel={detailsLabel}
         >
           <ActionIcon>
             <h4>. . .</h4>

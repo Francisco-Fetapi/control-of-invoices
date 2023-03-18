@@ -18,7 +18,8 @@ export const mockInvoices: Invoice[] = [
     id: "o2",
     accrualMonth: new Date(),
     corporationName: "Empresa 2",
-    description: "Foi um gasto bastante necessario",
+    description:
+      "Foi um gasto bastante necessario. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione voluptatem vel dolore possimus dicta corporis reiciendis nisi est, doloribus eum laudantium suscipit excepturi quam, fugit natus nostrum, culpa facilis modi.",
     number: 12321,
     receiptDate: new Date(),
     value: "30",

@@ -14,6 +14,7 @@ interface UseTableActionsProps {
   ViewDetails?: React.ReactNode;
   EditForm: React.ReactNode;
   handleDelete: () => Promise<void>;
+  detailsLabel?: string;
 }
 
 const messageDeletedDefault: Notification = {
@@ -41,6 +42,7 @@ export default function useTableActions({
   deletedNotificationError = messageDeletedErrorDefault,
   messageAreYouSure = messageAreYouSureDefault,
   handleDelete,
+  detailsLabel = "Detalhes",
 }: UseTableActionsProps) {
   function openModalDelete() {
     openConfirmModal({
@@ -69,7 +71,7 @@ export default function useTableActions({
 
   function openModalMoreDetails() {
     openModal({
-      title: "Detalhes",
+      title: detailsLabel,
       children: ViewDetails,
     });
   }
@@ -84,5 +86,6 @@ export default function useTableActions({
     openEditForm,
     openModalDelete,
     openModalMoreDetails: ViewDetails ? openModalMoreDetails : undefined,
+    detailsLabel,
   };
 }
