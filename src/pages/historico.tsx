@@ -2,6 +2,7 @@ import { Expense, ExpensesTable } from "components/tables/ExpensesTable";
 import { Invoice, InvoicesTable } from "components/tables/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
 import { Tabs } from "@mantine/core";
+import TitleAndButtonAction from "components/TitleAndButtonAction";
 
 export const mockInvoices: Invoice[] = [
   {
@@ -94,11 +95,18 @@ export default function IndexPage() {
           </Tabs.List>
 
           <Tabs.Panel value="invoices">
-            <h4>NOTAS FISCAIS LANÇADAS</h4>
+            <TitleAndButtonAction
+              title="Notas Fiscais Lançadas"
+              href="/lancar-nota-fiscal"
+            />
             <InvoicesTable data={mockInvoices} />
           </Tabs.Panel>
           <Tabs.Panel value="expense">
-            <h4>DESPESAS LANÇADAS</h4>
+            <TitleAndButtonAction
+              title="Despesas Lançadas"
+              href="/lancar-despesa"
+            />
+
             <ExpensesTable data={mockExpenses} />
           </Tabs.Panel>
         </Tabs>

@@ -2,6 +2,7 @@ import { ExpenseCategoryTable } from "components/tables/ExpenseCategoryTable";
 import AppScheme from "layouts/AppScheme";
 import { Button, Center } from "@mantine/core";
 import Link from "next/link";
+import TitleAndButtonAction from "components/TitleAndButtonAction";
 
 export interface ExpenseCategory {
   id: string;
@@ -47,15 +48,12 @@ export default function IndexPage() {
   return (
     <div>
       <AppScheme>
-        <h2>Categoria das Despesas</h2>
+        <TitleAndButtonAction
+          title="Categoria das Despesas"
+          href="/adicionar-categoria-despesas"
+        />
 
         <ExpenseCategoryTable data={mockCategories} />
-
-        <Center mt={30}>
-          <Link href="adicionar-categoria-despesas" passHref>
-            <Button component="a">Adicionar</Button>
-          </Link>
-        </Center>
       </AppScheme>
     </div>
   );
