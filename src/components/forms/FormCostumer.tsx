@@ -1,18 +1,40 @@
-import { TextInput, Textarea, Stack } from "@mantine/core";
+import { TextInput, Box, Stack } from "@mantine/core";
 import { Button, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons";
+import FormAddAndEditButton from "components/FormAddAndEditButton";
+import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
-export default function FormCostumer() {
+export interface FormCostumerFields {
+  name: string;
+  corporationName: string;
+  cnpj: string;
+}
+
+export default function FormCostumer({
+  form,
+  handleSubmit,
+  editMode,
+}: FormForAddAndEdit<FormCostumerFields>) {
   return (
-    <Stack spacing={15} style={{ flexDirection: "column" }}>
-      <TextInput label="Nome" required />
-      <TextInput label="Razão Social" required />
-      {/* TODO: validar o CNPJ */}
-      <TextInput label="CNPJ" required />
+    <Box
+      component="form"
+      autoComplete="off"
+      onSubmit={form.onSubmit(handleSubmit)}
+    >
+      <Stack spacing={15} style={{ flexDirection: "column" }}>
+        <TextInput label="Nome" required {...form.getInputProps("name")} />
+        <TextInput
+          label="Razão Social"
+          required
+          {...form.getInputProps("corporationName")}
+        />
+        {/* TODO: validar o CNPJ */}
+        <TextInput label="CNPJ" required {...form.getInputProps("cnpj")} />
 
-      <Center mt={30}>
-        <Button leftIcon={<IconPlus size="1rem" />}>Adicionar</Button>
-      </Center>
-    </Stack>
+        <Center mt={30}>
+          <FormAddAndEditButton editMode={editMode} />
+        </Center>
+      </Stack>
+    </Box>
   );
 }

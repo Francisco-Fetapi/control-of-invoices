@@ -1,5 +1,6 @@
 import { TextInput, Box, Textarea, Stack } from "@mantine/core";
 import { Button, Center } from "@mantine/core";
+import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 export interface FormCategoryFields {
@@ -29,7 +30,7 @@ export default function FormCategory({
         />
 
         <Center mt={30}>
-          <Button type="submit">{editMode ? "Salvar" : "Adicionar"}</Button>
+          <FormAddAndEditButton editMode={editMode} />
         </Center>
       </Stack>
     </Box>
