@@ -77,8 +77,8 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
           <th>Empresa</th>
           <th>Categoria</th>
           <th>Valor</th>
-          <th>Data do Pagamento</th>
-          <th>Data de Competência</th>
+          <th>Pagamento</th>
+          <th>Competência</th>
           <th></th>
         </tr>
       </thead>

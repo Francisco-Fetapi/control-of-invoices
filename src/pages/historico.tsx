@@ -1,6 +1,7 @@
 import { Expense, ExpensesTable } from "components/tables/ExpensesTable";
 import { Invoice, InvoicesTable } from "components/tables/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
+import { Tabs } from "@mantine/core";
 
 export const mockInvoices: Invoice[] = [
   {
@@ -80,20 +81,27 @@ export const mockExpenses: Expense[] = [
   },
 ];
 
-// TODO: implementar um TAB para alternar entre as 2 tabelas.
 export default function IndexPage() {
   return (
     <div>
       <AppScheme>
-        <h2>Historico</h2>
+        <h2>HISTÓRICO</h2>
 
-        <h4>Tabela de Notas Fiscais Lancadas</h4>
+        <Tabs defaultValue="invoices">
+          <Tabs.List>
+            <Tabs.Tab value="invoices">Notas Fiscais</Tabs.Tab>
+            <Tabs.Tab value="expense">Despesas</Tabs.Tab>
+          </Tabs.List>
 
-        <InvoicesTable data={mockInvoices} />
-
-        <h4>Tabela de Despesas Lancadas</h4>
-
-        <ExpensesTable data={mockExpenses} />
+          <Tabs.Panel value="invoices">
+            <h4>NOTAS FISCAIS LANÇADAS</h4>
+            <InvoicesTable data={mockInvoices} />
+          </Tabs.Panel>
+          <Tabs.Panel value="expense">
+            <h4>DESPESAS LANÇADAS</h4>
+            <ExpensesTable data={mockExpenses} />
+          </Tabs.Panel>
+        </Tabs>
       </AppScheme>
     </div>
   );

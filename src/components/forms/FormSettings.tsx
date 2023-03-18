@@ -36,8 +36,6 @@ export default function FormSettings() {
           label={<span>Receber SMS de alerta de faturamento</span>}
           {...form.getInputProps("sendSMS")}
         />
-
-        <pre>{JSON.stringify(form.values, null, 2)}</pre>
       </Box>
     </Stack>
   );
