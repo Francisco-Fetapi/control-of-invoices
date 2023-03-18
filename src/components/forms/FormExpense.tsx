@@ -1,5 +1,5 @@
 import { Select, TextInput, Box, Stack, Center } from "@mantine/core";
-import { Expense } from "components/ExpensesTable";
+import { Expense } from "components/tables/ExpensesTable";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { mockCategories } from "pages/categoria-despesas";
 import { mockConstumers } from "pages/empresas-parceiras";

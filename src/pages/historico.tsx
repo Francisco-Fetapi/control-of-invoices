@@ -1,4 +1,4 @@
-import { Expense, ExpensesTable } from "components/ExpensesTable";
+import { Expense, ExpensesTable } from "components/tables/ExpensesTable";
 import { Invoice, InvoicesTable } from "components/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
 

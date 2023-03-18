@@ -7,7 +7,7 @@ import {
   Text,
   ActionIcon,
 } from "@mantine/core";
-import { TableMenuRow } from "./TableMenuRow";
+import { TableMenuRow } from "../TableMenuRow";
 import getShortText from "helpers/getShortText";
 
 const useStyles = createStyles((theme) => ({

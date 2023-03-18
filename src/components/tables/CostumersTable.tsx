@@ -7,8 +7,8 @@ import {
   Text,
   ActionIcon,
 } from "@mantine/core";
-import { Costumer } from "../pages/empresas-parceiras";
-import { TableMenuRow } from "./TableMenuRow";
+import { Costumer } from "../../pages/empresas-parceiras";
+import { TableMenuRow } from "../TableMenuRow";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {

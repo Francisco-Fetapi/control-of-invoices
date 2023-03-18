@@ -1,5 +1,5 @@
 import AppScheme from "layouts/AppScheme";
-import { CostumersTable } from "../components/CostumersTable";
+import { CostumersTable } from "../components/tables/CostumersTable";
 import { Button, Center } from "@mantine/core";
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import { ExpenseCategoryTable } from "components/ExpenseCategoryTable";
+import { ExpenseCategoryTable } from "components/tables/ExpenseCategoryTable";
 import AppScheme from "layouts/AppScheme";
 import { Button, Center } from "@mantine/core";
 import Link from "next/link";

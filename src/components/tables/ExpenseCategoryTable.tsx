@@ -8,7 +8,7 @@ import {
   Text,
   ActionIcon,
 } from "@mantine/core";
-import { TableMenuRow } from "./TableMenuRow";
+import { TableMenuRow } from "../TableMenuRow";
 import { ExpenseCategory } from "pages/categoria-despesas";
 import getShortText from "helpers/getShortText";
 import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
