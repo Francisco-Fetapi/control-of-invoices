@@ -10,6 +10,7 @@ import {
 import { TableMenuRow } from "../TableMenuRow";
 import getShortText from "helpers/getShortText";
 import useTableActions from "hooks/useTableActions";
+import FormEditInvoices from "components/forms/FormEditInvoices";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -104,7 +105,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <div>Form de Edicao</div>,
+      EditForm: <FormEditInvoices />,
       ViewDetails: <div>Component com mais informacoes</div>,
     });
 

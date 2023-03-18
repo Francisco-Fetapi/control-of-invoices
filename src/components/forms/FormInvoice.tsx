@@ -7,7 +7,7 @@ import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 type SelectMode = "cnpj" | "name";
 
 export interface FormInvoiceFields extends Omit<Invoice, "id"> {
-  selectBy: string;
+  selectBy: SelectMode;
 }
 
 export default function FormInvoice({
@@ -15,9 +15,6 @@ export default function FormInvoice({
   handleSubmit,
   editMode,
 }: FormForAddAndEdit<FormInvoiceFields>) {
-  // const [selectMode, setSelectMode] = useState<string | null>(null);
-  // const [costumer, setCostumer] = useState<string | null>(null);
-
   const { corporationName, selectBy } = form.values;
 
   return (
