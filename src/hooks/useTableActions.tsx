@@ -11,7 +11,7 @@ interface UseTableActionsProps {
   messageAreYouSure?: Notification;
   deletedNotification?: Notification;
   deletedNotificationError?: Notification;
-  ViewDetails: React.ReactNode;
+  ViewDetails?: React.ReactNode;
   EditForm: React.ReactNode;
   handleDelete: () => Promise<void>;
 }
@@ -80,5 +80,9 @@ export default function useTableActions({
     });
   }
 
-  return { openEditForm, openModalDelete, openModalMoreDetails };
+  return {
+    openEditForm,
+    openModalDelete,
+    openModalMoreDetails: ViewDetails ? openModalMoreDetails : undefined,
+  };
 }

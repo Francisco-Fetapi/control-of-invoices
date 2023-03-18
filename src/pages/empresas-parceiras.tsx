@@ -13,8 +13,6 @@ export interface Costumer {
 
 // TODO: On details show more information related to this costumer such as expense and invoices.
 
-// TODO: put the add button near the title on header.
-
 export const mockConstumers: Costumer[] = [
   {
     cnpj: "12-12",

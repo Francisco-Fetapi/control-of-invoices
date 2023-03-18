@@ -8,8 +8,9 @@ import { IconTrash, IconPencil, IconInfoCircle } from "@tabler/icons";
 interface MenuRowProps {
   children: React.ReactNode;
   handleDelete: () => void;
-  handleDetails: () => void;
+  handleDetails?: () => void;
   handleEdit: () => void;
+  detailsLabel?: string;
 }
 
 export function TableMenuRow({
@@ -17,6 +18,7 @@ export function TableMenuRow({
   handleDelete,
   handleDetails,
   handleEdit,
+  detailsLabel = "Detalhes",
 }: MenuRowProps) {
   return (
     <Menu shadow="md" width={200}>
@@ -24,9 +26,15 @@ export function TableMenuRow({
 
       <Menu.Dropdown>
         <Menu.Label>Gerais</Menu.Label>
-        <Menu.Item onClick={handleDetails} icon={<IconInfoCircle size={14} />}>
-          Detalhes
-        </Menu.Item>
+        {handleDetails && (
+          <Menu.Item
+            onClick={handleDetails}
+            icon={<IconInfoCircle size={14} />}
+          >
+            {detailsLabel}
+          </Menu.Item>
+        )}
+
         <Menu.Item onClick={handleEdit} icon={<IconPencil size={14} />}>
           Editar
         </Menu.Item>

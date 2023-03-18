@@ -45,7 +45,6 @@ export function CostumersTable({ data }: CostumersTableProps) {
         console.log("Deletado");
       },
       EditForm: <FormEditCostumer />,
-      ViewDetails: <div>Component com mais informacoes</div>,
     });
 
   const rows = data.map((item, key) => {

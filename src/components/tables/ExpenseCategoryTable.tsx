@@ -94,7 +94,6 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
         console.log("Deletado");
       },
       EditForm: <FormEditCategory />,
-      ViewDetails: <div>Component com mais informacoes</div>,
     });
 
   return (
