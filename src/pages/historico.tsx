@@ -2,7 +2,7 @@ import { Expense, ExpensesTable } from "components/tables/ExpensesTable";
 import { Invoice, InvoicesTable } from "components/tables/InvoicesTable";
 import AppScheme from "layouts/AppScheme";
 
-const mockInvoices: Invoice[] = [
+export const mockInvoices: Invoice[] = [
   {
     id: "o1",
     accrualMonth: new Date(),
@@ -41,7 +41,7 @@ const mockInvoices: Invoice[] = [
   },
 ];
 
-const mockExpenses: Expense[] = [
+export const mockExpenses: Expense[] = [
   {
     id: "awd1",
     accrualMonth: new Date(),

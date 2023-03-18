@@ -57,7 +57,11 @@ export default function FormExpense({
               value={0}
               {...form.getInputProps("value")}
             />
-            <TextInput label="Nome da Despesa" required />
+            <TextInput
+              label="Nome da Despesa"
+              required
+              {...form.getInputProps("name")}
+            />
             <TextInput
               // placeholder="Descreva em poucas"
               type="month"

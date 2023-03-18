@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
+import FormEditExpense from "components/forms/FormEditExpense";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -101,7 +102,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <div>Form de Edicao</div>,
+      EditForm: <FormEditExpense />,
       ViewDetails: <div>Component com mais informacoes</div>,
     });
 
