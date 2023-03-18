@@ -1,6 +1,5 @@
 import { TextInput, Box, Stack } from "@mantine/core";
-import { Button, Center } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
+import { Center } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
@@ -28,7 +27,7 @@ export default function FormCostumer({
           required
           {...form.getInputProps("corporationName")}
         />
-        {/* TODO: validar o CNPJ */}
+        {/* TODO: validate CNPJ */}
         <TextInput label="CNPJ" required {...form.getInputProps("cnpj")} />
 
         <Center mt={30}>
