@@ -1,4 +1,4 @@
-import FormCostumer from "components/forms/FormCostumer";
+import FormAddCostumer from "components/forms/FormAddCostumer";
 import AppScheme from "layouts/AppScheme";
 
 // TODO: paginas como esse devem estar em um escopo. inves de adicionar-empresas-parceiras -> empresas-parceiras/adicionar.
@@ -9,7 +9,7 @@ export default function IndexPage() {
       <AppScheme>
         <h2>Empresas Parceiras</h2>
 
-        <FormCostumer />
+        <FormAddCostumer />
       </AppScheme>
     </div>
   );
