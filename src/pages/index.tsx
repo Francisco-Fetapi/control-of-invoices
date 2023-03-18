@@ -1,5 +1,8 @@
 import AppScheme from "layouts/AppScheme";
 
+// TODO: middlware to redirect user to login if isn't logged
+// put all pages that need authentication in the same folder.
+
 export default function IndexPage() {
   return (
     <div>

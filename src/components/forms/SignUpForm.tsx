@@ -30,6 +30,7 @@ export function SignUpForm() {
           <Anchor<"a"> size="sm">Iniciar sessão</Anchor>
         </Link>
       </FormHeader>
+      {/* TODO: put button to signut with Google and Facebook */}
       <Paper
         component="form"
         autoComplete="off"
