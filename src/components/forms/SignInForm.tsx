@@ -10,11 +10,13 @@ import {
   Box,
   Center,
   Stack,
+  Divider,
 } from "@mantine/core";
 
 import Link from "next/link";
 import FormHeader from "../FormHeader";
 import { useState } from "react";
+import { FacebookButton, GoogleButton } from "components/SocialButtons";
 
 export function SignInForm() {
   const [loading, setLoading] = useState(false);
@@ -39,16 +41,14 @@ export function SignInForm() {
         // onSubmit={form.onSubmit(handleSubmit)}
       >
         <Stack style={{ flexDirection: "column" }}>
-          <Title
-            align="center"
-            sx={() => ({
-              fontWeight: 600,
-              fontSize: 25,
-            })}
-            mb="md"
-          >
-            INICIAR SESSÃO
-          </Title>
+          <Text size="lg" weight={500}>
+            Bem vindo! Inicie sessão com o
+          </Text>
+          <Group grow mb="xs">
+            <GoogleButton radius="xl">Google</GoogleButton>
+            <FacebookButton radius="xl">Facebook</FacebookButton>
+          </Group>
+          <Divider label="Ou continue com o email" labelPosition="center" />
 
           <TextInput
             label="Email"
