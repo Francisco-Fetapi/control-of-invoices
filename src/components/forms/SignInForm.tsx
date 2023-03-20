@@ -12,42 +12,14 @@ import {
   Stack,
   Divider,
 } from "@mantine/core";
-
 import Link from "next/link";
 import FormHeader from "../FormHeader";
-import { useState } from "react";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
-import { useForm } from "@mantine/form";
 import { User } from "entities/User";
-import { useMutation } from "react-query";
-import { apiRoutes } from "lib/axios";
-
-interface UserFields extends Pick<User, "email" | "password"> {}
+import useFormSignin from "hooks/forms/useFormSignin";
 
 export function SignInForm() {
-  const form = useForm<UserFields>({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validate({ email, password }) {
-      let errors: any = {};
-      if (password.length < 6) {
-        errors.password = "Senha deve ter no minimo 6 caracteres.";
-      }
-
-      return errors;
-    },
-  });
-  const login = useMutation<unknown, unknown, UserFields>((user) => {
-    return apiRoutes.post("/login", {
-      user,
-    });
-  });
-
-  function handleSubmit(values: UserFields) {
-    login.mutate(values);
-  }
+  const { form, handleSubmit, login } = useFormSignin();
 
   return (
     <Stack my={50} sx={{ maxWidth: 500, width: "90%" }}>
@@ -81,6 +53,7 @@ export function SignInForm() {
             label="Email"
             placeholder="seu@email.com"
             required
+            type="email"
             {...form.getInputProps("email")}
           />
           <PasswordInput

@@ -79,8 +79,6 @@ export default function useFormSignUp() {
     }
   }, [createAccount.isError]);
 
-  console.log(createAccount);
-
   function handleSubmit(values: UserFields) {
     createAccount.mutate(values);
   }

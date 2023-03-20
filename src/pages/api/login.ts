@@ -22,7 +22,8 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
   const body = <Request>(query as unknown);
 
-  res.send({ msg: "Ola Mundo!" });
+  // TODO: return status 200 even on error and its message to show on front-end.
+  res.status(500).send({ msg: "Ola Mundo!" });
 }
 
 export default login;
