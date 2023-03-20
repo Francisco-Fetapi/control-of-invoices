@@ -10,6 +10,7 @@ import {
   createStyles,
 } from "@mantine/core";
 import { IconSun, IconMoonStars, IconLogout } from "@tabler/icons";
+import useLogout from "hooks/forms/useLogout";
 import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {
@@ -39,6 +40,7 @@ export default function Header({ opened, setOpened }: HeaderProps) {
   const theme = useMantineTheme();
   const { classes } = useStyles();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const logout = useLogout();
 
   return (
     <HeaderMantine height={70} p="md">
@@ -77,6 +79,7 @@ export default function Header({ opened, setOpened }: HeaderProps) {
           <ActionIcon
             className={`${classes.background} ${classes.alterIcon}`}
             size="lg"
+            onClick={logout.handle}
           >
             <IconLogout size={20} />
           </ActionIcon>
