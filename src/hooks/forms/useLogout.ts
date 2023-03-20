@@ -12,6 +12,7 @@ export default function useLogout() {
       labels: { confirm: "Sim", cancel: "Não" },
       onCancel: () => console.log("Cancel"),
       onConfirm: () => {
+        apiRoutes.get("/logout");
         logout();
       },
     });

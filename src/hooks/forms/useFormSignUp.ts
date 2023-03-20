@@ -1,11 +1,9 @@
 import { useMutation } from "react-query";
 import { apiRoutes } from "lib/axios";
-import { useEffect } from "react";
 import { useForm } from "@mantine/form";
 import type { CNPJ, User } from "entities/User";
 import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
-import { AxiosResponse } from "axios";
 import { RegisterApiResponse } from "pages/api/users/register";
 import { setCookie } from "nookies";
 
@@ -72,9 +70,6 @@ export default function useFormSignUp() {
       user,
     });
   });
-  // const res = createAccount.data as unknown as
-  //   | AxiosResponse<RegisterApiResponse>
-  //   | undefined;
 
   function handleSubmit(values: UserFields) {
     createAccount.mutate(values, {

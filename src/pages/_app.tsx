@@ -70,6 +70,7 @@ export default function App(props: AppProps & WithColorScheme) {
 App.getInitialProps = ({ ctx }: { ctx: any }) => {
   const cookies = nookies.get(ctx);
 
+  // fetch more information about user by uid on db.
   return {
     preferredColorScheme: cookies[THEME_COOKIE] || "light",
   };
