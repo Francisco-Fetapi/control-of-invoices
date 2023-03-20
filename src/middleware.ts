@@ -4,13 +4,10 @@ import { NextResponse } from "next/server";
 type MiddlewareReturn = Promise<Response | undefined> | Response | undefined;
 
 const protectdRoutesForAuth = [
-  "/adicionar-categoria",
-  "/adicionar-empresas-parceiras",
-  "/categoria-despesas",
-  "/configuracoes",
+  "/despesas",
   "/empresas-parceiras",
+  "/configuracoes",
   "/historico",
-  "/lancar-despesa",
   "/lancar-nota-fiscal",
 ];
 
