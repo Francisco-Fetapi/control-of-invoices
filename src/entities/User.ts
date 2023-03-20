@@ -1,4 +1,4 @@
-type CNPJ =
+export type CNPJ =
   | "MEI"
   | "EI"
   | "LTDA"

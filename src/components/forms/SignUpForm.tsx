@@ -12,20 +12,27 @@ import {
   Select,
   Divider,
 } from "@mantine/core";
-
 import Link from "next/link";
 
 import FormHeader from "../FormHeader";
-import { useState } from "react";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
 import { useForm } from "@mantine/form";
-import { User } from "entities/User";
+import type { CNPJ, User } from "entities/User";
 import { useMutation } from "react-query";
 import { apiRoutes } from "lib/axios";
 
 interface UserFields extends User {
   passwordConfirmation: string;
 }
+
+export const validCNPJ: CNPJ[] = [
+  "EI",
+  "LTDA",
+  "MEI",
+  "SLU",
+  "Sociedade Anônima",
+  "Sociedade Simples",
+];
 
 export function SignUpForm() {
   const form = useForm<UserFields>({
@@ -37,6 +44,37 @@ export function SignUpForm() {
       password: "",
       passwordConfirmation: "",
       phoneNumber: "",
+    },
+    validate({
+      cnpj,
+      corporationName,
+      name,
+      password,
+      passwordConfirmation,
+      phoneNumber,
+    }) {
+      let errors: any = {};
+      // if (!validCNPJ.includes(cnpj)) {
+      //   errors.cnpj = "CNPJ inválido";
+      // }
+      if (name.length < 3) {
+        errors.name = "Nome inválido. Mínimo de 3 caracteres";
+      }
+      if (corporationName.length < 3) {
+        errors.name = "Nome inválido. Mínimo de 3 caracteres";
+      }
+      if (password !== passwordConfirmation) {
+        errors.password = "A senha e o confirmar senha devem ser iguais.";
+      }
+      if (phoneNumber.length < 4) {
+        errors.phoneNumber = "Número de Telefone demasiado curto.";
+      }
+      if (phoneNumber.startsWith("+")) {
+        errors.phoneNumber =
+          "O Número de Telefone deve ser precedido com o código do seu país.";
+      }
+
+      return errors;
     },
   });
   const createAccount = useMutation<unknown, unknown, User>((user) => {
@@ -91,6 +129,7 @@ export function SignUpForm() {
           />
           <TextInput
             label="Email"
+            type="email"
             placeholder="seu@email.com"
             required
             {...form.getInputProps("email")}

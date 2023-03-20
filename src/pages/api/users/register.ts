@@ -1,7 +1,6 @@
 import { User } from "entities/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import { createUser } from "services/createUser";
-import { createUserWithEmailPassword } from "services/createUserWithEmailAndPassword";
 
 interface Request {
   user: User;
