@@ -115,7 +115,9 @@ interface NavBarProps {
 export function NavbarNested({ opened, links }: NavBarProps) {
   const { classes } = useStyles();
   const Links = links.map((item) => <LinksGroup {...item} key={item.label} />);
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
+
+  console.log("useAuth", user);
 
   return (
     <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ lg: 300, sm: 320 }}>
