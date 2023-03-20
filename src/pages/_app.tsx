@@ -7,6 +7,7 @@ import { useState } from "react";
 import nookies, { setCookie } from "nookies";
 import RouterTransition from "components/RouterTransition";
 import { QueryClient, QueryClientProvider } from "react-query";
+import getAllUserData from "services/getAllUserData";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,10 +68,9 @@ export default function App(props: AppProps & WithColorScheme) {
     </>
   );
 }
-App.getInitialProps = ({ ctx }: { ctx: any }) => {
+App.getInitialProps = async ({ ctx, req }: { ctx: any; req: string }) => {
   const cookies = nookies.get(ctx);
 
-  // fetch more information about user by uid on db.
   return {
     preferredColorScheme: cookies[THEME_COOKIE] || "light",
   };
