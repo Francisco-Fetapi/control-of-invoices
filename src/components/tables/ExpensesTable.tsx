@@ -10,6 +10,7 @@ import {
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
 import FormEditExpense from "components/forms/FormEditExpense";
+import { Expense } from "entities/Expense";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -20,18 +21,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface Expense {
+export interface ExpenseTable extends Expense {
   id: string;
-  name: string;
-  corporationName: string;
-  category: string;
-  value: string;
-  payday: Date;
-  accrualMonth: Date;
 }
 
 export interface ExpensesTableProps {
-  data: Expense[];
+  data: ExpenseTable[];
 }
 
 export function ExpensesTable({ data }: ExpensesTableProps) {
@@ -89,7 +84,7 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
 }
 
 interface TableRowProps {
-  item: Expense;
+  item: ExpenseTable;
   selection: string[];
   toggleRow: (id: string) => void;
 }

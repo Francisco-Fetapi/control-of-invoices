@@ -1,13 +1,10 @@
 import { TextInput, Box, Stack } from "@mantine/core";
 import { Center } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
+import { Costumer } from "entities/Costumer";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
-export interface FormCostumerFields {
-  name: string;
-  corporationName: string;
-  cnpj: string;
-}
+export interface FormCostumerFields extends Costumer {}
 
 export default function FormCostumer({
   form,

@@ -12,6 +12,7 @@ import getShortText from "helpers/getShortText";
 import useTableActions from "hooks/useTableActions";
 import FormEditInvoices from "components/forms/FormEditInvoices";
 import getWordsLength from "helpers/getWordsLength";
+import { Invoice } from "entities/Invoice";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -22,18 +23,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface Invoice {
+export interface InvoiceTable extends Invoice {
   id: string;
-  value: string;
-  number: number;
-  description: string;
-  accrualMonth: Date;
-  receiptDate: Date;
-  corporationName: string;
 }
 
 export interface InvoicesTableProps {
-  data: Invoice[];
+  data: InvoiceTable[];
 }
 
 export function InvoicesTable({ data }: InvoicesTableProps) {
@@ -93,7 +88,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
 }
 
 interface TableRowProps {
-  item: Invoice;
+  item: InvoiceTable;
   selection: string[];
   toggleRow: (id: string) => void;
 }

@@ -1,12 +1,10 @@
 import { TextInput, Box, Textarea, Stack } from "@mantine/core";
 import { Button, Center } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
+import { ExpenseCategory } from "entities/ExpenseCategory";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
-export interface FormCategoryFields {
-  name: string;
-  description: string;
-}
+export interface FormCategoryFields extends ExpenseCategory {}
 
 export default function FormCategory({
   form,

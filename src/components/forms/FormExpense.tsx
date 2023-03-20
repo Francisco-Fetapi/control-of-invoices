@@ -1,11 +1,11 @@
 import { Select, TextInput, Box, Stack, Center } from "@mantine/core";
-import { Expense } from "components/tables/ExpensesTable";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { mockCategories } from "pages/categoria-despesas";
 import { mockConstumers } from "pages/empresas-parceiras";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
+import { Expense } from "entities/Expense";
 
-export interface FormExpenseFields extends Omit<Expense, "id"> {}
+export interface FormExpenseFields extends Expense {}
 
 export default function FormExpense({
   form,
