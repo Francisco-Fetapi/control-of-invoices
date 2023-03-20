@@ -3,6 +3,7 @@ import { apiRoutes } from "lib/axios";
 import { useEffect } from "react";
 import { useForm } from "@mantine/form";
 import type { CNPJ, User } from "entities/User";
+import { showNotification } from "@mantine/notifications";
 
 interface UserFields extends User {
   passwordConfirmation: string;
@@ -53,9 +54,9 @@ export default function useFormSignUp() {
       if (phoneNumber.length < 4) {
         errors.phoneNumber = "Número de Telefone demasiado curto.";
       }
-      if (phoneNumber.startsWith("+")) {
+      if (!phoneNumber.startsWith("+")) {
         errors.phoneNumber =
-          "O Número de Telefone deve ser precedido com o código do seu país.";
+          "O Número de Telefone deve ser precedido com o código do seu país. Ex.: +244934712217";
       }
 
       return errors;
@@ -69,6 +70,12 @@ export default function useFormSignUp() {
 
   useEffect(() => {
     if (createAccount.isError) {
+      showNotification({
+        title: "Erro ao cadastrar.",
+        message:
+          "Houve um erro ao tentar criar a sua conta. Certifique-se de estar preenchendo corretamente o formúlario.",
+        color: "red",
+      });
     }
   }, [createAccount.isError]);
 
