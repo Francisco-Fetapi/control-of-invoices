@@ -45,7 +45,7 @@ export default function useFormSignUp() {
         errors.name = "Nome inválido. Mínimo de 3 caracteres";
       }
       if (password.length < 6) {
-        errors.password = "Senha deve ter no minimo 6 caracteres.";
+        errors.password = "A Senha deve ter no minimo 6 caracteres.";
       }
       if (password !== passwordConfirmation) {
         errors.passwordConfirmation = "Este campo deve ser igual a Senha.";

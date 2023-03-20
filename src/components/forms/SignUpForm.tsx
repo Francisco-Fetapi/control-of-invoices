@@ -6,7 +6,6 @@ import {
   Text,
   Group,
   Button,
-  Box,
   Center,
   Stack,
   Select,
