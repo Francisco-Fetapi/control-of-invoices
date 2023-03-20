@@ -7,8 +7,9 @@ interface Request {
   user: User;
 }
 
-interface Response {
-  id: number;
+export interface RegisterApiResponse {
+  uid?: string;
+  msg: string;
 }
 
 interface ResponseError {
@@ -21,13 +22,12 @@ async function register(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const result = await createUser(user);
-    //TODO: save any info on cookies
-    nookies.set({ res }, "email", user.email);
-    nookies.set({ res }, "password", user.password);
+    let uid = result.userRef.uid;
+    nookies.set({ res }, "uid", uid);
 
-    res.status(201).send({ msg: "User created." });
+    res.status(201).send({ uid, msg: "User created." });
   } catch (e: any) {
-    res.status(400).send({ error: e.message });
+    res.status(200).send({ msg: e.message });
   }
 }
 

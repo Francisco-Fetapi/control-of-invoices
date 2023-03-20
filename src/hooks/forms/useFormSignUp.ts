@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { useForm } from "@mantine/form";
 import type { CNPJ, User } from "entities/User";
 import { showNotification } from "@mantine/notifications";
+import { useRouter } from "next/router";
+import { AxiosResponse } from "axios";
+import { RegisterApiResponse } from "pages/api/users/register";
 
 interface UserFields extends User {
   passwordConfirmation: string;
@@ -62,25 +65,42 @@ export default function useFormSignUp() {
       return errors;
     },
   });
-  const createAccount = useMutation<unknown, unknown, UserFields>((user) => {
-    return apiRoutes.post("/users/register", {
+  const router = useRouter();
+  const createAccount = useMutation((user: UserFields) => {
+    return apiRoutes.post<RegisterApiResponse>("/users/register", {
       user,
     });
   });
-
-  useEffect(() => {
-    if (createAccount.isError) {
-      showNotification({
-        title: "Erro ao cadastrar.",
-        message:
-          "Houve um erro ao tentar criar a sua conta. Certifique-se de estar preenchendo corretamente o formúlario.",
-        color: "red",
-      });
-    }
-  }, [createAccount.isError]);
+  // const res = createAccount.data as unknown as
+  //   | AxiosResponse<RegisterApiResponse>
+  //   | undefined;
 
   function handleSubmit(values: UserFields) {
-    createAccount.mutate(values);
+    createAccount.mutate(values, {
+      onSuccess(res, variables, context) {
+        const msg = res.data.msg || "";
+        if (res.status === 201) {
+          router.push("/");
+          return;
+        }
+        console.log(res.data);
+        if (msg.includes("email-already-in-use")) {
+          showNotification({
+            title: "O Email já existe!",
+            message:
+              "Já existe um usuário com o email que está tentando cadastrar.",
+            color: "red",
+          });
+        } else {
+          showNotification({
+            title: "Erro ao cadastrar.",
+            message:
+              "Houve um erro ao tentar criar a sua conta. Certifique-se de estar preenchendo corretamente o formúlario.",
+            color: "red",
+          });
+        }
+      },
+    });
   }
 
   return { form, handleSubmit, createAccount };
