@@ -46,8 +46,7 @@ export function SignUpForm() {
   });
 
   async function handleSubmit(values: UserFields) {
-    const res = createAccount.mutate(values);
-    console.log(res);
+    createAccount.mutate(values);
   }
 
   return (
