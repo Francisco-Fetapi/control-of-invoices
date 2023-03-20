@@ -7,18 +7,18 @@ interface UserDocument extends User {
   id: string;
 }
 
-interface UserProviderProps extends User {
+export interface UserProviderProps {
   user: UserDocument | null;
   setUser: React.Dispatch<React.SetStateAction<UserDocument | null>>;
   isLoading: boolean;
 }
 
-const UserContext = createContext<Partial<UserProviderProps>>({});
+export const UserContext = createContext<Partial<UserProviderProps>>({});
 
 export default function UserProvider({ children }: React.PropsWithChildren) {
   const [user, setUser] = useState<UserDocument | null>(null);
   const getUser = useMutation(() => {
-    return apiRoutes.get<UserProviderProps["user"]>("/users");
+    return apiRoutes.get<{ user: UserDocument }>("/users");
   });
   const isLoading = getUser.isLoading;
 
@@ -26,7 +26,7 @@ export default function UserProvider({ children }: React.PropsWithChildren) {
     getUser.mutate(undefined, {
       onSuccess(res) {
         console.log(res.data);
-        setUser(res.data);
+        setUser(res.data.user);
       },
     });
   }, []);

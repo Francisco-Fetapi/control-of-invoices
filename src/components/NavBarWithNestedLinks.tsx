@@ -9,6 +9,9 @@ import { LinksGroup } from "./NavbarLinksGroup";
 import { LinkMenu } from "layouts/AppScheme";
 import { IconDoorExit, IconDoorEnter } from "@tabler/icons";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "context/UserProvider";
+import useAuth from "hooks/useAuth";
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -112,15 +115,18 @@ interface NavBarProps {
 export function NavbarNested({ opened, links }: NavBarProps) {
   const { classes } = useStyles();
   const Links = links.map((item) => <LinksGroup {...item} key={item.label} />);
+  const { user, isLoading } = useAuth();
 
   return (
     <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ lg: 300, sm: 320 }}>
       <Navbar.Section className={classes.header}>
-        <UserButton
-          image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-          name="Nome Usuario"
-          email="emaildousuario@gmail.com"
-        />
+        {user && (
+          <UserButton
+            image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+            name={user.name}
+            email={user.email}
+          />
+        )}
       </Navbar.Section>
 
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
