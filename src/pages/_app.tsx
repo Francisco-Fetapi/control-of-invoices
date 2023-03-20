@@ -8,6 +8,7 @@ import nookies, { setCookie } from "nookies";
 import RouterTransition from "components/RouterTransition";
 import { QueryClient, QueryClientProvider } from "react-query";
 import getAllUserData from "services/getAllUserData";
+import UserProvider from "context/UserProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,15 +61,17 @@ export default function App(props: AppProps & WithColorScheme) {
             colorScheme={colorScheme}
             toggleColorScheme={toggleColorScheme}
           >
-            <AppProvider Page={<Component {...pageProps} />} />
-            <RouterTransition />
+            <UserProvider>
+              <AppProvider Page={<Component {...pageProps} />} />
+              <RouterTransition />
+            </UserProvider>
           </ColorSchemeProvider>
         </AppStore>
       </QueryClientProvider>
     </>
   );
 }
-App.getInitialProps = async ({ ctx, req }: { ctx: any; req: string }) => {
+App.getInitialProps = async ({ ctx }: { ctx: any }) => {
   const cookies = nookies.get(ctx);
 
   return {
