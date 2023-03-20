@@ -43,6 +43,7 @@ export default function useFormSignin() {
           });
         } else {
           const user = res.data.user;
+          // TODO: before save on cookies ask about automatic login.
           setCookie(null, "uid", user.uid, {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",

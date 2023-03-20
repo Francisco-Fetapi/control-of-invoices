@@ -77,6 +77,7 @@ export default function useFormSignUp() {
         const msg = res.data.msg || "";
         if (res.status === 201) {
           const uid = res.data.uid!;
+          // TODO: before save on cookies ask about automatic login.
           setCookie(null, "uid", uid, {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",
