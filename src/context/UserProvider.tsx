@@ -25,7 +25,6 @@ export default function UserProvider({ children }: React.PropsWithChildren) {
   useEffect(() => {
     getUser.mutate(undefined, {
       onSuccess(res) {
-        console.log(res.data);
         setUser(res.data.user);
       },
     });

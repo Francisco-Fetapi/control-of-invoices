@@ -16,14 +16,14 @@ export async function createUser(user: User) {
       displayName: user.name,
     });
   }
-  const { cnpj, corporationName, phoneNumber, email, password } = user;
+  const { cnpj, corporationName, phoneNumber, email, name } = user;
   const docRef = await addDoc(collection(firebaseDb, "users"), {
     cnpj,
     corporationName,
     phoneNumber,
     userid: userRef?.uid,
     email,
-    password,
+    name,
   } as UserDoc);
 
   return { docId: docRef.id, userRef };
