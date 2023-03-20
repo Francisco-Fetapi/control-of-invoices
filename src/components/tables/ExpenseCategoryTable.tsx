@@ -9,7 +9,7 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import { TableMenuRow } from "../TableMenuRow";
-import { ExpenseCategory } from "pages/categoria-despesas";
+import { ExpenseCategory } from "pages/despesas/categorias";
 import getShortText from "helpers/getShortText";
 import { IconToggleRight, IconToggleLeft } from "@tabler/icons";
 import useTableActions from "hooks/useTableActions";

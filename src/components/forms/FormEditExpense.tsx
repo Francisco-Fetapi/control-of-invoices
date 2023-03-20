@@ -1,7 +1,7 @@
 import { useForm } from "@mantine/form";
 import FormExpense, { FormExpenseFields } from "components/forms/FormExpense";
 import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit";
-import { mockCategories } from "pages/categoria-despesas";
+import { mockCategories } from "pages/despesas/categorias";
 import { mockConstumers } from "pages/empresas-parceiras";
 
 type IForm = FormForAddAndEdit<FormExpenseFields>["handleSubmit"];

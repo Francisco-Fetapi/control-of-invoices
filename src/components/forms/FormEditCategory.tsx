@@ -2,7 +2,7 @@ import React from "react";
 import FormCategory, { FormCategoryFields } from "./FormCategory";
 import { useForm } from "@mantine/form";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
-import { mockCategories } from "pages/categoria-despesas";
+import { mockCategories } from "pages/despesas/categorias";
 
 type IForm = FormForAddAndEdit<FormCategoryFields>["handleSubmit"];
 
