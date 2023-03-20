@@ -50,7 +50,7 @@ export default function IndexPage() {
       <AppScheme>
         <TitleAndButtonAction
           title="Categoria das Despesas"
-          href="/adicionar-categoria-despesas"
+          href="/despesas/categorias/adicionar"
         />
 
         <ExpenseCategoryTable data={mockCategories} />

@@ -23,9 +23,9 @@ function isProtected(str: string) {
 
 export function middleware(request: NextRequest): MiddlewareReturn {
   const nextPathname = request.nextUrl.pathname;
-  if (isProtected(nextPathname)) {
-    return NextResponse.redirect(new URL("/iniciar-sessao", request.url));
-  }
+  // if (isProtected(nextPathname)) {
+  //   return NextResponse.redirect(new URL("/iniciar-sessao", request.url));
+  // }
 
   return NextResponse.next();
 }

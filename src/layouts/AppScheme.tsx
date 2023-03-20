@@ -27,7 +27,7 @@ export default function AppScheme({ children }: AppSchemeProps) {
   const initiallyOpened = [
     "/empresas-parceiras",
     "/configuracoes",
-    "/categoria-despesas",
+    "/despesas/categorias",
   ].includes(router.pathname);
 
   const linksMenu: LinkMenu[] = [
@@ -39,7 +39,7 @@ export default function AppScheme({ children }: AppSchemeProps) {
       initiallyOpened,
       links: [
         { label: "Empresas Parceiras", link: "/empresas-parceiras" },
-        { label: "Categoria de Despesas", link: "/categoria-despesas" },
+        { label: "Categoria de Despesas", link: "/despesas/categorias" },
         { label: "Configurações", link: "/configuracoes" },
       ],
     },
