@@ -1,7 +1,5 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import nookies, { parseCookies } from "nookies";
-import { loginUserWithEmailPassword } from "services/loginUserWithEmailAndPassword";
 
 type MiddlewareReturn = Promise<Response | undefined> | Response | undefined;
 
