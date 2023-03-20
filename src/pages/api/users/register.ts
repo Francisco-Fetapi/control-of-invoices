@@ -15,12 +15,15 @@ interface ResponseError {
 }
 
 async function register(req: NextApiRequest, res: NextApiResponse) {
-  const { method, body } = req;
+  const { body } = req;
   const { user } = <Request>body;
 
-  const result = await createUser(user);
-
-  return res.status(201).send({ msg: "User created." });
+  try {
+    const result = await createUser(user);
+    res.status(201).send({ msg: "User created." });
+  } catch (e: any) {
+    res.status(400).send({ error: e.message });
+  }
 }
 
 export default register;

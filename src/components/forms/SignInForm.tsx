@@ -17,9 +17,37 @@ import Link from "next/link";
 import FormHeader from "../FormHeader";
 import { useState } from "react";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
+import { useForm } from "@mantine/form";
+import { User } from "entities/User";
+import { useMutation } from "react-query";
+import { apiRoutes } from "lib/axios";
+
+interface UserFields extends Pick<User, "email" | "password"> {}
 
 export function SignInForm() {
-  const [loading, setLoading] = useState(false);
+  const form = useForm<UserFields>({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate({ email, password }) {
+      let errors: any = {};
+      if (password.length < 6) {
+        errors.password = "Senha deve ter no minimo 6 caracteres.";
+      }
+
+      return errors;
+    },
+  });
+  const login = useMutation<unknown, unknown, UserFields>((user) => {
+    return apiRoutes.post("/login", {
+      user,
+    });
+  });
+
+  function handleSubmit(values: UserFields) {
+    login.mutate(values);
+  }
 
   return (
     <Stack my={50} sx={{ maxWidth: 500, width: "90%" }}>
@@ -37,7 +65,7 @@ export function SignInForm() {
         p={30}
         mt={30}
         radius="md"
-        // onSubmit={form.onSubmit(handleSubmit)}
+        onSubmit={form.onSubmit(handleSubmit)}
       >
         <Stack style={{ flexDirection: "column" }}>
           <Text size="lg" weight={500}>
@@ -53,13 +81,13 @@ export function SignInForm() {
             label="Email"
             placeholder="seu@email.com"
             required
-            // {...form.getInputProps("email")}
+            {...form.getInputProps("email")}
           />
           <PasswordInput
             label="Senha"
             placeholder="6 digitos no minimo"
             required
-            // {...form.getInputProps("password1")}
+            {...form.getInputProps("password")}
           />
           <Group position="apart">
             <Link href="/esqueci-minha-senha">
@@ -67,7 +95,7 @@ export function SignInForm() {
             </Link>
           </Group>
           <Center>
-            <Button loading={loading} type="submit">
+            <Button loading={login.isLoading} type="submit">
               Iniciar sessão
             </Button>
           </Center>

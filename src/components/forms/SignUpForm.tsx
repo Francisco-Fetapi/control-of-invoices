@@ -13,79 +13,12 @@ import {
   Divider,
 } from "@mantine/core";
 import Link from "next/link";
-
 import FormHeader from "../FormHeader";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
-import { useForm } from "@mantine/form";
-import type { CNPJ, User } from "entities/User";
-import { useMutation } from "react-query";
-import { apiRoutes } from "lib/axios";
-
-interface UserFields extends User {
-  passwordConfirmation: string;
-}
-
-export const validCNPJ: CNPJ[] = [
-  "EI",
-  "LTDA",
-  "MEI",
-  "SLU",
-  "Sociedade Anônima",
-  "Sociedade Simples",
-];
+import useFormSignUp, { validCNPJ } from "hooks/forms/useFormSignUp";
 
 export function SignUpForm() {
-  const form = useForm<UserFields>({
-    initialValues: {
-      name: "",
-      corporationName: "",
-      cnpj: "MEI",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      phoneNumber: "",
-    },
-    validate({
-      cnpj,
-      corporationName,
-      name,
-      password,
-      passwordConfirmation,
-      phoneNumber,
-    }) {
-      let errors: any = {};
-      // if (!validCNPJ.includes(cnpj)) {
-      //   errors.cnpj = "CNPJ inválido";
-      // }
-      if (name.length < 3) {
-        errors.name = "Nome inválido. Mínimo de 3 caracteres";
-      }
-      if (corporationName.length < 3) {
-        errors.name = "Nome inválido. Mínimo de 3 caracteres";
-      }
-      if (password !== passwordConfirmation) {
-        errors.password = "A senha e o confirmar senha devem ser iguais.";
-      }
-      if (phoneNumber.length < 4) {
-        errors.phoneNumber = "Número de Telefone demasiado curto.";
-      }
-      if (phoneNumber.startsWith("+")) {
-        errors.phoneNumber =
-          "O Número de Telefone deve ser precedido com o código do seu país.";
-      }
-
-      return errors;
-    },
-  });
-  const createAccount = useMutation<unknown, unknown, User>((user) => {
-    return apiRoutes.post("/users/register", {
-      user,
-    });
-  });
-
-  async function handleSubmit(values: UserFields) {
-    createAccount.mutate(values);
-  }
+  const { form, handleSubmit, createAccount } = useFormSignUp();
 
   return (
     <Stack my={50} sx={{ maxWidth: 500, width: "90%" }}>
@@ -141,14 +74,7 @@ export function SignUpForm() {
           />
           <Select
             style={{ zIndex: 2 }}
-            data={[
-              "MEI",
-              "EI",
-              "LTDA",
-              "SLU",
-              "Sociedade Simples",
-              "Sociedade Anônima",
-            ]}
+            data={validCNPJ}
             {...form.getInputProps("cnpj")}
             // placeholder=""
             label="Selecione seu CNPJ"

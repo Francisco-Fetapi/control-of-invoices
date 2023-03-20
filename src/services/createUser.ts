@@ -9,24 +9,20 @@ interface UserDoc extends Partial<User>, DocumentData {
 }
 
 export async function createUser(user: User) {
-  try {
-    const userRef = await createUserWithEmailPassword(user);
+  const userRef = await createUserWithEmailPassword(user);
 
-    if (userRef) {
-      await updateProfile(userRef, {
-        displayName: user.name,
-      });
-    }
-    const { cnpj, corporationName, phoneNumber } = user;
-    const docRef = await addDoc(collection(firebaseDb, "users"), {
-      cnpj,
-      corporationName,
-      phoneNumber,
-      userid: userRef?.uid,
-    } as UserDoc);
-
-    return { docId: docRef.id, userRef };
-  } catch (e: any) {
-    console.log(e.message);
+  if (userRef) {
+    await updateProfile(userRef, {
+      displayName: user.name,
+    });
   }
+  const { cnpj, corporationName, phoneNumber } = user;
+  const docRef = await addDoc(collection(firebaseDb, "users"), {
+    cnpj,
+    corporationName,
+    phoneNumber,
+    userid: userRef?.uid,
+  } as UserDoc);
+
+  return { docId: docRef.id, userRef };
 }
