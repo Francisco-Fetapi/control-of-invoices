@@ -18,29 +18,6 @@ export default function Footer() {
   return (
     <FooterMantine height={60} p="md">
       <Center>{copyrights}</Center>
-      {/* <MediaQuery largerThan="md" styles={{ display: "none" }}>
-        <Center>{copyrights}</Center>
-      </MediaQuery> */}
-      {/* <MediaQuery smallerThan="md" styles={{ display: "none" }}>
-        <Group
-          sx={{
-            justifyContent: "space-between",
-          }}
-        >
-          {copyrights}
-          <Group>
-            <Breadcrumbs>
-              <FooterLink href="/politicas-de-privacidade">
-                Politicas de Privacidade
-              </FooterLink>
-              <FooterLink href="/termos-e-condicoes">
-                Termos e Condições
-              </FooterLink>
-              <FooterLink href="/quem-somos">Quem somos</FooterLink>
-            </Breadcrumbs>
-          </Group>
-        </Group>
-      </MediaQuery> */}
     </FooterMantine>
   );
 }

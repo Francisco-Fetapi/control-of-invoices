@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import FormHeader from "../FormHeader";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
-import { User } from "entities/User";
 import useFormSignin from "hooks/forms/useFormSignin";
 
 export function SignInForm() {

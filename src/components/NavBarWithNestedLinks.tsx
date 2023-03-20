@@ -7,9 +7,8 @@ import {
 import { UserButton } from "./UserButton";
 import { LinksGroup } from "./NavbarLinksGroup";
 import { LinkMenu } from "layouts/AppScheme";
-import { IconDoorExit,IconDoorEnter } from "@tabler/icons";
-import Link from 'next/link'
-
+import { IconDoorExit, IconDoorEnter } from "@tabler/icons";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -129,18 +128,18 @@ export function NavbarNested({ opened, links }: NavBarProps) {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer2}>
-      <Link href="/lancar-despesa" passHref>
-        <UnstyledButton component="a" className={classes.control}>
-          <IconDoorExit className={classes.linkIcon} stroke={1.5} />
-          <span>Lançar Despesa</span>
-        </UnstyledButton>
+        <Link href="/despesas/lancar" passHref>
+          <UnstyledButton component="a" className={classes.control}>
+            <IconDoorExit className={classes.linkIcon} stroke={1.5} />
+            <span>Lançar Despesa</span>
+          </UnstyledButton>
         </Link>
-        
+
         <Link href="/lancar-nota-fiscal" passHref>
-        <UnstyledButton component="a" className={classes.control}>
-          <IconDoorEnter className={classes.linkIcon} stroke={1.5} />
-          <span>Lançar Nota Fiscal</span>
-        </UnstyledButton>
+          <UnstyledButton component="a" className={classes.control}>
+            <IconDoorEnter className={classes.linkIcon} stroke={1.5} />
+            <span>Lançar Nota Fiscal</span>
+          </UnstyledButton>
         </Link>
       </Navbar.Section>
     </Navbar>

@@ -105,7 +105,7 @@ export default function IndexPage() {
           <Tabs.Panel value="expense">
             <TitleAndButtonAction
               title="Despesas Lançadas"
-              href="/lancar-despesa"
+              href="/despesas/lancar"
             />
 
             <ExpensesTable data={mockExpenses} />

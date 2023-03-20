@@ -38,7 +38,7 @@ export default function IndexPage() {
       <AppScheme>
         <TitleAndButtonAction
           title="Empresas Parceiras"
-          href="/adicionar-empresas-parceiras"
+          href="/empresas-parceiras/adicionar"
         />
 
         <CostumersTable data={mockConstumers} />
