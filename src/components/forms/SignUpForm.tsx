@@ -1,10 +1,8 @@
 import {
   TextInput,
   PasswordInput,
-  Checkbox,
   Anchor,
   Paper,
-  Title,
   Text,
   Group,
   Button,
@@ -19,14 +17,29 @@ import Link from "next/link";
 
 import FormHeader from "../FormHeader";
 import { useState } from "react";
-import {
-  FacebookButton,
-  GoogleButton,
-  SocialButtons,
-} from "components/SocialButtons";
+import { FacebookButton, GoogleButton } from "components/SocialButtons";
+import { useForm } from "@mantine/form";
+import { User } from "entities/User";
+
+interface UserFields extends User {
+  passwordConfirmation: string;
+}
 
 export function SignUpForm() {
   const [loading, setLoading] = useState(false);
+  const form = useForm<UserFields>({
+    initialValues: {
+      name: "",
+      corporationName: "",
+      cnpj: "MEI",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+      phoneNumber: "",
+    },
+  });
+
+  async function handleSubmit(values: UserFields) {}
 
   return (
     <Stack my={50} sx={{ maxWidth: 500, width: "90%" }}>
@@ -44,7 +57,7 @@ export function SignUpForm() {
         p={30}
         mt={30}
         radius="md"
-        // onSubmit={form.onSubmit(handleSubmit)}
+        onSubmit={form.onSubmit(handleSubmit)}
       >
         <Stack style={{ flexDirection: "column" }}>
           <Text size="lg" weight={500}>
@@ -59,26 +72,25 @@ export function SignUpForm() {
             label="Nome"
             placeholder="Nome e sobrenome"
             required
-            // {...form.getInputProps("username")}
+            {...form.getInputProps("name")}
             // width="100%"
           />
           <TextInput
             label="Nome da Empresa"
             required
-            // {...form.getInputProps("username")}
+            {...form.getInputProps("corporationName")}
             // width="100%"
           />
           <TextInput
             label="Email"
             placeholder="seu@email.com"
             required
-            // {...form.getInputProps("email")}
+            {...form.getInputProps("email")}
           />
           <TextInput
             label="Número de Telefone"
-            type="number"
             required
-            // {...form.getInputProps("email")}
+            {...form.getInputProps("phoneNumber")}
           />
           <Select
             style={{ zIndex: 2 }}
@@ -90,7 +102,7 @@ export function SignUpForm() {
               "Sociedade Simples",
               "Sociedade Anônima",
             ]}
-            // {...form.getInputProps("genre")}
+            {...form.getInputProps("cnpj")}
             // placeholder=""
             label="Selecione seu CNPJ"
             required
@@ -99,21 +111,21 @@ export function SignUpForm() {
             label="Senha"
             placeholder="6 digitos no minimo"
             required
-            // {...form.getInputProps("password1")}
+            {...form.getInputProps("password")}
           />
           <PasswordInput
             label="Confirmar senha"
             placeholder="Confirme sua senha"
             required
-            // {...form.getInputProps("password2")}
+            {...form.getInputProps("passwordConfirmation")}
           />
 
           <Center>
-            <Link href="/confirmar-email">
-              <Button loading={loading} component="a">
-                Criar conta
-              </Button>
-            </Link>
+            {/* <Link href="/confirmar-email"> */}
+            <Button type="submit" loading={loading}>
+              Criar conta
+            </Button>
+            {/* </Link> */}
           </Center>
         </Stack>
       </Paper>

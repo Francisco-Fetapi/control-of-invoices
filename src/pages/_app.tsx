@@ -6,6 +6,17 @@ import { ColorSchemeProvider } from "@mantine/core";
 import { useState } from "react";
 import nookies, { setCookie } from "nookies";
 import RouterTransition from "components/RouterTransition";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      // cacheTime: 60 * 60 * 24 * 1, //1 hour
+      // refetchOnMount: false,
+    },
+  },
+});
 
 interface WithColorScheme {
   preferredColorScheme: "light" | "dark";
@@ -42,15 +53,17 @@ export default function App(props: AppProps & WithColorScheme) {
         />
       </Head>
 
-      <AppStore>
-        <ColorSchemeProvider
-          colorScheme={colorScheme}
-          toggleColorScheme={toggleColorScheme}
-        >
-          <AppProvider Page={<Component {...pageProps} />} />
-          <RouterTransition />
-        </ColorSchemeProvider>
-      </AppStore>
+      <QueryClientProvider client={queryClient}>
+        <AppStore>
+          <ColorSchemeProvider
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
+          >
+            <AppProvider Page={<Component {...pageProps} />} />
+            <RouterTransition />
+          </ColorSchemeProvider>
+        </AppStore>
+      </QueryClientProvider>
     </>
   );
 }
