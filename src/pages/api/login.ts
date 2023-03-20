@@ -1,25 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 interface Request {
-  email: string;
-  name: string;
-  companyName: string;
-  phoneNumber: string;
-  companyAddress: string;
+  login: string;
   password: string;
 }
 
 interface Response {
-  id: number;
+  token: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+  };
 }
 
 interface ResponseError {
   error: string;
 }
 
-async function register(req: NextApiRequest, res: NextApiResponse) {
+async function login(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
   const body = <Request>(query as unknown);
+
+  res.send({ msg: "Ola Mundo!" });
 }
 
-export default register;
+export default login;

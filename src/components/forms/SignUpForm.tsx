@@ -20,13 +20,14 @@ import { useState } from "react";
 import { FacebookButton, GoogleButton } from "components/SocialButtons";
 import { useForm } from "@mantine/form";
 import { User } from "entities/User";
+import { useMutation } from "react-query";
+import { apiRoutes } from "lib/axios";
 
 interface UserFields extends User {
   passwordConfirmation: string;
 }
 
 export function SignUpForm() {
-  const [loading, setLoading] = useState(false);
   const form = useForm<UserFields>({
     initialValues: {
       name: "",
@@ -38,8 +39,16 @@ export function SignUpForm() {
       phoneNumber: "",
     },
   });
+  const createAccount = useMutation<unknown, unknown, User>((user) => {
+    return apiRoutes.post("/users/register", {
+      user,
+    });
+  });
 
-  async function handleSubmit(values: UserFields) {}
+  async function handleSubmit(values: UserFields) {
+    const res = createAccount.mutate(values);
+    console.log(res);
+  }
 
   return (
     <Stack my={50} sx={{ maxWidth: 500, width: "90%" }}>
@@ -122,7 +131,7 @@ export function SignUpForm() {
 
           <Center>
             {/* <Link href="/confirmar-email"> */}
-            <Button type="submit" loading={loading}>
+            <Button type="submit" loading={createAccount.isLoading}>
               Criar conta
             </Button>
             {/* </Link> */}
