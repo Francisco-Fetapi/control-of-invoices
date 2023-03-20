@@ -3,7 +3,10 @@ import { User } from "entities/User";
 import { useMutation } from "react-query";
 import { apiRoutes } from "lib/axios";
 import { showNotification } from "@mantine/notifications";
-import { useEffect } from "react";
+
+import { LoginApiResponse } from "pages/api/login";
+import { useRouter } from "next/router";
+import { setCookie } from "nookies";
 
 interface UserFields extends Pick<User, "email" | "password"> {}
 
@@ -22,25 +25,35 @@ export default function useFormSignin() {
       return errors;
     },
   });
-  const login = useMutation<unknown, unknown, UserFields>((user) => {
-    return apiRoutes.post("/login", {
+  const login = useMutation((user: UserFields) => {
+    return apiRoutes.post<LoginApiResponse>("/login", {
       user,
     });
   });
+  const router = useRouter();
 
   function handleSubmit(values: UserFields) {
-    login.mutate(values);
+    login.mutate(values, {
+      onSuccess(res, variables, context) {
+        if (!res.data.user) {
+          showNotification({
+            title: "Usuário não encontrado",
+            message: "Email ou senha incorretos.",
+            color: "red",
+          });
+        } else {
+          const user = res.data.user;
+          setCookie(null, "uid", user.uid, {
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/",
+          });
+          apiRoutes.defaults.headers["uid"] = user.uid;
+          router.push("/");
+        }
+        console.log(res.data);
+      },
+    });
   }
-  useEffect(() => {
-    if (login.isError) {
-      showNotification({
-        title: "Email/Senha inválido/a",
-        message:
-          "Certifique-se de estar preenchendo corretamente o formúlario.",
-        color: "red",
-      });
-    }
-  }, [login.isError]);
 
   return { form, handleSubmit, login };
 }

@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import nookies from "nookies";
+import nookies, { parseCookies } from "nookies";
 import { loginUserWithEmailPassword } from "services/loginUserWithEmailAndPassword";
 
 type MiddlewareReturn = Promise<Response | undefined> | Response | undefined;
@@ -23,14 +23,14 @@ function isProtected(str: string) {
 }
 
 export function isLoggedIn(req: NextRequest) {
-  const cookies = nookies.get({ req });
-  const userId = cookies.uid;
+  const uid = req.cookies.get("uid");
 
-  return userId != null;
+  return uid != null;
 }
 
 export function middleware(request: NextRequest): MiddlewareReturn {
   const nextPathname = request.nextUrl.pathname;
+
   if (!isLoggedIn(request) && isProtected(nextPathname)) {
     return NextResponse.redirect(new URL("/iniciar-sessao", request.url));
   }

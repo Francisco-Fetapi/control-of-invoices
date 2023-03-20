@@ -1,7 +1,6 @@
 import { User } from "entities/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import { createUser } from "services/createUser";
-import nookies from "nookies";
 
 interface Request {
   user: User;
@@ -23,7 +22,6 @@ async function register(req: NextApiRequest, res: NextApiResponse) {
   try {
     const result = await createUser(user);
     let uid = result.userRef.uid;
-    nookies.set({ res }, "uid", uid);
 
     res.status(201).send({ uid, msg: "User created." });
   } catch (e: any) {

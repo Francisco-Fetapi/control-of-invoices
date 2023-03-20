@@ -7,6 +7,7 @@ import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
 import { AxiosResponse } from "axios";
 import { RegisterApiResponse } from "pages/api/users/register";
+import { setCookie } from "nookies";
 
 interface UserFields extends User {
   passwordConfirmation: string;
@@ -80,6 +81,12 @@ export default function useFormSignUp() {
       onSuccess(res, variables, context) {
         const msg = res.data.msg || "";
         if (res.status === 201) {
+          const uid = res.data.uid!;
+          setCookie(null, "uid", uid, {
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/",
+          });
+          apiRoutes.defaults.headers["uid"] = uid;
           router.push("/");
           return;
         }

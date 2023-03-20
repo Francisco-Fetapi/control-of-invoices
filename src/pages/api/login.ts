@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { loginUserWithEmailPassword } from "services/loginUserWithEmailAndPassword";
+import nookies from "nookies";
+import { User } from "entities/User";
+import { UserCredential } from "firebase/auth";
 
 interface Request {
-  login: string;
-  password: string;
+  user: User;
 }
 
-interface Response {
-  token: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
+export interface LoginApiResponse {
+  msg: string;
+  user: User & UserCredential["user"];
 }
 
 interface ResponseError {
@@ -19,11 +18,19 @@ interface ResponseError {
 }
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
-  const { method, query } = req;
-  const body = <Request>(query as unknown);
+  const { body } = req;
+  const {
+    user: { email, password },
+  } = <Request>body;
 
-  // TODO: return status 200 even on error and its message to show on front-end.
-  res.status(500).send({ msg: "Ola Mundo!" });
+  try {
+    const result = await loginUserWithEmailPassword({ email, password });
+    const user = result.user;
+
+    res.status(201).send({ user, msg: "User logged." });
+  } catch (e: any) {
+    res.status(200).send({ msg: e.message });
+  }
 }
 
 export default login;
