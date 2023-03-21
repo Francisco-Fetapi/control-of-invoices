@@ -34,7 +34,8 @@ export default function useDeleteHandle({
       onSuccess(res, variables, context) {
         if (res.data?.deleted) {
           console.log(queryToRefetch);
-          queryClient.refetchQueries(queryToRefetch);
+          //   TODO: to performa implement strategy to change the value on cache.
+          queryClient.refetchQueries([queryToRefetch]);
           showNotification({
             title: hasOneItemOnly ? "Item Eliminado" : "Itens Selecionados",
             message: hasOneItemOnly
