@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   createStyles,
   Table,
@@ -95,7 +94,7 @@ interface TableRowProps {
   toggleRow: (id: string) => void;
 }
 
-// TODO: move all table for its corresponding table folder
+// TODO: move all TableRow for its corresponding table folder
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
