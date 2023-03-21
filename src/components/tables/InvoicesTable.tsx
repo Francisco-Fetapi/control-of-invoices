@@ -14,6 +14,7 @@ import FormEditInvoices from "components/forms/FormEditInvoices";
 import getWordsLength from "helpers/getWordsLength";
 import { Invoice } from "entities/Invoice";
 import useHistoryItems from "hooks/useHistoryItems";
+import useSelection from "hooks/useSelection";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -34,23 +35,19 @@ export interface InvoicesTableProps {
 
 export function InvoicesTable({ data }: InvoicesTableProps) {
   const { classes, cx } = useStyles();
-  // TODO: transform this logic to hook
-  const [selection, setSelection] = useState(["1"]);
-  const toggleRow = (id: string) =>
-    setSelection((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id]
-    );
-  const toggleAll = () =>
-    setSelection((current) =>
-      current.length === data.length ? [] : data.map((item) => item.id)
-    );
+
   const { invoicesIsLoading, invoices } = useHistoryItems();
+  const {
+    allItemsIsSelected,
+    someItemsIsSelected,
+    idSelecteds,
+    toggleAll,
+    toggleRow,
+  } = useSelection({ items: invoices });
   const rows = invoices?.map((item, key) => {
     return (
       <TableRow
-        selection={selection}
+        selection={idSelecteds}
         item={item}
         key={item.id}
         toggleRow={toggleRow}
@@ -81,10 +78,8 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
           <th style={{ width: 40 }}>
             <Checkbox
               onChange={toggleAll}
-              checked={selection.length === data.length}
-              indeterminate={
-                selection.length > 0 && selection.length !== data.length
-              }
+              checked={allItemsIsSelected}
+              indeterminate={someItemsIsSelected}
               transitionDuration={2}
             />
           </th>
@@ -111,6 +106,7 @@ interface TableRowProps {
   toggleRow: (id: string) => void;
 }
 
+// TODO: refactor Move all TableRow for its correspondent table folder.
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
