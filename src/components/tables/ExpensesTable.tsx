@@ -66,8 +66,6 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
     );
   }
 
-  console.log(expenses);
-
   if (expenses?.length === 0) {
     return (
       <Text mt={10} align="center">

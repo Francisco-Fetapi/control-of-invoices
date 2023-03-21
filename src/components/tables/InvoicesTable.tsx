@@ -46,8 +46,8 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
     setSelection((current) =>
       current.length === data.length ? [] : data.map((item) => item.id)
     );
-
-  const rows = data.map((item, key) => {
+  const { invoicesIsLoading, invoices } = useHistoryItems();
+  const rows = invoices?.map((item, key) => {
     return (
       <TableRow
         selection={selection}
@@ -57,6 +57,22 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
       />
     );
   });
+
+  if (invoicesIsLoading) {
+    return (
+      <Text mt={10} align="center">
+        Carregando...
+      </Text>
+    );
+  }
+
+  if (invoices?.length === 0) {
+    return (
+      <Text mt={10} align="center">
+        Nenhuma Nota Fiscal encontrada.
+      </Text>
+    );
+  }
 
   return (
     <Table verticalSpacing="sm">

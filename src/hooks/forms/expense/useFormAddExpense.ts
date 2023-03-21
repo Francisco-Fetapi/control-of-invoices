@@ -20,6 +20,7 @@ export default function useFormAddExpense() {
       value: "",
     },
   });
+  // TODO: validate payday and accrualMonth, one of them must be higher
   const addExpense = useMutation((expense: Expense) => {
     return apiRoutes.post<AddExpenseApiResponse>("/expense/add", {
       expense,

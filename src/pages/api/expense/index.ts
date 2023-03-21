@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import getAllUserData from "services/getAllUserData";
 import getExpenses, { ExpenseDoc } from "services/getExpenses";
 
 export interface GetExpensesApiResponse {

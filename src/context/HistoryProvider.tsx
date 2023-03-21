@@ -4,9 +4,11 @@ import { Settings } from "entities/Settings";
 import { User } from "entities/User";
 import { apiRoutes } from "lib/axios";
 import { GetExpensesApiResponse } from "pages/api/expense";
+import { GetInvoicesApiResponse } from "pages/api/invoice";
 import { createContext } from "react";
 import { useQuery } from "react-query";
 import { ExpenseDoc } from "services/getExpenses";
+import { InvoiceDoc } from "services/getInvoices";
 
 export interface UserDocument extends User {
   id: string;
@@ -15,7 +17,7 @@ export interface UserDocument extends User {
 
 export interface HistoryProviderProps {
   expenses?: ExpenseDoc[];
-  invoices: Invoice[];
+  invoices?: InvoiceDoc[];
   expensesIsLoading: boolean;
   invoicesIsLoading: boolean;
 }
@@ -27,16 +29,20 @@ export default function HistoryProvider({ children }: React.PropsWithChildren) {
     let res = apiRoutes.get<GetExpensesApiResponse>("/expense");
     return res;
   });
-  //   const getInvoices = useQuery("invoices", () => {
-  //     let res = apiRoutes.get("/invoice");
-  //     return res;
-  //   });
+  const getInvoices = useQuery("invoices", () => {
+    let res = apiRoutes.get<GetInvoicesApiResponse>("/invoice");
+    return res;
+  });
 
   const expensesIsLoading = getExpenses.isLoading;
   const expenses = getExpenses.data?.data.expenses;
+  const invoicesIsLoading = getInvoices.isLoading;
+  const invoices = getInvoices.data?.data.invoices;
 
   return (
-    <HistoryContext.Provider value={{ expensesIsLoading, expenses }}>
+    <HistoryContext.Provider
+      value={{ expensesIsLoading, expenses, invoices, invoicesIsLoading }}
+    >
       {children}
     </HistoryContext.Provider>
   );
