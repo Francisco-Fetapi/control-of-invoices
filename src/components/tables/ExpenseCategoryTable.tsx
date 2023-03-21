@@ -18,6 +18,7 @@ import { apiRoutes } from "lib/axios";
 import { useQuery } from "react-query";
 import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 import useSelection from "hooks/useSelection";
+import useDeleteHandle from "hooks/useDeleteHandle";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -109,11 +110,16 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
   const [archived, setArchived] = useState(item.archived);
+  const { deleteDocuments, isLoading } = useDeleteHandle({
+    documents: selection.map((item) => ({ id: item })),
+    queryToRefetch: "expense-categories",
+    url: "/expense/category/delete",
+  });
   // TODO: add behavior to show more details when necessary
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       handleDelete() {
-        console.log("Deletado");
+        deleteDocuments(item);
       },
       EditForm: <FormEditCategory item={item} />,
     });
