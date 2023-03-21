@@ -4,7 +4,6 @@ import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit
 import { useMutation, useQueryClient } from "react-query";
 import { ExpenseCategory } from "entities/ExpenseCategory";
 import { apiRoutes } from "lib/axios";
-import { AddExpenseCategoryApiResponse } from "pages/api/expense/category/add";
 import { showNotification } from "@mantine/notifications";
 import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 import { EditExpenseCategoryApiResponse } from "pages/api/expense/category/update";

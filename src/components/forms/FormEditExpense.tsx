@@ -1,28 +1,18 @@
-import { useForm } from "@mantine/form";
-import FormExpense, { FormExpenseFields } from "components/forms/FormExpense";
-import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit";
+import FormExpense from "components/forms/FormExpense";
+import useFormEditExpense from "hooks/forms/expense/useFormEditExpense";
+import { ExpenseDoc } from "services/getExpenses";
+import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
 
-type IForm = FormForAddAndEdit<FormExpenseFields>["handleSubmit"];
+interface FormEditExpenseProps {
+  item: ExpenseDoc;
+}
 
-export default function FormEditExpense() {
-  const form = useForm<FormExpenseFields>({
-    initialValues: {
-      accrualMonth: "",
-      category: "", //id category
-      corporationName: "", // id costumer
-      name: "Nome da Despesa",
-      payday: "",
-      value: "1234",
-    },
-  });
-
-  const handleSubmit: IForm = (values) => {
-    console.log(values);
-  };
+export default function FormEditExpense({ item }: FormEditExpenseProps) {
+  const { form, handleSubmit, isLoading } = useFormEditExpense(item);
 
   return (
-    <div>
+    <ContainerLoadingOverlay isLoading={isLoading}>
       <FormExpense form={form} handleSubmit={handleSubmit} editMode={true} />
-    </div>
+    </ContainerLoadingOverlay>
   );
 }
