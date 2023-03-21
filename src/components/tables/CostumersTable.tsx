@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import { apiRoutes } from "lib/axios";
 import { GetCostumersApiResponse } from "pages/api/costumer";
 import useSelection from "hooks/useSelection";
+import { CostumerDoc } from "services/getCostumers";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -25,15 +26,6 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function CostumersTable() {
-  const { classes, cx } = useStyles();
-  const { openEditForm, openModalDelete, openModalMoreDetails } =
-    useTableActions({
-      async handleDelete() {
-        console.log("Deletado");
-      },
-      EditForm: <FormEditCostumer />,
-    });
-
   const costumers = useQuery("costumers", () => {
     return apiRoutes.get<GetCostumersApiResponse>("/costumer");
   });
@@ -49,37 +41,13 @@ export function CostumersTable() {
   } = useSelection({ items: listCostumers });
 
   const rows = listCostumers?.map((item, key) => {
-    const selected = idSelecteds.includes(item.id);
     return (
-      <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
-        <td>
-          <Checkbox
-            checked={idSelecteds.includes(item.id)}
-            onChange={() => toggleRow(item.id)}
-            transitionDuration={2}
-          />
-        </td>
-        <td>
-          <Group spacing="sm">
-            <Text size="sm" weight={500}>
-              {item.name}
-            </Text>
-          </Group>
-        </td>
-        <td>{item.corporationName}</td>
-        <td>{item.cnpj}</td>
-        <td>
-          <TableMenuRow
-            handleDelete={openModalDelete}
-            handleDetails={openModalMoreDetails}
-            handleEdit={openEditForm}
-          >
-            <ActionIcon>
-              <h4>. . .</h4>
-            </ActionIcon>
-          </TableMenuRow>
-        </td>
-      </tr>
+      <TableRow
+        selection={idSelecteds}
+        item={item}
+        key={item.id}
+        toggleRow={toggleRow}
+      />
     );
   });
 
@@ -119,5 +87,54 @@ export function CostumersTable() {
       </thead>
       <tbody>{rows}</tbody>
     </Table>
+  );
+}
+interface TableRowProps {
+  item: CostumerDoc;
+  selection: string[];
+  toggleRow: (id: string) => void;
+}
+
+// TODO: move all table for its corresponding table folder
+function TableRow({ item, selection, toggleRow }: TableRowProps) {
+  const { classes, cx } = useStyles();
+  const selected = selection.includes(item.id);
+  const { openEditForm, openModalDelete, openModalMoreDetails } =
+    useTableActions({
+      async handleDelete() {
+        console.log("Deletado");
+      },
+      EditForm: <FormEditCostumer item={item} />,
+    });
+  return (
+    <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
+      <td>
+        <Checkbox
+          checked={selection.includes(item.id)}
+          onChange={() => toggleRow(item.id)}
+          transitionDuration={2}
+        />
+      </td>
+      <td>
+        <Group spacing="sm">
+          <Text size="sm" weight={500}>
+            {item.name}
+          </Text>
+        </Group>
+      </td>
+      <td>{item.corporationName}</td>
+      <td>{item.cnpj}</td>
+      <td>
+        <TableMenuRow
+          handleDelete={openModalDelete}
+          handleDetails={openModalMoreDetails}
+          handleEdit={openEditForm}
+        >
+          <ActionIcon>
+            <h4>. . .</h4>
+          </ActionIcon>
+        </TableMenuRow>
+      </td>
+    </tr>
   );
 }
