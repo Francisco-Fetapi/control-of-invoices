@@ -12,14 +12,13 @@ export interface EditExpenseCategoryApiResponse {
 }
 
 async function EditExpenseCategory(req: NextApiRequest, res: NextApiResponse) {
-  const { body, headers } = req;
+  const { body } = req;
   const { expenseCategory } = <Request>body;
-  const uid = headers.uid as string;
 
   try {
     const updated = await updateExpenseCategory(expenseCategory);
 
-    res.status(200).send({ updated, msg: "ExpenseCategory ipdated." });
+    res.status(200).send({ updated, msg: "ExpenseCategory updated." });
   } catch (e: any) {
     res.status(200).send({ msg: e.message });
     console.log(e.message);
