@@ -4,6 +4,8 @@ import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 type IForm = FormForAddAndEdit<FormCostumerFields>["handleSubmit"];
 
+// TODO: Create /api/costumer/add
+
 export default function FormAddCostumer() {
   const form = useForm<FormCostumerFields>({
     initialValues: {

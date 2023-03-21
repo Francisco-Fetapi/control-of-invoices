@@ -5,6 +5,8 @@ import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 type IForm = FormForAddAndEdit<FormCategoryFields>["handleSubmit"];
 
+// TODO: Create /api/category/add
+
 export default function FormAddCategory() {
   const form = useForm<FormCategoryFields>({
     initialValues: {
