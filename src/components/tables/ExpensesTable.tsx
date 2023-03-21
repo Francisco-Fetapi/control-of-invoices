@@ -85,7 +85,7 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
               indeterminate={
                 selection.length > 0 && selection.length !== data.length
               }
-              transitionDuration={0}
+              transitionDuration={2}
             />
           </th>
           <th>Nome</th>

@@ -85,7 +85,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
               indeterminate={
                 selection.length > 0 && selection.length !== data.length
               }
-              transitionDuration={0}
+              transitionDuration={2}
             />
           </th>
           <th>Empresa</th>

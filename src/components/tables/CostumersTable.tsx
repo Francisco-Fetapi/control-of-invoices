@@ -108,7 +108,7 @@ export function CostumersTable() {
               onChange={toggleAll}
               checked={allItemsIsSelected}
               indeterminate={someItemsIsSelected}
-              transitionDuration={0}
+              transitionDuration={2}
             />
           </th>
           <th>Nome</th>
