@@ -7,6 +7,7 @@ import { showNotification } from "@mantine/notifications";
 import { LoginApiResponse } from "pages/api/login";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
+import useAutoLogin from "hooks/useAutoLogin";
 
 interface UserFields extends Pick<User, "email" | "password"> {}
 
@@ -31,6 +32,7 @@ export default function useFormSignin() {
     });
   });
   const router = useRouter();
+  const autologin = useAutoLogin();
 
   function handleSubmit(values: UserFields) {
     login.mutate(values, {
@@ -43,13 +45,21 @@ export default function useFormSignin() {
           });
         } else {
           const user = res.data.user;
-          // TODO: before save on cookies ask about automatic login.
-          setCookie(null, "uid", user.uid, {
-            maxAge: 30 * 24 * 60 * 60,
-            path: "/",
+          showNotification({
+            title: "Credencias Válidas",
+            message:
+              "A sua conta foi encontrada. Em breve será redirecionado para a página principal.",
+            color: "green",
           });
-          apiRoutes.defaults.headers["uid"] = user.uid;
-          router.push("/");
+          // TODO: before save on cookies ask about automatic login.
+          autologin.handle((yes) => {
+            setCookie(null, "uid", user.uid, {
+              maxAge: yes ? 30 * 24 * 60 * 60 : undefined,
+              path: "/",
+            });
+            apiRoutes.defaults.headers["uid"] = user.uid;
+            router.push("/");
+          });
         }
         console.log(res.data);
       },

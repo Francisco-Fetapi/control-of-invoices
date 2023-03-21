@@ -6,6 +6,7 @@ import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
 import { RegisterApiResponse } from "pages/api/users/register";
 import { setCookie } from "nookies";
+import useAutoLogin from "hooks/useAutoLogin";
 
 interface UserFields extends User {
   passwordConfirmation: string;
@@ -70,6 +71,7 @@ export default function useFormSignUp() {
       user,
     });
   });
+  const autologin = useAutoLogin();
 
   function handleSubmit(values: UserFields) {
     createAccount.mutate(values, {
@@ -77,13 +79,22 @@ export default function useFormSignUp() {
         const msg = res.data.msg || "";
         if (res.status === 201) {
           const uid = res.data.uid!;
-          // TODO: before save on cookies ask about automatic login.
-          setCookie(null, "uid", uid, {
-            maxAge: 30 * 24 * 60 * 60,
-            path: "/",
+          showNotification({
+            title: "Usuario criado",
+            message:
+              "A sua conta foi criada com sucesso. Em breve será redirecionado para a página principal.",
+            color: "green",
           });
-          apiRoutes.defaults.headers["uid"] = uid;
-          router.push("/");
+          // TODO: before save on cookies ask about automatic login.
+          autologin.handle((yes) => {
+            setCookie(null, "uid", uid, {
+              maxAge: yes ? 30 * 24 * 60 * 60 : undefined,
+              path: "/",
+            });
+            apiRoutes.defaults.headers["uid"] = uid;
+            router.push("/");
+          });
+
           return;
         }
         console.log(res.data);

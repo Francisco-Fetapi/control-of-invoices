@@ -10,7 +10,7 @@ import {
   createStyles,
 } from "@mantine/core";
 import { IconSun, IconMoonStars, IconLogout } from "@tabler/icons";
-import useLogout from "hooks/forms/useLogout";
+import useLogout from "hooks/useLogout";
 import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {

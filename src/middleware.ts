@@ -11,7 +11,7 @@ const protectdRoutesForAuth = [
   "/lancar-nota-fiscal",
 ];
 
-function isProtected(str: string) {
+export function isProtected(str: string) {
   return (
     str === "/" ||
     protectdRoutesForAuth.some((routeProtected) =>
