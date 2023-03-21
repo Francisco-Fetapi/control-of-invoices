@@ -14,6 +14,7 @@ import { Expense } from "entities/Expense";
 import useHistoryItems from "hooks/useHistoryItems";
 import { ExpenseDoc } from "services/getExpenses";
 import useSelection from "hooks/useSelection";
+import useDeleteHandle from "hooks/useDeleteHandle";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -107,10 +108,15 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  const { deleteDocuments, isLoading } = useDeleteHandle({
+    documents: selection.map((item) => ({ id: item })),
+    queryToRefetch: "expenses",
+    url: "/expense/delete",
+  });
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       handleDelete() {
-        console.log("Deletado");
+        deleteDocuments(item);
       },
       EditForm: <FormEditExpense item={item} />,
     });

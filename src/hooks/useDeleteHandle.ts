@@ -34,7 +34,7 @@ export default function useDeleteHandle({
       onSuccess(res, variables, context) {
         //   TODO: to performa implement strategy to change the value on cache.
         showNotification({
-          title: hasOneItemOnly ? "Item Eliminado" : "Itens Selecionados",
+          title: hasOneItemOnly ? "Item Eliminado" : "Itens Eliminados",
           message: hasOneItemOnly
             ? "O Item selecionado foi eliminado."
             : "Todos os itens selecionados foram eliminados.",
