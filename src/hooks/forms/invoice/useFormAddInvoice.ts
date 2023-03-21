@@ -12,12 +12,12 @@ type IForm = FormForAddAndEdit<FormInvoiceFields>["handleSubmit"];
 export default function useFormAddInvoice() {
   const form = useForm<FormInvoiceFields>({
     initialValues: {
-      accrualMonth: new Date(),
+      accrualMonth: "",
       corporationName: "",
       value: "",
       description: "",
       number: 0,
-      receiptDate: new Date(),
+      receiptDate: "",
       selectBy: "name",
     },
   });

@@ -13,6 +13,7 @@ import useTableActions from "hooks/useTableActions";
 import FormEditInvoices from "components/forms/FormEditInvoices";
 import getWordsLength from "helpers/getWordsLength";
 import { Invoice } from "entities/Invoice";
+import useHistoryItems from "hooks/useHistoryItems";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -33,6 +34,7 @@ export interface InvoicesTableProps {
 
 export function InvoicesTable({ data }: InvoicesTableProps) {
   const { classes, cx } = useStyles();
+  // TODO: transform this logic to hook
   const [selection, setSelection] = useState(["1"]);
   const toggleRow = (id: string) =>
     setSelection((current) =>
@@ -121,8 +123,8 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       <td>{item.value}</td>
       <td>{item.number}</td>
       <td>{getShortText(item.description, 3)}</td>
-      <td>{item.accrualMonth.toLocaleDateString()}</td>
-      <td>{item.receiptDate.toLocaleDateString()}</td>
+      <td>{item.accrualMonth}</td>
+      <td>{item.receiptDate}</td>
       <td>
         <TableMenuRow
           handleDelete={openModalDelete}

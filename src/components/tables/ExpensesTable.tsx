@@ -11,6 +11,8 @@ import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
 import FormEditExpense from "components/forms/FormEditExpense";
 import { Expense } from "entities/Expense";
+import useHistoryItems from "hooks/useHistoryItems";
+import { ExpenseDoc } from "services/getExpenses";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -43,7 +45,9 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
       current.length === data.length ? [] : data.map((item) => item.id)
     );
 
-  const rows = data.map((item, key) => {
+  const { expenses, expensesIsLoading } = useHistoryItems();
+
+  const rows = expenses?.map((item, key) => {
     return (
       <TableRow
         selection={selection}
@@ -53,6 +57,24 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
       />
     );
   });
+
+  if (expensesIsLoading) {
+    return (
+      <Text mt={10} align="center">
+        Carregando...
+      </Text>
+    );
+  }
+
+  console.log(expenses);
+
+  if (expenses?.length === 0) {
+    return (
+      <Text mt={10} align="center">
+        Nenhuma Despesa encontrada.
+      </Text>
+    );
+  }
 
   return (
     <Table verticalSpacing="sm">
@@ -84,7 +106,7 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
 }
 
 interface TableRowProps {
-  item: ExpenseTable;
+  item: ExpenseDoc;
   selection: string[];
   toggleRow: (id: string) => void;
 }
@@ -113,8 +135,8 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       <td>{item.corporationName}</td>
       <td>{item.category}</td>
       <td>{item.value}</td>
-      <td>{item.payday.toLocaleDateString()}</td>
-      <td>{item.accrualMonth.toLocaleDateString()}</td>
+      <td>{item.payday}</td>
+      <td>{item.accrualMonth}</td>
       <td>
         <TableMenuRow
           handleDelete={openModalDelete}
