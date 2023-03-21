@@ -27,7 +27,6 @@ export default function useFormAddInvoice() {
     });
   });
   const handleSubmit: IForm = (values) => {
-    console.log(values);
     addInvoice.mutate(values, {
       onSuccess(res, variables, context) {
         if (res.data.created) {

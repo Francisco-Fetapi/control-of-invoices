@@ -1,29 +1,14 @@
+import useFormAddExpenseCategory from "hooks/forms/expense/category/useFormAddExpenseCategory";
 import React from "react";
-import FormCategory, { FormCategoryFields } from "./FormCategory";
-import { useForm } from "@mantine/form";
-import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
-
-type IForm = FormForAddAndEdit<FormCategoryFields>["handleSubmit"];
-
-// TODO: Create /api/category/add
+import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
+import FormCategory from "./FormCategory";
 
 export default function FormAddCategory() {
-  const form = useForm<FormCategoryFields>({
-    initialValues: {
-      name: "",
-      description: "",
-    },
-  });
-
-  const handleSubmit: IForm = (values, e) => {
-    e.preventDefault();
-
-    console.log(values);
-  };
+  const { form, handleSubmit, isLoading } = useFormAddExpenseCategory();
 
   return (
-    <div>
+    <ContainerLoadingOverlay isLoading={isLoading}>
       <FormCategory form={form} handleSubmit={handleSubmit} />
-    </div>
+    </ContainerLoadingOverlay>
   );
 }

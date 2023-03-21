@@ -117,8 +117,6 @@ export function NavbarNested({ opened, links }: NavBarProps) {
   const Links = links.map((item) => <LinksGroup {...item} key={item.label} />);
   const { user } = useAuth();
 
-  console.log("useAuth", user);
-
   return (
     <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ lg: 300, sm: 320 }}>
       <Navbar.Section className={classes.header}>
