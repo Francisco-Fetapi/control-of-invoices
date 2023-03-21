@@ -1,6 +1,6 @@
 import { firebaseDb } from "config/firebase.config";
 import { ExpenseCategory } from "entities/ExpenseCategory";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 interface ExpenseCategoryDoc extends ExpenseCategory {
   userid?: string;
@@ -16,8 +16,6 @@ export async function updateExpenseCategory(
   const expenseCategoryRef = doc(firebaseDb, "expense-categories", id);
 
   // TODO: verify if this expenseCategory already exists before update.
-
-  console.log("expenseCategory", expenseCategory);
 
   await setDoc(
     expenseCategoryRef,

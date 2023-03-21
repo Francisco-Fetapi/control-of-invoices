@@ -5,7 +5,6 @@ import Header from "components/Header";
 import { useRouter } from "next/router";
 import { IconHome, IconHistory, IconSettings, TablerIcon } from "@tabler/icons";
 import { NavbarNested } from "components/NavBarWithNestedLinks";
-import { useMediaQuery } from "@mantine/hooks";
 
 interface AppSchemeProps {
   children: React.ReactNode;
@@ -29,10 +28,6 @@ export default function AppScheme({ children }: AppSchemeProps) {
     "/configuracoes",
     "/despesas/categorias",
   ].includes(router.pathname);
-
-  // TODO: you can configure different value when the page has a table and when it has a form.
-  // if pathname has 'lancar' or 'adicionar' then has a form.
-  const isOnTablet = useMediaQuery("(max-width:1030px)", true);
 
   const linksMenu: LinkMenu[] = [
     { label: "Página Inicial", icon: IconHome, link: "/" },
@@ -62,13 +57,7 @@ export default function AppScheme({ children }: AppSchemeProps) {
       navbarOffsetBreakpoint="md"
       asideOffsetBreakpoint="md"
       // navbar={<NavbarNested opened={opened} links={linksMenu} />}
-      navbar={
-        isOnTablet ? (
-          <div />
-        ) : (
-          <NavbarNested opened={opened} links={linksMenu} />
-        )
-      }
+      navbar={<NavbarNested opened={opened} links={linksMenu} />}
       footer={<Footer />}
       header={<Header opened={opened} setOpened={setOpened} />}
     >
