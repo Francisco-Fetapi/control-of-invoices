@@ -8,7 +8,6 @@ interface ExpenseCategoryDoc extends ExpenseCategory {
 }
 
 export async function updateExpenseCategory(
-  userid: string,
   expenseCategory: ExpenseCategoryDoc
 ) {
   const { description, name, id, archived = false } = expenseCategory;
@@ -22,7 +21,6 @@ export async function updateExpenseCategory(
     {
       description,
       name,
-      userid,
       archived,
     } as Omit<ExpenseCategoryDoc, "id">,
     {

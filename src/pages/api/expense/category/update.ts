@@ -17,7 +17,7 @@ async function EditExpenseCategory(req: NextApiRequest, res: NextApiResponse) {
   const uid = headers.uid as string;
 
   try {
-    const updated = await updateExpenseCategory(uid, expenseCategory);
+    const updated = await updateExpenseCategory(expenseCategory);
 
     res.status(200).send({ updated, msg: "ExpenseCategory ipdated." });
   } catch (e: any) {
