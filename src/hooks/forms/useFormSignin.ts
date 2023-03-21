@@ -51,7 +51,7 @@ export default function useFormSignin() {
               "A sua conta foi encontrada. Em breve será redirecionado para a página principal.",
             color: "green",
           });
-          // TODO: before save on cookies ask about automatic login.
+
           autologin.handle((yes) => {
             setCookie(null, "uid", user.uid, {
               maxAge: yes ? 30 * 24 * 60 * 60 : undefined,

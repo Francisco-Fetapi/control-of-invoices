@@ -85,7 +85,7 @@ export default function useFormSignUp() {
               "A sua conta foi criada com sucesso. Em breve será redirecionado para a página principal.",
             color: "green",
           });
-          // TODO: before save on cookies ask about automatic login.
+
           autologin.handle((yes) => {
             setCookie(null, "uid", uid, {
               maxAge: yes ? 30 * 24 * 60 * 60 : undefined,
