@@ -33,7 +33,7 @@ export default function useFormAddExpenseCategory() {
             message: "A categoria foi adicionada com sucesso.",
             color: "green",
           });
-          //   form.reset();
+          form.reset();
         } else {
           showNotification({
             title: "Categoria já existe.",
