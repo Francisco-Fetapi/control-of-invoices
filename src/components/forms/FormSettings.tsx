@@ -1,11 +1,8 @@
 import { TextInput, Box, Checkbox, Space, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { Settings } from "entities/Settings";
 
-interface FormSettingFields {
-  limit: number;
-  sendEmail: boolean;
-  sendSMS: boolean;
-}
+interface FormSettingFields extends Settings {}
 
 export default function FormSettings() {
   const form = useForm<FormSettingFields>({

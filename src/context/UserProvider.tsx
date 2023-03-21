@@ -1,3 +1,4 @@
+import { Settings } from "entities/Settings";
 import { User } from "entities/User";
 import { apiRoutes } from "lib/axios";
 import { isProtected } from "middleware";
@@ -7,6 +8,7 @@ import { useQuery } from "react-query";
 
 interface UserDocument extends User {
   id: string;
+  settings: Settings;
 }
 
 export interface UserProviderProps {
