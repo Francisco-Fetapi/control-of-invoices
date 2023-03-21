@@ -13,6 +13,7 @@ import FormEditExpense from "components/forms/FormEditExpense";
 import { Expense } from "entities/Expense";
 import useHistoryItems from "hooks/useHistoryItems";
 import { ExpenseDoc } from "services/getExpenses";
+import useSelection from "hooks/useSelection";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -33,24 +34,20 @@ export interface ExpensesTableProps {
 
 export function ExpensesTable({ data }: ExpensesTableProps) {
   const { classes, cx } = useStyles();
-  const [selection, setSelection] = useState(["1"]);
-  const toggleRow = (id: string) =>
-    setSelection((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id]
-    );
-  const toggleAll = () =>
-    setSelection((current) =>
-      current.length === data.length ? [] : data.map((item) => item.id)
-    );
 
   const { expenses, expensesIsLoading } = useHistoryItems();
+  const {
+    allItemsIsSelected,
+    someItemsIsSelected,
+    idSelecteds,
+    toggleAll,
+    toggleRow,
+  } = useSelection({ items: expenses });
 
   const rows = expenses?.map((item, key) => {
     return (
       <TableRow
-        selection={selection}
+        selection={idSelecteds}
         item={item}
         key={item.id}
         toggleRow={toggleRow}
@@ -81,10 +78,8 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
           <th style={{ width: 40 }}>
             <Checkbox
               onChange={toggleAll}
-              checked={selection.length === data.length}
-              indeterminate={
-                selection.length > 0 && selection.length !== data.length
-              }
+              checked={allItemsIsSelected}
+              indeterminate={someItemsIsSelected}
               transitionDuration={2}
             />
           </th>
