@@ -42,14 +42,7 @@ export default function FormSettings() {
           message: "As suas configurações foram salvas com sucesso.",
           color: "green",
         });
-        queryClient.setQueryData<UserDocument | undefined>("user", (prev) => {
-          if (prev) {
-            return {
-              ...prev,
-              settings: values,
-            };
-          }
-        });
+        queryClient.refetchQueries(["user"]);
       },
     });
   }
@@ -71,11 +64,13 @@ export default function FormSettings() {
           <Checkbox
             label={<span>Receber email de alerta de faturamento</span>}
             {...form.getInputProps("sendEmail")}
+            checked={form.values.sendEmail}
           />
           <Space mt={7} />
           <Checkbox
             label={<span>Receber SMS de alerta de faturamento</span>}
             {...form.getInputProps("sendSMS")}
+            checked={form.values.sendSMS}
           />
         </Box>
         <Center mt={10}>
