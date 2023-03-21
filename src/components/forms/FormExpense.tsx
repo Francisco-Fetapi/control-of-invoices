@@ -1,9 +1,12 @@
-import { Select, TextInput, Box, Stack, Center } from "@mantine/core";
+import { Select, TextInput, Box, Stack, Center, Text } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
-import { mockCategories } from "pages/despesas/categorias";
-import { mockConstumers } from "pages/empresas-parceiras";
+
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 import { Expense } from "entities/Expense";
+import { useQuery } from "react-query";
+import { GetExpenseCategoryApiResponse } from "pages/api/expense/category";
+import { apiRoutes } from "lib/axios";
+import { GetCostumersApiResponse } from "pages/api/costumer";
 
 export interface FormExpenseFields extends Expense {}
 
@@ -12,7 +15,26 @@ export default function FormExpense({
   handleSubmit,
   editMode,
 }: FormForAddAndEdit<FormExpenseFields>) {
-  const { corporationName: costumer } = form.values;
+  const { corporationName } = form.values;
+  const expenseCategories = useQuery("expense-categories", () => {
+    return apiRoutes.get<GetExpenseCategoryApiResponse>("/expense/category");
+  });
+  const costumers = useQuery("costumers", () => {
+    return apiRoutes.get<GetCostumersApiResponse>("/costumer");
+  });
+
+  const listCostumers = costumers.data?.data.costumers;
+  const listExpenseCategories = expenseCategories.data?.data.expenseCategorys;
+
+  const isLoading = expenseCategories.isLoading || costumers.isLoading;
+  if (isLoading) {
+    return (
+      <Text align="center">
+        Carregando...
+        <br /> <i>Lista de Categorias</i> e <i>Lista de Empresas Parceiras</i>
+      </Text>
+    );
+  }
 
   return (
     <Box
@@ -23,9 +45,9 @@ export default function FormExpense({
       <Stack spacing={15} style={{ flexDirection: "column" }}>
         <Select
           label="Selecionar categoria"
-          data={mockCategories.map((category) => {
+          data={listExpenseCategories?.map((category) => {
             return {
-              value: category.id,
+              value: category.name,
               label: category.name,
             };
           })}
@@ -37,17 +59,17 @@ export default function FormExpense({
         {/* <br /> */}
         <Select
           label="Selecionar empresa"
-          data={mockConstumers.map((costumer) => {
+          data={listCostumers?.map((costumer) => {
             return {
-              value: costumer.id,
-              label: costumer.name,
+              value: costumer.corporationName,
+              label: costumer.corporationName,
             };
           })}
           searchable
           nothingFound="Empresa não encontrada."
           {...form.getInputProps("corporationName")}
         />
-        {costumer && (
+        {corporationName && (
           <Stack spacing={10}>
             <h3>Dados da Despesa</h3>
             <TextInput
@@ -82,7 +104,6 @@ export default function FormExpense({
         <Center mt={30}>
           <FormAddAndEditButton editMode={editMode} />
         </Center>
-        <p>ID empresa selecionada: {costumer}</p>
       </Stack>
     </Box>
   );

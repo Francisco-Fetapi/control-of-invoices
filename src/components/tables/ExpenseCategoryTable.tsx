@@ -78,8 +78,6 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
     );
   }
 
-  console.log(listExpenseCategories);
-
   return (
     <Table verticalSpacing="sm">
       <thead>
@@ -115,6 +113,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
   const [archived, setArchived] = useState(item.archived);
+  // TODO: add behavior to show more details when necessary
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       async handleDelete() {

@@ -7,13 +7,13 @@ import {
   Text,
   ActionIcon,
 } from "@mantine/core";
-import { Costumer } from "../../pages/empresas-parceiras";
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
 import FormEditCostumer from "components/forms/FormEditCostumer";
 import { useQuery } from "react-query";
 import { apiRoutes } from "lib/axios";
 import { GetCostumersApiResponse } from "pages/api/costumer";
+import useSelection from "hooks/useSelection";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -24,24 +24,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface CostumersTableProps {
-  data: Costumer[];
-}
-
-export function CostumersTable({ data }: CostumersTableProps) {
+export function CostumersTable() {
   const { classes, cx } = useStyles();
-  const [selection, setSelection] = useState(["1"]);
-  const toggleRow = (id: string) =>
-    setSelection((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id]
-    );
-  const toggleAll = () =>
-    setSelection((current) =>
-      current.length === data.length ? [] : data.map((item) => item.id)
-    );
-
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       async handleDelete() {
@@ -56,13 +40,21 @@ export function CostumersTable({ data }: CostumersTableProps) {
 
   const listCostumers = costumers.data?.data.costumers;
 
+  const {
+    allItemsIsSelected,
+    someItemsIsSelected,
+    idSelecteds,
+    toggleAll,
+    toggleRow,
+  } = useSelection({ items: listCostumers });
+
   const rows = listCostumers?.map((item, key) => {
-    const selected = selection.includes(item.id);
+    const selected = idSelecteds.includes(item.id);
     return (
       <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
         <td>
           <Checkbox
-            checked={selection.includes(item.id)}
+            checked={idSelecteds.includes(item.id)}
             onChange={() => toggleRow(item.id)}
             transitionDuration={2}
           />
@@ -114,10 +106,8 @@ export function CostumersTable({ data }: CostumersTableProps) {
           <th style={{ width: 40 }}>
             <Checkbox
               onChange={toggleAll}
-              checked={selection.length === data.length}
-              indeterminate={
-                selection.length > 0 && selection.length !== data.length
-              }
+              checked={allItemsIsSelected}
+              indeterminate={someItemsIsSelected}
               transitionDuration={0}
             />
           </th>
