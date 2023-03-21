@@ -115,7 +115,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <FormEditCategory />,
+      EditForm: <FormEditCategory item={item} />,
     });
 
   return (

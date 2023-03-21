@@ -1,29 +1,19 @@
 import React from "react";
-import FormCategory, { FormCategoryFields } from "./FormCategory";
-import { useForm } from "@mantine/form";
-import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
-import { mockCategories } from "pages/despesas/categorias";
+import FormCategory from "./FormCategory";
+import useFormEditExpenseCategory from "hooks/forms/expense/category/useFormEditExpenseCategory";
+import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
+import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 
-type IForm = FormForAddAndEdit<FormCategoryFields>["handleSubmit"];
+interface FormEditCategoryProps {
+  item: ExpenseCategoryDoc;
+}
 
-export default function FormEditCategory() {
-  const mock = mockCategories[0];
-  const form = useForm<FormCategoryFields>({
-    initialValues: {
-      name: mock.name,
-      description: mock.description,
-    },
-  });
-
-  const handleSubmit: IForm = (values, e) => {
-    e.preventDefault();
-
-    console.log(values);
-  };
+export default function FormEditCategory({ item }: FormEditCategoryProps) {
+  const { form, handleSubmit, isLoading } = useFormEditExpenseCategory(item);
 
   return (
-    <div>
+    <ContainerLoadingOverlay isLoading={isLoading}>
       <FormCategory form={form} handleSubmit={handleSubmit} editMode={true} />
-    </div>
+    </ContainerLoadingOverlay>
   );
 }

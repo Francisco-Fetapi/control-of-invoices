@@ -29,5 +29,6 @@ export default async function expenseCategoryAlreadyExists(
 
   const count = ExpenseCategorys.data().count;
 
-  return count > 0;
+  // return count > 0;
+  return count;
 }
