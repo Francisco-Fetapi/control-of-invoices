@@ -1,7 +1,17 @@
-import { Textarea, Select, Center, TextInput, Box, Stack } from "@mantine/core";
+import {
+  Textarea,
+  Select,
+  Center,
+  TextInput,
+  Box,
+  Stack,
+  Text,
+} from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { Invoice } from "entities/Invoice";
-import { mockConstumers } from "pages/empresas-parceiras";
+import { apiRoutes } from "lib/axios";
+import { GetCostumersApiResponse } from "pages/api/costumer";
+import { useQuery } from "react-query";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 type SelectMode = "cnpj" | "name";
@@ -16,6 +26,21 @@ export default function FormInvoice({
   editMode,
 }: FormForAddAndEdit<FormInvoiceFields>) {
   const { corporationName, selectBy } = form.values;
+  const costumers = useQuery("costumers", () => {
+    return apiRoutes.get<GetCostumersApiResponse>("/costumer");
+  });
+
+  const listCostumers = costumers.data?.data.costumers;
+
+  if (costumers.isLoading) {
+    return (
+      <Text align="center">
+        Carregando...
+        <br />
+        <i>Lista de Empresas Parceiras</i>
+      </Text>
+    );
+  }
 
   return (
     <Box
@@ -37,11 +62,10 @@ export default function FormInvoice({
         {selectBy && (
           <Select
             label="Selecionar empresa"
-            data={mockConstumers.map((costumer) => {
+            data={listCostumers?.map((costumer) => {
               return {
-                // TODO: corporationName
-                value: costumer.id,
-                label: costumer[selectBy as SelectMode],
+                value: costumer.corporationName,
+                label: costumer.corporationName,
               };
             })}
             searchable
@@ -91,7 +115,6 @@ export default function FormInvoice({
         <Center mt={30}>
           <FormAddAndEditButton editMode={editMode} />
         </Center>
-        <p>ID empresa selecionada: {corporationName}</p>
       </Stack>
     </Box>
   );
