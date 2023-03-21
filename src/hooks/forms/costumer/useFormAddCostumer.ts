@@ -33,6 +33,7 @@ export default function useFormAddCostumer() {
             message: "Empresa cadastrada com sucesso.",
             color: "green",
           });
+          form.reset();
         } else {
           showNotification({
             title: "A Empresa já existe",

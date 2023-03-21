@@ -1,4 +1,3 @@
-import { LoadingOverlay } from "@mantine/core";
 import useFormAddCostumer from "hooks/forms/costumer/useFormAddCostumer";
 import FormCostumer from "./FormCostumer";
 import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
