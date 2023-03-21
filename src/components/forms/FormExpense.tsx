@@ -36,6 +36,10 @@ export default function FormExpense({
     );
   }
 
+  const nonArchivedExpenseCategories = listExpenseCategories?.filter(
+    (category) => !category.archived
+  );
+
   return (
     <Box
       component="form"
@@ -45,7 +49,7 @@ export default function FormExpense({
       <Stack spacing={15} style={{ flexDirection: "column" }}>
         <Select
           label="Selecionar categoria"
-          data={listExpenseCategories?.map((category) => {
+          data={nonArchivedExpenseCategories?.map((category) => {
             return {
               value: category.name,
               label: category.name,
