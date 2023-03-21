@@ -7,45 +7,10 @@ import {
   Button,
   Center,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
-import { UserDocument } from "context/UserProvider";
-import { Settings } from "entities/Settings";
-import useAuth from "hooks/useAuth";
-import { apiRoutes } from "lib/axios";
-import { UpdateSettingsApiResponse } from "pages/api/users/update/settings";
-import { useMutation, useQueryClient } from "react-query";
-
-interface FormSettingFields extends Settings {}
+import useFormSettings from "hooks/forms/useFormSettings";
 
 export default function FormSettings() {
-  const { user } = useAuth();
-  const settings = user?.settings;
-  const form = useForm<FormSettingFields>({
-    initialValues: {
-      limit: settings?.limit || 0,
-      sendEmail: settings?.sendEmail || false,
-      sendSMS: settings?.sendSMS || false,
-    },
-  });
-  const saveSettings = useMutation((settings: Settings) => {
-    return apiRoutes.post<UpdateSettingsApiResponse>("/users/update/settings", {
-      settings,
-    });
-  });
-  const queryClient = useQueryClient();
-  function handleSubmit(values: Settings) {
-    saveSettings.mutate(form.values, {
-      onSuccess() {
-        showNotification({
-          title: "Configurações salvas",
-          message: "As suas configurações foram salvas com sucesso.",
-          color: "green",
-        });
-        queryClient.refetchQueries(["user"]);
-      },
-    });
-  }
+  const { form, saveSettings, handleSubmit } = useFormSettings();
   return (
     <Box
       component="form"
