@@ -27,14 +27,13 @@ export default function FormCostumer({
         />
 
         <Select
-            style={{ zIndex: 2 }}
-            data={validCNPJ}
-            {...form.getInputProps("cnpj")}
-            // placeholder=""
-            label="CNPJ"
-            required
-          />
-        
+          style={{ zIndex: 2 }}
+          data={validCNPJ}
+          {...form.getInputProps("cnpj")}
+          // placeholder=""
+          label="CNPJ"
+          required
+        />
 
         <Center mt={30}>
           <FormAddAndEditButton editMode={editMode} />

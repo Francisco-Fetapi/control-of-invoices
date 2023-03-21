@@ -112,7 +112,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   // TODO: add behavior to show more details when necessary
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
-      async handleDelete() {
+      handleDelete() {
         console.log("Deletado");
       },
       EditForm: <FormEditCategory item={item} />,

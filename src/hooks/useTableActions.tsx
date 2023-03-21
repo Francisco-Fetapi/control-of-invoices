@@ -13,7 +13,7 @@ interface UseTableActionsProps {
   deletedNotificationError?: Notification;
   ViewDetails?: React.ReactNode;
   EditForm: React.ReactNode;
-  handleDelete: () => Promise<void>;
+  handleDelete: () => void;
   detailsLabel?: string;
 }
 
@@ -51,20 +51,7 @@ export default function useTableActions({
       labels: { confirm: "Confirmar", cancel: "Cancelar" },
       onCancel: () => console.log("Cancel"),
       onConfirm: async () => {
-        try {
-          await handleDelete();
-          showNotification({
-            title: deletedNotification.title,
-            message: <>{deletedNotification.message}</>,
-            color: "green",
-          });
-        } catch (e: any) {
-          showNotification({
-            title: deletedNotificationError.title,
-            message: deletedNotificationError.message,
-            color: "red",
-          });
-        }
+        handleDelete();
       },
     });
   }

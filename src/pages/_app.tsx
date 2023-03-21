@@ -13,9 +13,9 @@ import UserProvider from "context/UserProvider";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
       // cacheTime: 60 * 60 * 24 * 1, //1 hour
-      // refetchOnMount: false,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
     },
   },
 });

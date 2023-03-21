@@ -32,23 +32,20 @@ export default function useDeleteHandle({
 
     handleDelete.mutate(documents_ || documents, {
       onSuccess(res, variables, context) {
-        if (res.data?.deleted) {
-          console.log(queryToRefetch);
-          //   TODO: to performa implement strategy to change the value on cache.
-          queryClient.refetchQueries([queryToRefetch]);
-          showNotification({
-            title: hasOneItemOnly ? "Item Eliminado" : "Itens Selecionados",
-            message: hasOneItemOnly
-              ? "O Item selecionado foi eliminado."
-              : "Todos os itens selecionados foram eliminados.",
-            color: "green",
-          });
-        }
+        //   TODO: to performa implement strategy to change the value on cache.
+        showNotification({
+          title: hasOneItemOnly ? "Item Eliminado" : "Itens Selecionados",
+          message: hasOneItemOnly
+            ? "O Item selecionado foi eliminado."
+            : "Todos os itens selecionados foram eliminados.",
+          color: "green",
+        });
+        queryClient.refetchQueries([queryToRefetch]);
       },
     });
   }
 
   const isLoading = handleDelete.isLoading;
 
-  return { isLoading, deleteDocuments };
+  return { handleDelete, isLoading, deleteDocuments };
 }

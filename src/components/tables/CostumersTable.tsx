@@ -9,12 +9,13 @@ import {
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
 import FormEditCostumer from "components/forms/FormEditCostumer";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { apiRoutes } from "lib/axios";
 import { GetCostumersApiResponse } from "pages/api/costumer";
 import useSelection from "hooks/useSelection";
 import { CostumerDoc } from "services/getCostumers";
 import useDeleteHandle from "hooks/useDeleteHandle";
+import { useEffect } from "react";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -99,14 +100,16 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  // TODO: use isLoading to show some loading component
   const { deleteDocuments, isLoading } = useDeleteHandle({
     documents: selection.map((item) => ({ id: item })),
     queryToRefetch: "costumers",
     url: "/costumer/delete",
   });
+
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
-      async handleDelete() {
+      handleDelete() {
         deleteDocuments(item);
       },
       EditForm: <FormEditCostumer item={item} />,

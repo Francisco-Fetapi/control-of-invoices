@@ -109,7 +109,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const selected = selection.includes(item.id);
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
-      async handleDelete() {
+      handleDelete() {
         console.log("Deletado");
       },
       EditForm: <FormEditExpense item={item} />,

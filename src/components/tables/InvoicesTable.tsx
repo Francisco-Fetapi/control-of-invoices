@@ -114,7 +114,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const wordsLength = getWordsLength(item.description);
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
-      async handleDelete() {
+      handleDelete() {
         console.log("Deletado");
       },
       EditForm: <FormEditInvoices item={item} />,
