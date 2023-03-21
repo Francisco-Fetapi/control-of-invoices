@@ -1,5 +1,4 @@
 import { Button, ButtonProps, Group } from '@mantine/core';
-import { GithubIcon, DiscordIcon, TwitterIcon } from '@mantine/ds';
 import { GoogleIcon } from 'assets/GoogleIcon';
 import { FacebookIcon } from 'assets/FacebookIcon';
 
