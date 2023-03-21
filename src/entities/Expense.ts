@@ -3,6 +3,6 @@ export interface Expense {
   corporationName: string;
   category: string;
   value: string;
-  payday: Date;
-  accrualMonth: Date;
+  payday: string;
+  accrualMonth: string;
 }

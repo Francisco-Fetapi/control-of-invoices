@@ -9,11 +9,11 @@ type IForm = FormForAddAndEdit<FormExpenseFields>["handleSubmit"];
 export default function FormAddExpense() {
   const form = useForm<FormExpenseFields>({
     initialValues: {
-      accrualMonth: new Date(),
+      accrualMonth: "",
       category: "",
       corporationName: "",
       name: "",
-      payday: new Date(),
+      payday: "",
       value: "",
     },
   });
