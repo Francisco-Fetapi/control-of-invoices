@@ -99,7 +99,7 @@ export function CostumersTable({ data }: CostumersTableProps) {
     );
   }
 
-  if (listCostumers?.length === 0) {
+  if (!listCostumers?.length) {
     return (
       <Text mt={10} align="center">
         Nenhuma Empresa encontrada.

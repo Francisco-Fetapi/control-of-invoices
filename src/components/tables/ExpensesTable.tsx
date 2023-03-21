@@ -66,7 +66,7 @@ export function ExpensesTable({ data }: ExpensesTableProps) {
     );
   }
 
-  if (expenses?.length === 0) {
+  if (!expenses?.length) {
     return (
       <Text mt={10} align="center">
         Nenhuma Despesa encontrada.

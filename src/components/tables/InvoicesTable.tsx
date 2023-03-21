@@ -66,7 +66,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
     );
   }
 
-  if (invoices?.length === 0) {
+  if (!invoices?.length) {
     return (
       <Text mt={10} align="center">
         Nenhuma Nota Fiscal encontrada.

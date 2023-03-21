@@ -13,6 +13,10 @@ import { ExpenseCategory } from "pages/despesas/categorias";
 import getShortText from "helpers/getShortText";
 import useTableActions from "hooks/useTableActions";
 import FormEditCategory from "components/forms/FormEditCategory";
+import { GetExpenseCategoryApiResponse } from "pages/api/expense/category";
+import { apiRoutes } from "lib/axios";
+import { useQuery } from "react-query";
+import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -41,7 +45,13 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
       current.length === data.length ? [] : data.map((item) => item.id)
     );
 
-  const rows = data.map((item, key) => {
+  const expenseCategories = useQuery("expense-categories", () => {
+    return apiRoutes.get<GetExpenseCategoryApiResponse>("/expense/category");
+  });
+
+  const listExpenseCategories = expenseCategories.data?.data.expenseCategorys;
+
+  const rows = listExpenseCategories?.map((item, key) => {
     return (
       <TableRow
         selection={selection}
@@ -51,6 +61,24 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
       />
     );
   });
+
+  if (expenseCategories.isLoading) {
+    return (
+      <Text mt={10} align="center">
+        Carregando...
+      </Text>
+    );
+  }
+
+  if (!listExpenseCategories?.length) {
+    return (
+      <Text mt={10} align="center">
+        Nenhuma Categoria encontrada.
+      </Text>
+    );
+  }
+
+  console.log(listExpenseCategories);
 
   return (
     <Table verticalSpacing="sm">
@@ -78,7 +106,7 @@ export function ExpenseCategoryTable({ data }: ExpenseCategoryTableProps) {
 }
 
 interface TableRowProps {
-  item: ExpenseCategory;
+  item: ExpenseCategoryDoc;
   selection: string[];
   toggleRow: (id: string) => void;
 }
