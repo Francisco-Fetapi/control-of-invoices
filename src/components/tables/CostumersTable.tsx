@@ -14,6 +14,7 @@ import { apiRoutes } from "lib/axios";
 import { GetCostumersApiResponse } from "pages/api/costumer";
 import useSelection from "hooks/useSelection";
 import { CostumerDoc } from "services/getCostumers";
+import useDeleteHandle from "hooks/useDeleteHandle";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -98,10 +99,15 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
+  const { deleteDocuments, isLoading } = useDeleteHandle({
+    documents: selection.map((item) => ({ id: item })),
+    queryToRefetch: "costumers",
+    url: "/costumer/delete",
+  });
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       async handleDelete() {
-        console.log("Deletado");
+        deleteDocuments(item);
       },
       EditForm: <FormEditCostumer item={item} />,
     });

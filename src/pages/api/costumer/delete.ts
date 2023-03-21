@@ -5,7 +5,7 @@ interface Request {
   documents: { id: string }[];
 }
 
-export interface DeleteCostumerApiResponse {
+export interface DeleteDocumentApiResponse {
   msg: string;
   deleted: boolean;
 }
