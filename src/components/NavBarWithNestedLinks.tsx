@@ -118,7 +118,7 @@ export function NavbarNested({ opened, links }: NavBarProps) {
   const { user } = useAuth();
 
   return (
-    <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ lg: 300, sm: 320 }}>
+    <Navbar hidden={!opened} width={{ base: 320 }}>
       <Navbar.Section className={classes.header}>
         {user && (
           <UserButton

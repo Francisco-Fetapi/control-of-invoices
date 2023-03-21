@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
 import Footer from "components/Footer";
-import Aside from "components/Aside";
 import Header from "components/Header";
 import { useRouter } from "next/router";
 import { IconHome, IconHistory, IconSettings, TablerIcon } from "@tabler/icons";
 import { NavbarNested } from "components/NavBarWithNestedLinks";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface AppSchemeProps {
   children: React.ReactNode;
@@ -29,6 +29,8 @@ export default function AppScheme({ children }: AppSchemeProps) {
     "/configuracoes",
     "/despesas/categorias",
   ].includes(router.pathname);
+
+  const isTablet = useMediaQuery("(max-width:1030px)");
 
   const linksMenu: LinkMenu[] = [
     { label: "Página Inicial", icon: IconHome, link: "/" },
@@ -57,8 +59,11 @@ export default function AppScheme({ children }: AppSchemeProps) {
       }}
       navbarOffsetBreakpoint="md"
       asideOffsetBreakpoint="md"
-      navbar={<NavbarNested opened={opened} links={linksMenu} />}
-      aside={<Aside />}
+      navbar={
+        isTablet ? undefined : (
+          <NavbarNested opened={opened} links={linksMenu} />
+        )
+      }
       footer={<Footer />}
       header={<Header opened={opened} setOpened={setOpened} />}
     >
