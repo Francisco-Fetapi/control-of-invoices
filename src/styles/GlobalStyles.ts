@@ -5,5 +5,7 @@ interface StylesProps {
 }
 
 export const GlobalStyles = createGlobalStyle<StylesProps>`
-    
+  form{
+    max-width:500px;
+  }    
 `;

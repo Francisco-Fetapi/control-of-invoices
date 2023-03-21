@@ -30,6 +30,8 @@ export default function AppScheme({ children }: AppSchemeProps) {
     "/despesas/categorias",
   ].includes(router.pathname);
 
+  // TODO: you can configure different value when the page has a table and when it has a form.
+  // if pathname has 'lancar' or 'adicionar' then has a form.
   const isTablet = useMediaQuery("(max-width:1030px)");
 
   const linksMenu: LinkMenu[] = [
