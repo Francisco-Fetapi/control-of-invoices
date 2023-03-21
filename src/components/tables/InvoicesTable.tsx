@@ -117,7 +117,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       async handleDelete() {
         console.log("Deletado");
       },
-      EditForm: <FormEditInvoices />,
+      EditForm: <FormEditInvoices item={item} />,
       ViewDetails: wordsLength > 3 ? <div>{item.description}</div> : undefined,
       detailsLabel,
     });

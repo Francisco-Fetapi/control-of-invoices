@@ -19,7 +19,7 @@ export default function useFormEditExpenseCategory(item: ExpenseCategoryDoc) {
     },
   });
   const queryClient = useQueryClient();
-  const editExpenseCategory = useMutation(
+  const updateExpenseCategory = useMutation(
     (expenseCategory: ExpenseCategory) => {
       return apiRoutes.post<EditExpenseCategoryApiResponse>(
         "/expense/category/update",
@@ -31,7 +31,7 @@ export default function useFormEditExpenseCategory(item: ExpenseCategoryDoc) {
   );
   const handleSubmit: IForm = (values) => {
     const moreValues = { ...item, ...values };
-    editExpenseCategory.mutate(moreValues, {
+    updateExpenseCategory.mutate(moreValues, {
       onSuccess(res, variables, context) {
         console.log(res.data.updated);
         if (res.data.updated) {
@@ -48,7 +48,7 @@ export default function useFormEditExpenseCategory(item: ExpenseCategoryDoc) {
     });
   };
 
-  const isLoading = editExpenseCategory.isLoading;
+  const isLoading = updateExpenseCategory.isLoading;
 
   return { form, handleSubmit, isLoading };
 }

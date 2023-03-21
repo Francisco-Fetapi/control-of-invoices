@@ -5,7 +5,6 @@ import { FormExpenseFields } from "components/forms/FormExpense";
 import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit";
 import { Expense } from "entities/Expense";
 import { apiRoutes } from "lib/axios";
-import { AddExpenseApiResponse } from "pages/api/expense/add";
 import { EditExpenseApiResponse } from "pages/api/expense/update";
 import { useMutation, useQueryClient } from "react-query";
 import { ExpenseDoc } from "services/getExpenses";
@@ -25,7 +24,7 @@ export default function useFormEditExpense(item: ExpenseDoc) {
     },
   });
   // TODO: validate payday and accrualMonth, one of them must be higher
-  const addExpense = useMutation((expense: Expense) => {
+  const updateExpense = useMutation((expense: Expense) => {
     return apiRoutes.post<EditExpenseApiResponse>("/expense/update", {
       expense,
     });
@@ -33,7 +32,7 @@ export default function useFormEditExpense(item: ExpenseDoc) {
   const queryClient = useQueryClient();
   const handleSubmit: IForm = (values) => {
     const allValues = { ...item, ...values };
-    addExpense.mutate(allValues, {
+    updateExpense.mutate(allValues, {
       onSuccess(res, variables, context) {
         if (res.data.updated) {
           showNotification({
@@ -48,7 +47,7 @@ export default function useFormEditExpense(item: ExpenseDoc) {
       },
     });
   };
-  const isLoading = addExpense.isLoading;
+  const isLoading = updateExpense.isLoading;
 
   return { form, handleSubmit, isLoading };
 }
