@@ -1,4 +1,5 @@
 import { openConfirmModal } from "@mantine/modals";
+import { destroyCookie } from "nookies";
 
 type Fn = (value: boolean) => void;
 
@@ -16,7 +17,12 @@ export default function useAutoLogin() {
         </>
       ),
       labels: { confirm: "Habilitar", cancel: "Cancelar" },
-      onCancel: () => fn(false),
+      onCancel: () => {
+        window.onunload = function () {
+          destroyCookie(null, "uid");
+        };
+        fn(false);
+      },
       onConfirm: () => {
         fn(true);
       },
