@@ -11,6 +11,9 @@ import { Costumer } from "../../pages/empresas-parceiras";
 import { TableMenuRow } from "../TableMenuRow";
 import useTableActions from "hooks/useTableActions";
 import FormEditCostumer from "components/forms/FormEditCostumer";
+import { useQuery } from "react-query";
+import { apiRoutes } from "lib/axios";
+import { GetCostumersApiResponse } from "pages/api/costumer";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -47,7 +50,13 @@ export function CostumersTable({ data }: CostumersTableProps) {
       EditForm: <FormEditCostumer />,
     });
 
-  const rows = data.map((item, key) => {
+  const costumers = useQuery("costumers", () => {
+    return apiRoutes.get<GetCostumersApiResponse>("/costumer");
+  });
+
+  const listCostumers = costumers.data?.data.costumers;
+
+  const rows = listCostumers?.map((item, key) => {
     const selected = selection.includes(item.id);
     return (
       <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
@@ -65,7 +74,7 @@ export function CostumersTable({ data }: CostumersTableProps) {
             </Text>
           </Group>
         </td>
-        <td>{item.companyname}</td>
+        <td>{item.corporationName}</td>
         <td>{item.cnpj}</td>
         <td>
           <TableMenuRow
@@ -81,6 +90,22 @@ export function CostumersTable({ data }: CostumersTableProps) {
       </tr>
     );
   });
+
+  if (costumers.isLoading) {
+    return (
+      <Text mt={10} align="center">
+        Carregando...
+      </Text>
+    );
+  }
+
+  if (listCostumers?.length === 0) {
+    return (
+      <Text mt={10} align="center">
+        Nenhuma Empresa encontrada.
+      </Text>
+    );
+  }
 
   return (
     <Table verticalSpacing="sm">
