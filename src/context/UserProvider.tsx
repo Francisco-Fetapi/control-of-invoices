@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { createContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
-interface UserDocument extends User {
+export interface UserDocument extends User {
   id: string;
   settings: Settings;
 }
