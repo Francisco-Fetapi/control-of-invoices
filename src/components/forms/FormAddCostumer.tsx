@@ -1,29 +1,14 @@
-import { useForm } from "@mantine/form";
-import FormCostumer, { FormCostumerFields } from "./FormCostumer";
-import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
-
-type IForm = FormForAddAndEdit<FormCostumerFields>["handleSubmit"];
-
-// TODO: Create /api/costumer/add
+import { LoadingOverlay } from "@mantine/core";
+import useFormAddCostumer from "hooks/forms/costumer/useFormAddCostumer";
+import FormCostumer from "./FormCostumer";
+import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
 
 export default function FormAddCostumer() {
-  const form = useForm<FormCostumerFields>({
-    initialValues: {
-      name: "",
-      cnpj: "",
-      corporationName: "",
-    },
-  });
-
-  const handleSubmit: IForm = (values, e) => {
-    e.preventDefault();
-
-    console.log(values);
-  };
+  const { form, handleSubmit, isLoading } = useFormAddCostumer();
 
   return (
-    <div>
+    <ContainerLoadingOverlay isLoading={isLoading}>
       <FormCostumer form={form} handleSubmit={handleSubmit} />
-    </div>
+    </ContainerLoadingOverlay>
   );
 }

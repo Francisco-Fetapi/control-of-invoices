@@ -1,7 +1,8 @@
-import { TextInput, Box, Stack } from "@mantine/core";
+import { TextInput, Box, Stack, Select } from "@mantine/core";
 import { Center } from "@mantine/core";
 import FormAddAndEditButton from "components/FormAddAndEditButton";
 import { Costumer } from "entities/Costumer";
+import { validCNPJ } from "hooks/forms/useFormSignUp";
 import { FormForAddAndEdit } from "./interfaces/FormForAddAndEdit";
 
 export interface FormCostumerFields extends Costumer {}
@@ -25,7 +26,15 @@ export default function FormCostumer({
           {...form.getInputProps("corporationName")}
         />
 
-        <TextInput label="CNPJ" required {...form.getInputProps("cnpj")} />
+        <Select
+            style={{ zIndex: 2 }}
+            data={validCNPJ}
+            {...form.getInputProps("cnpj")}
+            // placeholder=""
+            label="CNPJ"
+            required
+          />
+        
 
         <Center mt={30}>
           <FormAddAndEditButton editMode={editMode} />

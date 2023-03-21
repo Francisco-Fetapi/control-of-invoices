@@ -71,6 +71,7 @@ export function SignUpForm() {
             required
             {...form.getInputProps("phoneNumber")}
           />
+          {/* TODO: remove it and set default MEI */}
           <Select
             style={{ zIndex: 2 }}
             data={validCNPJ}
