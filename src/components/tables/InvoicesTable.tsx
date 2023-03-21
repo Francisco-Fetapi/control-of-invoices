@@ -15,6 +15,7 @@ import getWordsLength from "helpers/getWordsLength";
 import { Invoice } from "entities/Invoice";
 import useHistoryItems from "hooks/useHistoryItems";
 import useSelection from "hooks/useSelection";
+import useDeleteHandle from "hooks/useDeleteHandle";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -112,10 +113,15 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const selected = selection.includes(item.id);
   const detailsLabel = "Descrição";
   const wordsLength = getWordsLength(item.description);
+  const { deleteDocuments, isLoading } = useDeleteHandle({
+    documents: selection.map((item) => ({ id: item })),
+    queryToRefetch: "invoices",
+    url: "/invoice/delete",
+  });
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       handleDelete() {
-        console.log("Deletado");
+        deleteDocuments(item);
       },
       EditForm: <FormEditInvoices item={item} />,
       ViewDetails: wordsLength > 3 ? <div>{item.description}</div> : undefined,
