@@ -9,7 +9,7 @@ export default function ContainerLoadingOverlay({
   isLoading,
 }: ContainerLoadingOverlayProps) {
   return (
-    <div style={{ position: "relative", padding: "20px" }}>
+    <div style={{ zIndex: 1, position: "relative", padding: "20px" }}>
       <LoadingOverlay
         visible={isLoading}
         overlayBlur={2}
