@@ -34,6 +34,7 @@ export default function useFormAddExpense() {
             message: "A sua despesa foi salva com sucesso.",
             color: "green",
           });
+          form.reset();
         }
       },
     });

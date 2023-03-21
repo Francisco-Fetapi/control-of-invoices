@@ -1,33 +1,15 @@
-import { useForm } from "@mantine/form";
-import { FormForAddAndEdit } from "components/forms/interfaces/FormForAddAndEdit";
-import FormInvoice, { FormInvoiceFields } from "./FormInvoice";
-
-type IForm = FormForAddAndEdit<FormInvoiceFields>["handleSubmit"];
+import useFormAddInvoice from "hooks/forms/invoice/useFormAddInvoice";
+import ContainerLoadingOverlay from "./ContainerLoadingOverlay";
+import FormInvoice from "./FormInvoice";
 
 // TODO: Create /api/invoice/add
 
 export default function FormAddInvoices() {
-  const form = useForm<FormInvoiceFields>({
-    initialValues: {
-      accrualMonth: new Date(),
-      corporationName: "",
-      value: "",
-      description: "",
-      number: 0,
-      receiptDate: new Date(),
-      selectBy: "name",
-    },
-  });
-
-  const handleSubmit: IForm = (values, e) => {
-    e.preventDefault();
-
-    console.log(values);
-  };
+  const { form, handleSubmit, isLoading } = useFormAddInvoice();
 
   return (
-    <div>
+    <ContainerLoadingOverlay isLoading={isLoading}>
       <FormInvoice form={form} handleSubmit={handleSubmit} />
-    </div>
+    </ContainerLoadingOverlay>
   );
 }
