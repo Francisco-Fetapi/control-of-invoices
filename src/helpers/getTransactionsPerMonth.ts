@@ -6,7 +6,7 @@ interface Props {
   year?: string;
 }
 
-export default function getTransactionsPerMonth({ year, transactions }: Props) {
+export default function getransactionsPerMonth({ year, transactions }: Props) {
   if (!transactions || !year) return;
   let filteredtransactions = transactions.filter((transaction) => {
     const date = new Date(transaction.accrualMonth);

@@ -7,6 +7,7 @@ import { useForm } from "@mantine/form";
 import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
 import getExpensesYear from "helpers/getTransactionsPerYear";
 import getYearOfLastTransaction from "helpers/getYearOfLastTransaction";
+import { TitleAndAction } from "styles/components/TitleAndAction";
 
 export default function ExpensesPerMonth() {
   const { expenses, expensesIsLoading } = useHistoryItems();
@@ -21,10 +22,11 @@ export default function ExpensesPerMonth() {
   const { year } = form.values;
 
   const availableYears = getExpensesYear({ transactions });
-  const defaultyear = availableYears ? availableYears.at(-1) : "";
+  const defaultYear = availableYears ? availableYears.at(-1) : "";
+  const selectedYear = year || defaultYear;
   const ExpensesPerMonth = getExpensesPerMonth({
     transactions,
-    year: year || defaultyear,
+    year: year || defaultYear,
   });
 
   if (expensesIsLoading) {
@@ -34,22 +36,25 @@ export default function ExpensesPerMonth() {
 
   return (
     <div>
-      <TitleAndButtonActionContainer>
-        <h2>Notas Fiscais</h2>
+      <TitleAndAction>
+        <h2>Despesas</h2>
         <Select
-          label="Ano"
+          // label="Ano"
           data={availableYears}
           {...form.getInputProps("year")}
-          defaultValue={defaultyear}
+          defaultValue={defaultYear}
+          sx={{
+            width: "90px",
+          }}
         />
-      </TitleAndButtonActionContainer>
+      </TitleAndAction>
 
       <Bar
         data={{
           labels: Object.keys(ExpensesPerMonth || {}),
           datasets: [
             {
-              label: `Notas Fiscais (${year})`,
+              label: `Despesas (${selectedYear})`,
               data: Object.values(ExpensesPerMonth || {}),
               backgroundColor: theme.colors.blue[6],
               borderColor: theme.colors.gray[3],
