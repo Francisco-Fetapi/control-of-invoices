@@ -20,6 +20,7 @@ export interface HistoryProviderProps {
   invoices?: InvoiceDoc[];
   expensesIsLoading: boolean;
   invoicesIsLoading: boolean;
+  totalInvoices: number;
 }
 
 export const HistoryContext = createContext<Partial<HistoryProviderProps>>({});
@@ -39,9 +40,23 @@ export default function HistoryProvider({ children }: React.PropsWithChildren) {
   const invoicesIsLoading = getInvoices.isLoading;
   const invoices = getInvoices.data?.data.invoices;
 
+  let totalInvoices = 0;
+
+  if (invoices?.length) {
+    totalInvoices = invoices.reduce((acc, act) => {
+      return +acc + +act.value;
+    }, 0);
+  }
+
   return (
     <HistoryContext.Provider
-      value={{ expensesIsLoading, expenses, invoices, invoicesIsLoading }}
+      value={{
+        totalInvoices,
+        expensesIsLoading,
+        expenses,
+        invoices,
+        invoicesIsLoading,
+      }}
     >
       {children}
     </HistoryContext.Provider>

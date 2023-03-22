@@ -16,6 +16,7 @@ import { Invoice } from "entities/Invoice";
 import useHistoryItems from "hooks/useHistoryItems";
 import useSelection from "hooks/useSelection";
 import useDeleteHandle from "hooks/useDeleteHandle";
+import { InvoiceDoc } from "services/getInvoices";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -26,15 +27,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface InvoiceTable extends Invoice {
-  id: string;
-}
-
-export interface InvoicesTableProps {
-  data: InvoiceTable[];
-}
-
-export function InvoicesTable({ data }: InvoicesTableProps) {
+export function InvoicesTable() {
   const { classes, cx } = useStyles();
 
   const { invoicesIsLoading, invoices } = useHistoryItems();
@@ -102,7 +95,7 @@ export function InvoicesTable({ data }: InvoicesTableProps) {
 }
 
 interface TableRowProps {
-  item: InvoiceTable;
+  item: InvoiceDoc;
   selection: string[];
   toggleRow: (id: string) => void;
 }

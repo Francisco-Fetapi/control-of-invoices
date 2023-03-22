@@ -25,15 +25,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export interface ExpenseTable extends Expense {
-  id: string;
-}
-
-export interface ExpensesTableProps {
-  data: ExpenseTable[];
-}
-
-export function ExpensesTable({ data }: ExpensesTableProps) {
+export function ExpensesTable() {
   const { classes, cx } = useStyles();
 
   const { expenses, expensesIsLoading } = useHistoryItems();

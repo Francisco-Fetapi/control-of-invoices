@@ -3,13 +3,22 @@ import { formatMoney } from "helpers/formatMoney";
 import getPercentage from "helpers/getPercentage";
 import getSettings from "helpers/getSettings";
 import useAuth from "hooks/useAuth";
+import useHistoryItems from "hooks/useHistoryItems";
 import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
 
 export default function LimitRecipes() {
   const { user } = useAuth();
   const settings = getSettings(user);
-  const value = 23520;
+  //   TODO: Value falsy
+
   const total = settings.limit;
+  const { invoicesIsLoading, totalInvoices } = useHistoryItems();
+
+  if (invoicesIsLoading) {
+    return <div />;
+  }
+
+  const value = totalInvoices;
   const percentage = getPercentage({
     total,
     value,
