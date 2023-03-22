@@ -19,6 +19,7 @@ import { useQuery } from "react-query";
 import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 import useSelection from "hooks/useSelection";
 import useDeleteHandle from "hooks/useDeleteHandle";
+import getWordsLength from "helpers/getWordsLength";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -115,13 +116,17 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
     queryToRefetch: "expense-categories",
     url: "/expense/category/delete",
   });
-  // TODO: add behavior to show more details when necessary
+  const detailsLabel = "Descrição";
+  const wordsLength = getWordsLength(item.description);
+
   const { openEditForm, openModalDelete, openModalMoreDetails } =
     useTableActions({
       handleDelete() {
         deleteDocuments(item);
       },
       EditForm: <FormEditCategory item={item} />,
+      ViewDetails: wordsLength > 3 ? <div>{item.description}</div> : undefined,
+      detailsLabel,
     });
 
   return (
@@ -152,6 +157,7 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
           handleDelete={openModalDelete}
           handleDetails={openModalMoreDetails}
           handleEdit={openEditForm}
+          detailsLabel={detailsLabel}
         >
           <ActionIcon>
             <h4>. . .</h4>
