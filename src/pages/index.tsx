@@ -25,15 +25,6 @@ export default function IndexPage() {
             <BalancePerMonth />
           </Stack>
 
-          <h2>Visualização Rápida</h2>
-          <ul>
-            <li>
-              gráficos com balanço simples, mostrando receitas - despesas mês a
-              mês
-            </li>
-            <li>gráficos com as despesas por categorias</li>
-          </ul>
-
           <br />
         </HistoryProvider>
       </AppScheme>

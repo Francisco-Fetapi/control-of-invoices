@@ -20,7 +20,7 @@ export default function BalancePerMonth() {
   const form = useForm({
     initialValues: {
       year: undefined,
-      month: months[0],
+      month: "",
     },
   });
   const { year } = form.values;
@@ -59,7 +59,7 @@ export default function BalancePerMonth() {
             }}
           />
           <Select
-            data={months}
+            data={Object.keys(allBalancesPerMonth || {})}
             {...form.getInputProps("month")}
             sx={{
               width: "120px",
@@ -68,7 +68,11 @@ export default function BalancePerMonth() {
         </TitleAndAction>
       </TitleAndAction>
 
-      {!balances && <Text>Nehum dado encontrado na Data selecionada</Text>}
+      {!balances && (
+        <Text color="red">
+          Nehuma transação encontrada na data selecionada.
+        </Text>
+      )}
 
       {balances && (
         <Center
@@ -84,7 +88,6 @@ export default function BalancePerMonth() {
                 {
                   label: `Balanço (Receitas - Despesas) (${selectedYear})`,
                   data: balances,
-                  // backgroundColor: theme.colors.blue[6],
                   borderColor: theme.colors.gray[3],
                   backgroundColor: [
                     "rgb(255, 99, 132)",
@@ -94,9 +97,6 @@ export default function BalancePerMonth() {
                 },
               ],
             }}
-            // options={{
-            //   maintainAspectRatio: false,
-            // }}
             width="60%"
             height="40%"
           />
