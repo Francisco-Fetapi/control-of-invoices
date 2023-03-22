@@ -34,6 +34,8 @@ Com base na descrição inicial e no que eu implementei, as funções que não f
 - Envio de mensagens para caso o cliente esteja ultrapassando o limite de faturamento como MEI.
 - Criar Conta/Iniciar Sessão com o Facebook e o Google.
 - Exibir o gráfico que mostra as despesas classficadas por categoria.
+- Formulário para editar as informações do usuario.
+- Reposição da Senha
 
 ## Tecnologias Utilizadas
 
