@@ -71,15 +71,7 @@ export function SignUpForm() {
             required
             {...form.getInputProps("phoneNumber")}
           />
-          {/* TODO: remove it and set default MEI */}
-          <Select
-            style={{ zIndex: 2 }}
-            data={validCNPJ}
-            {...form.getInputProps("cnpj")}
-            // placeholder=""
-            label="Selecione seu CNPJ"
-            required
-          />
+          
           <PasswordInput
             label="Senha"
             placeholder="6 digitos no minimo"
@@ -94,11 +86,10 @@ export function SignUpForm() {
           />
 
           <Center>
-            {/* <Link href="/confirmar-email"> */}
             <Button type="submit" loading={createAccount.isLoading}>
               Criar conta
             </Button>
-            {/* </Link> */}
+            
           </Center>
         </Stack>
       </Paper>
