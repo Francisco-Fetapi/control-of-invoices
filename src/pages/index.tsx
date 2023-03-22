@@ -11,7 +11,11 @@ export default function IndexPage() {
     <div>
       <AppScheme>
         <HistoryProvider>
-          <Stack>
+          <Stack
+            sx={{
+              maxWidth: 600,
+            }}
+          >
             <LimitRecipes />
 
             <InvoicesPerMonth />
