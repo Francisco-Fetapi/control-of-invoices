@@ -9,7 +9,8 @@ export default function IndexPage() {
       <AppScheme>
         <HistoryProvider>
           <LimitRecipes />
-          <InvoicesPerMonth year="2020" />
+          <br />
+          <InvoicesPerMonth />
           <h2>Visualização Rápida</h2>
           <ul>
             <li>
