@@ -1,9 +1,11 @@
+import LimitRecipes from "components/charts/LimitRecipes";
 import AppScheme from "layouts/AppScheme";
 
 export default function IndexPage() {
   return (
     <div>
       <AppScheme>
+        <LimitRecipes />
         <h2>Visualização Rápida</h2>
         <ul>
           <li>
