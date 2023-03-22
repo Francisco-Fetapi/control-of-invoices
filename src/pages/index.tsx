@@ -2,15 +2,22 @@ import InvoicesPerMonth from "components/charts/InvoicesPerMonth";
 import LimitRecipes from "components/charts/LimitRecipes";
 import HistoryProvider from "context/HistoryProvider";
 import AppScheme from "layouts/AppScheme";
+import { Stack } from "@mantine/core";
+import ExpensesPerMonth from "components/charts/ExpensesPerMonth";
 
 export default function IndexPage() {
   return (
     <div>
       <AppScheme>
         <HistoryProvider>
-          <LimitRecipes />
-          <br />
-          <InvoicesPerMonth />
+          <Stack>
+            <LimitRecipes />
+
+            <InvoicesPerMonth />
+
+            <ExpensesPerMonth />
+          </Stack>
+
           <h2>Visualização Rápida</h2>
           <ul>
             <li>

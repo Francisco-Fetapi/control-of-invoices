@@ -1,33 +1,33 @@
-import { InvoiceDoc } from "services/getInvoices";
+import { Transaction } from "entities/Transaction";
 import { getMonthName } from "./getMonthName";
 
 interface Props {
-  invoices?: InvoiceDoc[];
-  year: string;
+  transactions?: Transaction[];
+  year?: string;
 }
 
-export default function getInvoicesPerMonth({ year, invoices }: Props) {
-  if (!invoices) return;
-  let filteredInvoices = invoices.filter((invoice) => {
-    const date = new Date(invoice.accrualMonth);
+export default function getTransactionsPerMonth({ year, transactions }: Props) {
+  if (!transactions || !year) return;
+  let filteredtransactions = transactions.filter((transaction) => {
+    const date = new Date(transaction.accrualMonth);
     return date.getFullYear() === +year;
   });
 
-  let mappedInvoices = filteredInvoices.map((invoice) => {
+  let mappedtransactions = filteredtransactions.map((transaction) => {
     return {
-      ...invoice,
-      value: +invoice.value,
-      accrualMonth: new Date(invoice.accrualMonth),
+      ...transaction,
+      value: +transaction.value,
+      accrualMonth: new Date(transaction.accrualMonth),
     };
   });
 
-  let invoicesPerMonth: Record<string, number> = {};
+  let transactionsPerMonth: Record<string, number> = {};
 
-  mappedInvoices.forEach((invoice) => {
-    const month = getMonthName(invoice.accrualMonth);
-    const currentValue = invoicesPerMonth[month] || 0;
-    invoicesPerMonth[month] = currentValue + invoice.value;
+  mappedtransactions.forEach((transaction) => {
+    const month = getMonthName(transaction.accrualMonth);
+    const currentValue = transactionsPerMonth[month] || 0;
+    transactionsPerMonth[month] = currentValue + transaction.value;
   });
 
-  return invoicesPerMonth;
+  return transactionsPerMonth;
 }

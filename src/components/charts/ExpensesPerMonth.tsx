@@ -1,19 +1,18 @@
 import { Bar } from "react-chartjs-2";
 import "lib/chart";
 import useHistoryItems from "hooks/useHistoryItems";
-import getInvoicesPerMonth from "helpers/getTransactionsPerMonth";
+import getExpensesPerMonth from "helpers/getTransactionsPerMonth";
 import { useMantineTheme, Select, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
-import getInvoicesYear from "helpers/getTransactionsPerYear";
+import getExpensesYear from "helpers/getTransactionsPerYear";
 import getYearOfLastTransaction from "helpers/getYearOfLastTransaction";
 
-export default function InvoicesPerMonth() {
-  const { invoices, invoicesIsLoading } = useHistoryItems();
+export default function ExpensesPerMonth() {
+  const { expenses, expensesIsLoading } = useHistoryItems();
 
   const theme = useMantineTheme();
-
-  const transactions = invoices;
+  const transactions = expenses;
   const form = useForm({
     initialValues: {
       year: undefined,
@@ -21,14 +20,14 @@ export default function InvoicesPerMonth() {
   });
   const { year } = form.values;
 
-  const availableYears = getInvoicesYear({ transactions });
-  const defaultYear = availableYears ? availableYears.at(-1) : "";
-  const invoicesPerMonth = getInvoicesPerMonth({
+  const availableYears = getExpensesYear({ transactions });
+  const defaultyear = availableYears ? availableYears.at(-1) : "";
+  const ExpensesPerMonth = getExpensesPerMonth({
     transactions,
-    year: year || defaultYear,
+    year: year || defaultyear,
   });
 
-  if (invoicesIsLoading) {
+  if (expensesIsLoading) {
     // loading
     return <div />;
   }
@@ -41,25 +40,22 @@ export default function InvoicesPerMonth() {
           label="Ano"
           data={availableYears}
           {...form.getInputProps("year")}
-          defaultValue={defaultYear}
+          defaultValue={defaultyear}
         />
       </TitleAndButtonActionContainer>
 
       <Bar
         data={{
-          labels: Object.keys(invoicesPerMonth || {}),
+          labels: Object.keys(ExpensesPerMonth || {}),
           datasets: [
             {
               label: `Notas Fiscais (${year})`,
-              data: Object.values(invoicesPerMonth || {}),
+              data: Object.values(ExpensesPerMonth || {}),
               backgroundColor: theme.colors.blue[6],
               borderColor: theme.colors.gray[3],
               //   borderWidth: 50,
             },
           ],
-        }}
-        options={{
-          indexAxis: "y",
         }}
       />
     </div>

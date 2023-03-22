@@ -1,15 +1,15 @@
-import { InvoiceDoc } from "services/getInvoices";
+import { Transaction } from "entities/Transaction";
 
 interface Props {
-  invoices?: InvoiceDoc[];
+  transactions?: Transaction[];
 }
 
-export default function getInvoicesYear({ invoices }: Props) {
-  if (!invoices) return;
+export default function gettransactionsYear({ transactions }: Props) {
+  if (!transactions) return;
   const years = new Set<string>();
 
-  invoices.forEach((invoice) => {
-    const date = new Date(invoice.accrualMonth);
+  transactions.forEach((transaction) => {
+    const date = new Date(transaction.accrualMonth);
     const year = date.getFullYear();
     years.add(year.toString());
   });
