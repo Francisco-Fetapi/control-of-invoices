@@ -1,5 +1,4 @@
 import { InvoiceDoc } from "services/getInvoices";
-import { getMonthName } from "./getMonthName";
 
 interface Props {
   invoices?: InvoiceDoc[];

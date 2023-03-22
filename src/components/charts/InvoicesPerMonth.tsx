@@ -1,11 +1,11 @@
 import { Bar } from "react-chartjs-2";
 import "lib/chart";
 import useHistoryItems from "hooks/useHistoryItems";
-import getInvoicesPerMonth from "helpers/getInvoicesPerMonth";
+import getInvoicesPerMonth from "helpers/getTransactionsPerMonth";
 import { useMantineTheme, Select, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
-import getInvoicesYear from "helpers/getInvoicesYear";
+import getInvoicesYear from "helpers/getTransactionsPerYear";
 
 export default function InvoicesPerMonth() {
   const { invoices, invoicesIsLoading } = useHistoryItems();
