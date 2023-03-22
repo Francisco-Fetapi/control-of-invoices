@@ -41,9 +41,18 @@ export default function BalancePerMonth() {
     year: selectedYear,
   });
 
-  const balances = allBalancesPerMonth
+  let balances = allBalancesPerMonth
     ? allBalancesPerMonth[form.values.month]
     : undefined;
+
+  const availableMonths = Object.keys(allBalancesPerMonth || {});
+  const selectedMonth = !balances ? availableMonths[0] : form.values.month;
+
+  if (selectedMonth) {
+    balances = allBalancesPerMonth
+      ? allBalancesPerMonth[selectedMonth]
+      : undefined;
+  }
 
   return (
     <div>
@@ -59,8 +68,9 @@ export default function BalancePerMonth() {
             }}
           />
           <Select
-            data={Object.keys(allBalancesPerMonth || {})}
+            data={availableMonths}
             {...form.getInputProps("month")}
+            value={selectedMonth}
             sx={{
               width: "120px",
             }}
