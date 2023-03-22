@@ -9,7 +9,6 @@ import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonA
 export default function LimitRecipes() {
   const { user } = useAuth();
   const settings = getSettings(user);
-  //   TODO: Value falsy
 
   const total = settings.limit;
   const { invoicesIsLoading, totalInvoices } = useHistoryItems();
@@ -25,7 +24,6 @@ export default function LimitRecipes() {
   });
   const remainingBilling = total - value;
 
-  console.log(percentage);
   return (
     <Box>
       <TitleAndButtonActionContainer>

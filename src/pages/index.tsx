@@ -1,3 +1,4 @@
+import InvoicesPerMonth from "components/charts/InvoicesPerMonth";
 import LimitRecipes from "components/charts/LimitRecipes";
 import HistoryProvider from "context/HistoryProvider";
 import AppScheme from "layouts/AppScheme";
@@ -8,6 +9,7 @@ export default function IndexPage() {
       <AppScheme>
         <HistoryProvider>
           <LimitRecipes />
+          <InvoicesPerMonth />
           <h2>Visualização Rápida</h2>
           <ul>
             <li>
