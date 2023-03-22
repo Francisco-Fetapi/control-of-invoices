@@ -45,7 +45,7 @@ export default function InvoicesPerMonth() {
               data: Object.values(invoicesPerMonth || {}),
               backgroundColor: theme.colors.blue[6],
               borderColor: theme.colors.gray[3],
-              borderWidth: 50,
+              //   borderWidth: 50,
             },
           ],
         }}
