@@ -34,6 +34,11 @@ export default function LimitRecipes() {
         <Progress
           size="xl"
           radius="xl"
+          styles={{
+            label: {
+              fontSize: 9,
+            },
+          }}
           sections={[
             {
               value: percentage,
