@@ -47,8 +47,33 @@ export default function useFormEditExpenseCategory(item: ExpenseCategoryDoc) {
       },
     });
   };
+  const toggleArchive: IForm = (values) => {
+    const moreValues = { ...item, ...values };
+    updateExpenseCategory.mutate(moreValues, {
+      onSuccess(res, { archived }, context) {
+        console.log(res.data.updated);
+        if (res.data.updated) {
+          if (archived) {
+            showNotification({
+              title: "Categoria Arquivada",
+              message:
+                "A categoria foi arquivada com sucesso. Ela não irá mais aparecer na lista de categorias durante a criação de uma despesa.",
+              color: "green",
+            });
+          } else {
+            showNotification({
+              title: "Categoria Desarquivada",
+              message: "A categoria foi desarquivada com sucesso.",
+              color: "green",
+            });
+          }
+          queryClient.refetchQueries(["expense-categories"]);
+        }
+      },
+    });
+  };
 
   const isLoading = updateExpenseCategory.isLoading;
 
-  return { form, handleSubmit, isLoading };
+  return { form, handleSubmit, isLoading, toggleArchive };
 }

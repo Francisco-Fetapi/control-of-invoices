@@ -20,6 +20,7 @@ import { ExpenseCategoryDoc } from "services/getExpenseCategory";
 import useSelection from "hooks/useSelection";
 import useDeleteHandle from "hooks/useDeleteHandle";
 import getWordsLength from "helpers/getWordsLength";
+import useFormEditExpenseCategory from "hooks/forms/expense/category/useFormEditExpenseCategory";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -110,7 +111,7 @@ interface TableRowProps {
 function TableRow({ item, selection, toggleRow }: TableRowProps) {
   const { classes, cx } = useStyles();
   const selected = selection.includes(item.id);
-  const [archived, setArchived] = useState(item.archived);
+  // const [archived, setArchived] = useState(item.archived);
   const { deleteDocuments, isLoading } = useDeleteHandle({
     documents: selection.map((item) => ({ id: item })),
     queryToRefetch: "expense-categories",
@@ -128,6 +129,14 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       ViewDetails: wordsLength > 3 ? <div>{item.description}</div> : undefined,
       detailsLabel,
     });
+
+  const {
+    form,
+    toggleArchive,
+    isLoading: isFormEditLoading,
+  } = useFormEditExpenseCategory(item);
+
+  const archived = item.archived;
 
   return (
     <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
@@ -149,7 +158,12 @@ function TableRow({ item, selection, toggleRow }: TableRowProps) {
       <td style={{ textAlign: "center" }}>
         <Switch
           checked={archived}
-          onChange={(event) => setArchived(event.currentTarget.checked)}
+          onChange={() =>
+            toggleArchive({
+              ...item,
+              archived: !archived,
+            })
+          }
         />
       </td>
       <td>
