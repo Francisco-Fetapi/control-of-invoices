@@ -2,15 +2,11 @@
 
 ## Introdução
 
-Este projeto foi desenvolvido como uma solução para o problema de controle de notas fiscais de um freelancer que presta serviços para diferentes empresas. A aplicação permite que o usuário controle suas notas fiscais, lançando o número, valor, empresa, competência e serviço prestado.
-
-A aplicação também possui um sistema de login social, permitindo que o usuário faça login e signin utilizando suas contas do Google ou Facebook.
-
-Além disso, o sistema envia mensagens caso o cliente esteja ultrapassando o limite de faturamento como MEI.
+Este é um projeto desenvolvido para atender à necessidade do cliente Senhor Vibbraneo de controlar suas notas fiscais de forma organizada e eficiente. O sistema permite o lançamento de informações sobre notas fiscais emitidas para diferentes empresas, assim como o controle de despesas e categorias de despesas associadas.
 
 ## Avaliação do Escopo
 
-O escopo do projeto incluiu a implementação de um CRUD de Notas Fiscais, Despesas, Empresas Parceiras e Categorias de Despesas, bem como a possibilidade de arquivar uma Categoria de Despesa.
+O escopo do projeto incluiu a implementação de um CRUD de Notas Fiscais, Despesas, Empresas Parceiras e Categorias de Despesas.
 
 ## Estimativa
 
@@ -51,4 +47,4 @@ FIREBASE_STORAGE_BUCKET=
 FIREBASE_MESSAGING_SENDER_ID=
 FIREBASE_APP_ID=
 ```
-
+As credenciais podem ser obtidas na console do Firebase. Certifique-se de que o projeto esteja configurado corretamente para permitir a conexão com a aplicação.
