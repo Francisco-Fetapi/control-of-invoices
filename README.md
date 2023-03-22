@@ -14,14 +14,17 @@ O escopo do projeto incluiu a implementação de um CRUD de Notas Fiscais, Despe
 O projeto foi concluido num prazo igual à 7 dias. 
 
 ### Em Horas
-Abaixo temos as `Atividades Realizadas` da main recente à mais antiga e o tempo que levou para conclui-las.
+Foram investidas um total de 29 horas no desenvolvimento do projeto.
 
-- 22/03/2023 -> 5h0m: Criação dos gráficos para prover uma melhor visualização dos dados.
-- 21/03/2023 -> 15h: Criação do CRUD de todas as coleções do projeto.
-- 20/03/2023 -> 12h: Conexão do Sistema com o firebase. Autenticação com Email e Senha implementado.
-- 17/03/2023 -> 7h: Criação das principais páginas e componentes. (SEM FUNCIONALIDADE).
-- 16/03/2023 -> 5h: Estruturando as páginas e principais componentes.
-- 15/03/2023 -> 2h20m: Preparação do ambiente.
+### Atividades Realizadas
+Abaixo temos uma listagem das atividades realizadas desde a mais recente à mais nova.
+
+- Criação dos gráficos para prover uma melhor visualização dos dados.
+- Criação do CRUD de todas as coleções do projeto.
+- Conexão do Sistema com o firebase. Autenticação com Email e Senha implementado.
+- Criação das principais páginas e componentes. (SEM FUNCIONALIDADE)
+- Estruturando as páginas e principais componentes.
+- Preparação do ambiente.
 
 ## Atividades em falta
 
