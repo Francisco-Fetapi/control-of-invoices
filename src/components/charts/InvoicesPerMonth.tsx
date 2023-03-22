@@ -2,9 +2,10 @@ import { Bar } from "react-chartjs-2";
 import "lib/chart";
 import useHistoryItems from "hooks/useHistoryItems";
 import getInvoicesPerMonth from "helpers/getInvoicesPerMonth";
-import { useMantineTheme, Select } from "@mantine/core";
+import { useMantineTheme, Select, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
+import getInvoicesYear from "helpers/getInvoicesYear";
 
 export default function InvoicesPerMonth() {
   const { invoices, invoicesIsLoading } = useHistoryItems();
@@ -17,6 +18,7 @@ export default function InvoicesPerMonth() {
   });
   const { year } = form.values;
   const invoicesPerMonth = getInvoicesPerMonth({ invoices, year });
+  const availableYears = getInvoicesYear({ invoices });
 
   if (invoicesIsLoading) {
     // loading
@@ -29,10 +31,11 @@ export default function InvoicesPerMonth() {
         <h2>Notas Fiscais</h2>
         <Select
           label="Ano"
-          data={["2021", "2020", "2019"]}
+          data={availableYears}
           {...form.getInputProps("year")}
         />
       </TitleAndButtonActionContainer>
+
       <Bar
         data={{
           labels: Object.keys(invoicesPerMonth || {}),
