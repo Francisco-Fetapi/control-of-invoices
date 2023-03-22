@@ -4,9 +4,7 @@ import useHistoryItems from "hooks/useHistoryItems";
 import getInvoicesPerMonth from "helpers/getTransactionsPerMonth";
 import { useMantineTheme, Select, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { TitleAndButtonActionContainer } from "styles/components/TitleAndButtonAction";
 import getInvoicesYear from "helpers/getTransactionsPerYear";
-import getYearOfLastTransaction from "helpers/getYearOfLastTransaction";
 import { TitleAndAction } from "styles/components/TitleAndAction";
 
 export default function InvoicesPerMonth() {

@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   BarElement,
+  ArcElement,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,5 +19,6 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  BarElement
+  BarElement,
+  ArcElement
 );
