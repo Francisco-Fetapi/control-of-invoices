@@ -1,28 +1,43 @@
 import { Bar } from "react-chartjs-2";
 import "lib/chart";
+import useHistoryItems from "hooks/useHistoryItems";
+import getInvoicesPerMonth from "helpers/getInvoicesPerMonth";
 
-const data = {
-  labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
-  datasets: [
-    {
-      label: "Vendas",
-      data: [12, 19, 3, 5, 2, 3, 7],
-      fill: false,
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgba(255, 99, 132, 0.2)",
-    },
-  ],
-};
+interface InvoicesPerMonthProps {
+  year: string;
+}
 
-const options = {
-  indexAxis: "y",
-};
+export default function InvoicesPerMonth({ year }: InvoicesPerMonthProps) {
+  const { invoices, invoicesIsLoading } = useHistoryItems();
+  const invoicesPerMonth = getInvoicesPerMonth({ invoices, year });
 
-export default function InvoicesPerMonth() {
+  if (invoicesIsLoading) {
+    // loading
+    return <div />;
+  }
+
+  const data = {
+    labels: Object.keys(invoicesPerMonth || {}),
+    datasets: [
+      {
+        label: `Notas Fiscais (${year})`,
+        data: Object.values(invoicesPerMonth || {}),
+        fill: false,
+        backgroundColor: "rgb(255, 99, 132)",
+        borderColor: "rgba(255, 99, 132, 0.2)",
+      },
+    ],
+  };
+
   return (
     <div>
-      <h2>Vendas por mês</h2>
-      <Bar data={data} />
+      <h2>Notas Fiscais</h2>
+      <Bar
+        data={data}
+        options={{
+          indexAxis: "y",
+        }}
+      />
     </div>
   );
 }
